@@ -1,81 +1,120 @@
 <template>
   <v-app id="inspire">
-    <v-navigation-drawer
-            v-model="drawer"
-            app
-    >
-      <v-list dense>
-        <v-list-item link>
-          <v-list-item-action>
-            <v-icon>mdi-home</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Home</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item link>
-          <v-list-item-action>
-            <v-icon>mdi-contact-mail</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Contact</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
 
     <v-app-bar
             app
-            color="indigo"
+            color="green"
             dark
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title>Application</v-toolbar-title>
     </v-app-bar>
 
-    <v-content>
-      <v-container
-              class="fill-height"
-              fluid
-      >
-        <v-row
-                align="center"
-                justify="center"
-        >
-          <v-col class="text-center">
-            <v-tooltip left>
-              <template v-slot:activator="{ on }">
-                <v-btn
-                        :href="source"
-                        icon
-                        large
-                        target="_blank"
-                        v-on="on"
-                >
-                  <v-icon large>mdi-code-tags</v-icon>
-                </v-btn>
-              </template>
-              <span>Source</span>
-            </v-tooltip>
+    <v-content class="grey lighten-5">
+      <v-row>
+        <v-col>
 
-            <v-tooltip right>
-              <template v-slot:activator="{ on }">
-                <v-btn
-                        icon
-                        large
-                        href="https://codepen.io/johnjleider/pen/zgxeLQ"
-                        target="_blank"
-                        v-on="on"
-                >
-                  <v-icon large>mdi-codepen</v-icon>
-                </v-btn>
-              </template>
-              <span>Codepen</span>
-            </v-tooltip>
-          </v-col>
-        </v-row>
-      </v-container>
+    <v-card
+            class="mx-auto"
+            max-width="344"
+    >
+      <v-img
+              src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+              height="200px"
+      ></v-img>
+
+      <v-card-title>
+        Top western road trips
+      </v-card-title>
+
+      <v-card-subtitle>
+        1,000 miles of wonder
+      </v-card-subtitle>
+
+      <v-card-actions>
+        <v-btn text>Share</v-btn>
+
+        <v-btn
+                color="purple"
+                text
+        >
+          Explore
+        </v-btn>
+
+        <v-spacer></v-spacer>
+
+        <v-btn
+                icon
+                @click="show = !show"
+        >
+          <v-icon>{{ show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+        </v-btn>
+      </v-card-actions>
+
+      <v-expand-transition>
+        <div v-show="show">
+          <v-divider></v-divider>
+
+          <v-card-text>
+            I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.
+          </v-card-text>
+        </div>
+      </v-expand-transition>
+    </v-card>
+        </v-col>
+<v-col>
+      <v-card
+              class="mx-auto"
+              max-width="344"
+      >
+        <v-img
+                src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+                height="200px"
+        ></v-img>
+
+        <v-card-title>
+          Top western road trips
+        </v-card-title>
+
+        <v-card-subtitle>
+          1,000 miles of wonder
+        </v-card-subtitle>
+
+        <v-card-actions>
+          <v-btn text>Share</v-btn>
+
+          <v-btn
+                  color="purple"
+                  text
+          >
+            Explore
+          </v-btn>
+
+          <v-spacer></v-spacer>
+
+          <v-btn
+                  icon
+                  @click="show = !show"
+          >
+            <v-icon>{{ show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+          </v-btn>
+        </v-card-actions>
+
+        <v-expand-transition>
+          <div v-show="show">
+            <v-divider></v-divider>
+
+            <v-card-text>
+              I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.
+            </v-card-text>
+          </div>
+        </v-expand-transition>
+      </v-card>
+</v-col>
+      </v-row>
+
     </v-content>
+
     <v-footer
             color="indigo"
             app
