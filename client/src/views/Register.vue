@@ -1,29 +1,43 @@
 <template>
-  <v-layout column>
-    <v-flex>
-      <div class="white elevation-15">
-        <v-toolbar flay dense class="cyan" color="green">
-          <v-toolbar-title>Register</v-toolbar-title>
-        </v-toolbar>
-        <div class="pl-4 pr-4 pt-2 pb-2">
-        <input
-          type="email"
-          name="email"
-          v-model="email"
-          placeholder="email"/>
-        <br>
-        <input
-          type="password"
-          name="password"
-          v-model="password"
-          placeholder="password"/>
-        <br>
-        <button
-          @click="register">Register</button>
+    <v-row
+            align="center"
+            justify="center"
+    >
+        <v-col
+                cols="12"
+                sm="8"
+                md="4"
+        >
+    <v-card>
+        <v-card-title color="green" class="headline">Unlimited music now</v-card-title>
+
+        <v-card-subtitle>Listen to your favorite artists and albums whenever and wherever, online and offline.</v-card-subtitle>
+
+        <v-card-text>
+            <div>
+                <h3>Logowanie</h3>
+            </div>
+        </v-card-text>
+     <div class="pl-4 pr-4 pt-2 pb-2">
+         <v-text-field
+                 v-model="name"
+                 :counter="10"
+                 :rules="nameRules"
+                 label="Name"
+                 required
+         ></v-text-field>
+         <v-text-field
+                 v-model="email"
+                 :rules="emailRules"
+                 label="E-mail"
+                 required
+         ></v-text-field>
+        <v-btn color="warning" dark
+          @click="register">Register</v-btn>
       </div>
-      </div>
-    </v-flex>
-  </v-layout>
+    </v-card>
+    </v-col>
+    </v-row>
 </template>
 
 <script>
