@@ -2,14 +2,12 @@
   <v-app id="inspire">
     <v-app-bar
             app
-            color="green"
+            color="primary"
             dark
     >
-
-
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title>Application</v-toolbar-title>
-      <v-avatar color="indigo" >
+      <v-avatar color="green" >
         <v-icon dark>mdi-account-circle</v-icon>
       </v-avatar>
     </v-app-bar>
@@ -25,7 +23,7 @@
     </main>
 
     <v-footer
-            color="green"
+            color="secondary"
             app
     >
       <span class="white--text">&copy; 2019</span>
