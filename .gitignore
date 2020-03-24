@@ -21,3 +21,4 @@ yarn-error.log*
 *.sw?
 /client/dist/
 /client/README.md
+/client/npm
