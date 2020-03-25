@@ -13,19 +13,19 @@ const Users = sequelize.define('User', {
         allowNull: false},
     US_SUER_NAME: {
         type: Sequelize.STRING,
-        allowNull: false},
+        allowNull: true},
     US_LOGIN: {
         type: Sequelize.STRING,
-        allowNull: false},
+        allowNull: true},
     US_PASS: {
         type: Sequelize.STRING,
         allowNull: false},
     US_PROFESJA: {
         type: Sequelize.ENUM('Operator','Automatyk','Mechanik',''),
-        allowNull: false},
+        allowNull: true},
     Hala_ID: {
         type: Sequelize.INTEGER,
-        allowNull: false}
+        allowNull: true}
 });
 
 module.exports = Users;

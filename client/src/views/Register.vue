@@ -9,31 +9,27 @@
                 md="4"
         >
     <v-card>
-        <v-card-title color="green" class="headline">Unlimited music now</v-card-title>
+        <v-card-title color="green" class="headline">Logowanie</v-card-title>
 
-        <v-card-subtitle>Listen to your favorite artists and albums whenever and wherever, online and offline.</v-card-subtitle>
-
-        <v-card-text>
-            <div>
-                <h3>Logowanie</h3>
-            </div>
-        </v-card-text>
-     <div class="pl-4 pr-4 pt-2 pb-2">
+     <div class="pl-4 pr-4 pt-3 pb-3">
          <v-text-field
-                 v-model="name"
-                 :counter="10"
+                 v-model="US_Name"
+                 :counter="8"
                  :rules="nameRules"
                  label="Name"
                  required
          ></v-text-field>
          <v-text-field
-                 v-model="email"
+                 v-model="US_PASS"
+                 :type="'password'"
                  :rules="emailRules"
-                 label="E-mail"
+                 label="Hasło"
                  required
          ></v-text-field>
-        <v-btn color="warning" dark
-          @click="register">Register</v-btn>
+         <v-layout align-center justify-center>
+        <v-btn color="accent" dark
+          @click="register">Loguj</v-btn>
+         </v-layout>
       </div>
     </v-card>
     </v-col>
@@ -45,22 +41,21 @@ import AuthenticationService from '../services/AuthenticationService'
 export default {
   data () {
     return {
-      email: '',
-      password: ''
+      US_Name: '',
+        US_PASS: ''
     }
   },
   methods: {
     async register () {
       const response = await AuthenticationService.register({
-        email: this.email,
-        password: this.password
+        US_Name: this.US_Name,
+        US_PASS: this.US_PASS
       })
       console.log(response.data)
     }
   }
 }
 </script>
-
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
