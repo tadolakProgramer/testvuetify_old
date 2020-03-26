@@ -1,7 +1,11 @@
 <template>
+
   <v-app id="App">
-    <page-header></page-header>
+
+    <Header></Header>
+
     <main>
+
       <v-container fluid>
         <v-content>
           <router-view>
@@ -21,11 +25,12 @@
 </template>
 
 <script>
-  import Header from './components/Header'
+
+
+  import Header from "./components/Header";
   export default {
-    comments:{
-      'page-header':Header
-    },
+    name: 'App',
+    components: {Header},
     props: {
       source: String,
     },

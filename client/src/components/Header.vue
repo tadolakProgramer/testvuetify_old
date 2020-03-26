@@ -1,4 +1,5 @@
 <template>
+    <div class="Header">
     <v-app-bar
             app
             color="primary"
@@ -10,13 +11,14 @@
             <v-icon dark>mdi-account-circle</v-icon>
         </v-avatar>
     </v-app-bar>
-
+    </div>
 </template>
 
 <script>
     export default {
         name: "Header"
     }
+
 </script>
 
 <style scoped>
