@@ -21,7 +21,7 @@
          ></v-text-field>
          <v-text-field
                  v-model="US_PASS"
-                 :type="'password'"
+                 type="password"
                  :rules="emailRules"
                  label="Hasło"
                  required
