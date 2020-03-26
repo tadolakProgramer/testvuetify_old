@@ -1,17 +1,6 @@
 <template>
-  <v-app id="inspire">
-    <v-app-bar
-            app
-            color="primary"
-            dark
-    >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title>Application</v-toolbar-title>
-      <v-avatar color="green" >
-        <v-icon dark>mdi-account-circle</v-icon>
-      </v-avatar>
-    </v-app-bar>
-
+  <v-app id="App">
+    <page-header></page-header>
     <main>
       <v-container fluid>
         <v-content>
@@ -26,13 +15,17 @@
             color="secondary"
             app
     >
-      <span class="white--text">&copy; 2019</span>
+      <span class="white--text">&copy; 2020</span>
     </v-footer>
   </v-app>
 </template>
 
 <script>
+  import Header from './components/Header'
   export default {
+    comments:{
+      'page-header':Header
+    },
     props: {
       source: String,
     },

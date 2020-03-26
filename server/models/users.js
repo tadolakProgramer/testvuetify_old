@@ -10,7 +10,8 @@ const Users = sequelize.define('User', {
         primaryKey: true},
     US_Name: {
         type: Sequelize.STRING,
-        allowNull: false},
+        allowNull: false,
+        unique: true},
     US_SUER_NAME: {
         type: Sequelize.STRING,
         allowNull: true},
@@ -19,7 +20,7 @@ const Users = sequelize.define('User', {
         allowNull: true},
     US_PASS: {
         type: Sequelize.STRING,
-        allowNull: false},
+        allowNull: true},
     US_PROFESJA: {
         type: Sequelize.ENUM('Operator','Automatyk','Mechanik',''),
         allowNull: true},
