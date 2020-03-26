@@ -5,9 +5,14 @@
             color="primary"
             dark
     >
-        <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-        <v-toolbar-title>Application</v-toolbar-title>
-        <v-avatar color="green" >
+        <v-toolbar-title> Application </v-toolbar-title>
+        <v-spacer></v-spacer>
+        <span></span>
+            <v-btn  depressed  color="primary">
+                Login
+            </v-btn>
+
+        <v-avatar color="primary" >
             <v-icon dark>mdi-account-circle</v-icon>
         </v-avatar>
     </v-app-bar>

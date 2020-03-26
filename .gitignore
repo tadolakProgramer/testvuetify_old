@@ -22,3 +22,5 @@ yarn-error.log*
 /client/dist/
 /client/README.md
 /client/npm
+/node_modules/
+/node_modules/
