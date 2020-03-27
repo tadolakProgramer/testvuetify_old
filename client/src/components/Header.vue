@@ -1,21 +1,30 @@
 <template>
     <div class="Header">
-    <v-app-bar
-            app
-            color="primary"
-            dark
-    >
-        <v-toolbar-title> Application </v-toolbar-title>
-        <v-spacer></v-spacer>
-        <span></span>
-            <v-btn  depressed  color="primary">
+        <v-app-bar
+                app
+                color="primary"
+                dark
+        >
+            <v-toolbar-items>
+                <div>
+                    <v-img src="../assets/logofolplast.png" alt=""></v-img>
+                </div>
+            </v-toolbar-items>
+
+            <v-toolbar-title>
+                Naprawy
+            </v-toolbar-title>
+
+            <v-spacer></v-spacer>
+            <span></span>
+            <v-btn depressed color="primary">
                 Login
             </v-btn>
 
-        <v-avatar color="primary" >
-            <v-icon dark>mdi-account-circle</v-icon>
-        </v-avatar>
-    </v-app-bar>
+            <v-avatar color="primary">
+                <v-icon>mdi-account</v-icon>
+            </v-avatar>
+        </v-app-bar>
     </div>
 </template>
 

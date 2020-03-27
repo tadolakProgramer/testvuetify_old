@@ -1,9 +1,13 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify/lib';
-
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
+import '@fortawesome/fontawesome-free/css/all.css'
+import '@mdi/font/css/materialdesignicons.css'
 import colors from 'vuetify/lib/util/colors'
 
-Vue.use(Vuetify);
+Vue.use(Vuetify,
+    {iconfont: 'mdi'|| 'fa'}
+    );
 
 export default new Vuetify({
     theme: {
@@ -20,4 +24,3 @@ export default new Vuetify({
         },
     },
 });
-

@@ -10,25 +10,30 @@
         >
     <v-card>
         <v-card-title color="green" class="headline">Logowanie</v-card-title>
-
      <div class="pl-4 pr-4 pt-3 pb-3">
          <v-text-field
                  v-model="US_Name"
-                 :counter="8"
-                 :rules="nameRules"
+                 :counter="6"
+                 :rules="[rules.required, rules.min]"
+                 hint="Minimum 6 znaków"
                  label="Name"
                  required
          ></v-text-field>
          <v-text-field
                  v-model="US_PASS"
-                 type="password"
-                 :rules="emailRules"
+                 :type="show1 ? 'text' : 'password'"
+                 hint="Minimum 8 znaków"
+                 :counter="6"
+                 :rules="[rules.required, rules.min]"
+                 :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                 @click:append="show1 = !show1"
                  label="Hasło"
-                 required
          ></v-text-field>
          <v-layout align-center justify-center>
         <v-btn color="accent" dark
-          @click="register">Loguj</v-btn>
+
+          @click="register">Loguj
+            </v-btn>
          </v-layout>
       </div>
     </v-card>
@@ -41,8 +46,13 @@ import AuthenticationService from '../services/AuthenticationService'
 export default {
   data () {
     return {
-      US_Name: '',
-        US_PASS: ''
+        show1: false,
+        US_Name: '',
+        US_PASS: '',
+        rules: {
+            required: value => !!value || 'Required.',
+            min: v => v.length >= 6 || 'Min 8 characters'
+        }
     }
   },
   methods: {
