@@ -8,7 +8,7 @@ module.exports ={
         } catch (err) {
             console.log('error', err);
             res.status(400).send({
-                error: 'This email account is already in use.'
+                error: 'This Login account is already in use.'
             })
         }
     }

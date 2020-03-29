@@ -24,8 +24,20 @@
                                 ></v-text-field>
                             </v-col>
                     </v-row>
+                <v-divider
+                        class="mx-lg-4"
+                ></v-divider>
                     <v-row>
-                        <v-col cols="8" sm="6" md="6">
+                        <v-col cols="8" sm="4" md="4">
+                            <v-text-field
+                                    v-model="US_LOGIN"
+                                    :rules="[rules.required]"
+                                    hint="Wpisz swoje Login"
+                                    label="Login"
+
+                            ></v-text-field>
+                        </v-col>
+                        <v-col cols="8" sm="4" md="4">
                                 <v-text-field
                                         v-model="US_PASS"
                                         :type="show1 ? 'text' : 'password'"
@@ -37,19 +49,27 @@
                                         label="Hasło"
                                 ></v-text-field>
                             </v-col>
-                        <v-col cols="8" sm="6" md="6">
+                        <v-col cols="8" sm="4" md="4">
                             <v-text-field
                                     v-model="US_PASS"
-                                    :type="show1 ? 'text' : 'password'"
-                                    hint="Minimum 8 znaków"
-                                    :counter="6"
-                                    :rules="[rules.required, rules.min]"
-                                    :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-                                    @click:append="show1 = !show1"
-                                    label="Hasło"
+                                    :type="'password'"
+                                    :rules="[rules.required]"
+                                    label="Powturz hasło"
                             ></v-text-field>
                         </v-col>
                     </v-row>
+                <v-divider
+                        class="mx-lg-4"
+                ></v-divider>
+                <v-row>
+                    <v-col cols="8" sm="4" md="4">
+                        <v-select
+                        :items="items"
+                        :rules="[rules.required]"
+                        label="Wybierz profesję">
+                        </v-select>
+                    </v-col>
+                </v-row>
                     <v-layout align-center justify-center>
                         <v-btn color="accent" dark
                                @click="register">Loguj
@@ -67,10 +87,15 @@
     export default {
         data() {
             return {
+                items: [
+                    'Operator','Automatyk','Mechanik'
+                ],
                 show1: false,
                 US_Name: '',
                 US_PASS: '',
                 US_SUER_NAME: '',
+                US_LOGIN: '',
+                US_PROFESJA: '',
                 rules: {
                     required: value => !!value || 'To pole nie może być puste.',
                     min: v => v.length >= 6 || 'Min 6 znaków'
@@ -82,7 +107,9 @@
                 const response = await AuthenticationService.register({
                     US_Name: this.US_Name,
                     US_PASS: this.US_PASS,
-                    US_SUER_NAME: this.US_SUER_NAME
+                    US_SUER_NAME: this.US_SUER_NAME,
+                    US_LOGIN: this.US_LOGIN,
+                    US_PROFESJA: this.US_PROFESJA
                 })
                 console.log(response.data)
             }
