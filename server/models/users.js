@@ -21,11 +21,11 @@ const Users = sequelize.define('User', {
     US_PASS: {
         type: Sequelize.STRING,
         allowNull: true},
-    US_PROFESJA: {
-        type: Sequelize.ENUM('Operator','Automatyk','Mechanik',''),
-        allowNull: true},
     Hala_ID: {
         type: Sequelize.INTEGER,
+        allowNull: true},
+    US_PROFESJA: {
+        type: Sequelize.ENUM('Operator','Automatyk','Mechanik',''),
         allowNull: true}
 });
 

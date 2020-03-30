@@ -1,4 +1,6 @@
 const Users = require('../models/users');
+const Hale = require('../models/hale');
+
 module.exports ={
     async register (req, res) {
         try {
@@ -11,5 +13,11 @@ module.exports ={
                 error: 'This Login account is already in use.'
             })
         }
+    },
+    async getHale (req, res) {
+        await Hale.findAll()
+            .then(hale => res.send(hale))
+            .catch(error => console.log(error));
     }
 };
+
