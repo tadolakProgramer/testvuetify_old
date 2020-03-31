@@ -72,7 +72,7 @@
                     <v-col cols="8" sm="4" md="4">
                         <v-select
                                 v-model="listaHal"
-                                disabled
+                                :disabled="disabled"
                                 :items=Hale
                                 item-text="NazwaHali"
                                 item-value="ID_Hala"
@@ -100,10 +100,11 @@
         data() {
             return {
                 Hale: '',
+                disabled: true,
                 items: [
-                    'Operator', 'Automatyk', 'Mechanik'
+                    "Operator", "Automatyk", "Mechanik"
                 ],
-                Profesje:'',
+                Profesje: '',
                 show1: false,
                 US_Name: '',
                 US_PASS: '',
@@ -115,6 +116,12 @@
                     required: value => !!value || 'To pole nie może być puste.',
                     min: v => v.length >= 6 || 'Min 6 znaków'
                 }
+            }
+        },
+        watch: {
+            Profesje: function () {
+                console.log('ddddddddd')
+                this.disable="false";
             }
         },
         methods: {

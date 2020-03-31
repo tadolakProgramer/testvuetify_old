@@ -7,7 +7,7 @@
         >
             <v-toolbar-items>
                 <div>
-                    <v-img src="../assets/logofolplast.png" alt=""></v-img>
+                    <v-img src="../assets/logo.png" alt=""></v-img>
                 </div>
             </v-toolbar-items>
 

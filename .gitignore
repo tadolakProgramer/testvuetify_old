@@ -24,3 +24,4 @@ yarn-error.log*
 /client/npm
 /node_modules/
 /node_modules/
+/client/database
