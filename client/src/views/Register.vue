@@ -86,9 +86,8 @@
                     </v-row>
                     <v-alert
                             :value="alert"
-                            type="error"
+                            :type="error"
                             elevation="2"
-
                             transition="scale-transition"
                     >{{ServerMessage}}
                     </v-alert>
@@ -149,14 +148,13 @@
                 }
             },
             US_LOGIN: function () {
-                if (this.alert){
+                if (this.alert) {
                     this.alert = false
                 }
             }
         },
         methods: {
             async register() {
-                this.alert = false;
                 try {
                     await AuthenticationService.register({
                         US_Name: this.US_Name,
@@ -166,13 +164,14 @@
                         US_PROFESJA: this.Profesje,
                         Hala_ID: this.listaHal
                     });
-                }
-                catch (ServerMessage) {
+                    //this.alert = true
+
+                } catch (ServerMessage) {
                     this.ServerMessage = ServerMessage.response.data.ServerMessage
                     this.alert = true
                 }
-
-            }},
+            }
+        },
         async mounted() {
             this.Hale = (await AuthenticationService.getHale()).data;
             console.log('Hale: ', this.Hale)
