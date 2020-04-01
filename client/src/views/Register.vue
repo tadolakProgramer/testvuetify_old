@@ -84,6 +84,14 @@
                         </v-col>
 
                     </v-row>
+                    <v-alert
+                            :value="alert"
+                            type="error"
+                            elevation="2"
+
+                            transition="scale-transition"
+                    >{{ServerMessage}}
+                    </v-alert>
                     <v-layout align-center justify-center>
                         <v-btn color="accent"
                                dark
@@ -104,6 +112,8 @@
     export default {
         data() {
             return {
+                ServerMessage: null,
+                alert: false,
                 valid: false,
                 Hale: '',
                 items: [
@@ -134,23 +144,35 @@
                     this.disable = false;
                 } else {
                     this.disable = true;
-                    this.US_PROFESJA = ''
+                    this.US_PROFESJA = '';
+                    this.listaHal = '0';
+                }
+            },
+            US_LOGIN: function () {
+                if (this.alert){
+                    this.alert = false
                 }
             }
         },
         methods: {
             async register() {
-                const response = await AuthenticationService.register({
-                    US_Name: this.US_Name,
-                    US_PASS: this.US_PASS,
-                    US_SUER_NAME: this.US_SUER_NAME,
-                    US_LOGIN: this.US_LOGIN,
-                    US_PROFESJA: this.Profesje,
-                    Hala_ID: this.listaHal.Hala_ID,
-                });
-                console.log(response.data)
-            },
-        },
+                this.alert = false;
+                try {
+                    await AuthenticationService.register({
+                        US_Name: this.US_Name,
+                        US_PASS: this.US_PASS,
+                        US_SUER_NAME: this.US_SUER_NAME,
+                        US_LOGIN: this.US_LOGIN,
+                        US_PROFESJA: this.Profesje,
+                        Hala_ID: this.listaHal
+                    });
+                }
+                catch (ServerMessage) {
+                    this.ServerMessage = ServerMessage.response.data.ServerMessage
+                    this.alert = true
+                }
+
+            }},
         async mounted() {
             this.Hale = (await AuthenticationService.getHale()).data;
             console.log('Hale: ', this.Hale)

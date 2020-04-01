@@ -4,9 +4,16 @@ const Hale = require('../models/hale');
 module.exports ={
     async register (req, res) {
         try {
-            console.log(req.body);
-            const user = await Users.create(req.body);
-            res.send(user.toJSON())
+            console.log('reqbody ',req.body);
+            const { count, rows } = await Users.findAndCountAll({where: {US_LOGIN: req.body.US_LOGIN}});
+            console.log(count);
+            if (count<1){
+                await Users.create(req.body);
+                res.status(400).send({"ServerMessageOK":"Jest OK!!!"})}
+            else {
+                res.status(400).send({"ServerMessageE":"Taki login juz istnieje!!!"});
+            }
+
         } catch (err) {
             console.log('error', err);
             res.status(400).send({

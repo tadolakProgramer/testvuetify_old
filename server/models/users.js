@@ -1,3 +1,4 @@
+const Hale = require('./hale');
 const Sequelize = require('sequelize');
 
 const sequelize = require('../database/databases');
@@ -26,7 +27,7 @@ const Users = sequelize.define('User', {
         allowNull: true},
     US_PROFESJA: {
         type: Sequelize.ENUM('Operator','Automatyk','Mechanik',''),
-        allowNull: true}
+        allowNull: true},
 });
-
+Users.hasOne(Hale, {as: 'Hale_ID', foreignKey:'ID_Hala' });
 module.exports = Users;

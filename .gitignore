@@ -1,7 +1,7 @@
 .DS_Store
 client/node_modules
 server/node_modules
-/client/database
+
 /dist
 
 # local env files
@@ -25,4 +25,5 @@ yarn-error.log*
 /client/README.md
 /client/npm
 /node_modules/
-
+/client/database
+/client/src/assets/logofolplast.png
