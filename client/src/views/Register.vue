@@ -94,7 +94,6 @@
                     <v-layout align-center justify-center>
                         <v-btn color="accent"
                                dark
-
                                @click="register">Dodaj
                         </v-btn>
                     </v-layout>
@@ -182,3 +181,6 @@
 <style scoped>
 
 </style>
+
+/* To do
+Validate form */

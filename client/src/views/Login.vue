@@ -1,52 +1,66 @@
 <template>
-    <div class="masthead">
-        <v-row justify="center">
+    <div class="masthead scroll-off-screen" >
             <v-card
-                    class="mx-auto"
+                    class="pa-6 ma-auto"
                     max-width="344"
                     outlined
+                    elevation="15"
                     color="transparent"
             >
-                <v-list-item three-line>
-                    <v-list-item-content>
-                        <div class="overline mb-4">OVERLINE</div>
-                        <v-list-item-title class="headline mb-1">Headline 5</v-list-item-title>
-                        <v-list-item-subtitle>Greyhound divisely hello coldly fonwderfully</v-list-item-subtitle>
-                    </v-list-item-content>
-
-                    <v-list-item-avatar
-                            tile
-                            size="80"
-                            color="grey"
-                    ></v-list-item-avatar>
-                </v-list-item>
+                <v-text-field
+                        v-model="US_LOGIN"
+                        hint="Wpisz swoje Login"
+                        label="Login"
+                        outlined
+                ></v-text-field>
+                <v-text-field
+                        v-model="US_PASS"
+                        :type="show1 ? 'text' : 'password'"
+                        :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                        @click:append="show1 = !show1"
+                        label="Hasło"
+                        outlined
+                ></v-text-field>
 
                 <v-card-actions>
-                    <v-btn text>Button</v-btn>
-                    <v-btn text>Button</v-btn>
+                    <v-layout align-center justify-center>
+                    <v-btn
+                            class="ma-2"
+                            outlined
+                    >
+                        <v-icon left>mdi-account-outline</v-icon>Loguj
+                        </v-btn>
+                    </v-layout>
                 </v-card-actions>
             </v-card>
-        </v-row>
     </div>
 </template>
 
 <script>
     export default {
-        name: "Login"
+        data() {
+            return {
+                US_LOGIN: '',
+                US_PASS: '',
+                show1: false,
+            }
+        }
     }
 </script>
 
 <style scoped>
     .masthead {
         min-height: 75rem;
-    / / width: 100 %;
-    / / height: 100 %;
-        padding-top: 8rem;
-    / / resize: horizontal;
+        width: 100%;
+        height: 100%;
+        padding-top: 18rem;
         background: url('../assets/MG_8241_1.jpg') fixed;
-    / / background-position: top center;
+        background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
         background-color: #00b0ff;
     }
 </style>
+
+<!--TODO
+    block scroll page-->

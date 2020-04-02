@@ -21,6 +21,19 @@ module.exports ={
             })
         }
     },
+    async login (req, res) {
+        try {
+            const {US_LOGIN, US_PASS} = req.body;
+            const user = await Users.findOne({
+                where: {
+                    US_LOGIN : US_LOGIN
+                }
+            })
+        }
+        catch (error){
+            console.log('login error');
+        }
+    },
     async getHale (req, res) {
         await Hale.findAll()
             .then(hale => res.send(hale))
