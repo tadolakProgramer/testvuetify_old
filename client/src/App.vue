@@ -1,11 +1,7 @@
 <template>
-
     <v-app id="App">
-
         <Header></Header>
-
         <main>
-
             <v-container fluid>
                 <v-content>
                     <router-view>
@@ -25,7 +21,6 @@
 </template>
 
 <script>
-
 
     import Header from "./components/Header";
 
