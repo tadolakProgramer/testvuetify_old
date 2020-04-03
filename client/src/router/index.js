@@ -30,7 +30,6 @@ const routes = [
     name: 'login',
     component: Login
   },
-
 ]
 
 const router = new VueRouter({
