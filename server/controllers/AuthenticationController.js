@@ -29,6 +29,9 @@ module.exports ={
                     US_LOGIN : US_LOGIN
                 }
             })
+            if (!user){
+                console.log('no user');
+            }
         }
         catch (error){
             console.log('login error');
