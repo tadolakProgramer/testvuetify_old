@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-const sequelize = require('../databases');
+const sequelize = require('../database/databases');
 
 const vMaszyny = sequelize.define('V_Maszyny', {
     NazwaHali: {

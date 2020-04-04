@@ -4,6 +4,8 @@ import Home from '../views/Home.vue'
 import Register from '../views/Register'
 import Login from "../views/Login";
 
+import notification from "../views/notification";
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -30,6 +32,11 @@ const routes = [
     name: 'login',
     component: Login
   },
+  {
+    path: '/notification',
+    name: 'notification',
+    component: notification
+  }
 ]
 
 const router = new VueRouter({

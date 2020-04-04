@@ -10,6 +10,6 @@ app.use(bodyParser.json());
 app.use(cors());
 
 require('./routers/router')(app);
-app.use(require('./routers/notification'));
+require('./routers/notification')(app);
 
 app.listen(process.env.PORT || 8081);
