@@ -2,16 +2,16 @@
     <v-flex>
         <v-row justify="start" class="mb-3">
             <v-col v-for="maszyna in listaMaszyn" :key="maszyna"
-                   md="3"
+                   md="4"
             >
-                <v-card class="pa-2"
+                <v-card class="pq-2"
                         max-width="auto"
                         color="secondary"
                 >
-                    <v-card-title>
+                    <v-card-title class="primary font-weight-bold">
                         {{maszyna.NazwaMaszyny}}
-                    </v-card-title>
-                    <v-card-subtitle>
+                    </v-card-title >
+                    <v-card-subtitle class="pt-10 font-weight-bold">
                         {{maszyna.NazwaTypu}}
                     </v-card-subtitle>
                     <v-divider
@@ -25,7 +25,7 @@
                             <v-icon right>mdi-plus</v-icon>
                         </v-btn>
                         <v-btn class="ma-2"
-                               color="warning" pa="2"
+                               color="szary" pa="2"
                                dark
                                @click="register">Edycja
                             <v-icon right>mdi-pencil</v-icon>

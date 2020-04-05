@@ -20,6 +20,7 @@ export default new Vuetify({
                 info: '#00E676',
                 warning: '#FFC107',
                 success: '#4CAF50',
+                szary: '#5b5b58',
             },
         },
     },
