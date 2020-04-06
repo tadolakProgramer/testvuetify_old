@@ -113,7 +113,7 @@
                 ServerMessage: null,
                 alert: false,
                 valid: false,
-                Hale: '',
+                Hale: [],
                 items: [
                     'Operator', 'Automatyk', 'Mechanik'
                 ],
@@ -138,7 +138,7 @@
         watch: {
             //Kontrola czy wybrany Operator
             Profesje: function () {
-                if (this.Profesje == "Operator") {
+                if (this.Profesje === "Operator") {
                     this.disable = false;
                 } else {
                     this.disable = true;
@@ -166,7 +166,7 @@
                     //this.alert = true
 
                 } catch (ServerMessage) {
-                    this.ServerMessage = ServerMessage.response.data.ServerMessage
+                    this.ServerMessage = ServerMessage.response.data.ServerMessage;
                     this.alert = true
                 }
             }

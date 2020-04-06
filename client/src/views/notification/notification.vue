@@ -38,7 +38,7 @@
 </template>
 
 <script>
-    import NotificationService from "../services/NotificationService";
+    import NotificationService from "../../services/NotificationService";
 
     export default {
         name: "notification",
@@ -54,7 +54,7 @@
             }
         },
         async mounted() {
-            this.listaMaszyn = (await NotificationService.getListaMaszyn()).data
+            this.listaMaszyn = (await NotificationService.getListaMaszyn()).data;
             console.log('Lista: ', this.listaMaszyn)
         }
     }

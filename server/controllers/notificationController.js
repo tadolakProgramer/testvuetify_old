@@ -13,5 +13,8 @@ module.exports = {
             error: 'vMaszyny error'
         })
     }
-}
+},
+    async postNewNotification (req, res){
+
+    }
 };

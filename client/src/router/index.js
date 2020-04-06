@@ -4,7 +4,7 @@ import Home from '../views/Home.vue'
 import Register from '../views/Register'
 import Login from "../views/Login";
 
-import notification from "../views/notification";
+import notification from "../views/notification/notification";
 
 Vue.use(VueRouter)
 

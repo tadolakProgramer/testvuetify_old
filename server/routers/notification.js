@@ -4,5 +4,5 @@ module.exports = (app) => {
 
     app.get('/notification', notificationController.getListaMaszyn);
 
-    app.post('/notification/new');
+    app.post('/notification/new', notificationController.postNewNotification);
 };
