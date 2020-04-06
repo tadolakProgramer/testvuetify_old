@@ -25,5 +25,5 @@ yarn-error.log*
 /client/README.md
 /client/npm
 /node_modules/
-/client/database
+/client/database/databases.js
 /client/src/assets/logofolplast.png
