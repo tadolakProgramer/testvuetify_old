@@ -65,7 +65,7 @@
                         US_LOGIN: this.US_LOGIN,
                         US_PASS: this.US_PASS
                     })
-                    this.$router.push('/')
+                    this.$router.push('/notification')
                 } catch (LoginError) {
                     this.LoginError = LoginError.response.data.LoginError;
                     this.alert = true
@@ -75,6 +75,11 @@
         },
         watch: {
             US_LOGIN: function () {
+                if (this.alert) {
+                    this.alert = false
+                }
+            },
+            US_PASS: function () {
                 if (this.alert) {
                     this.alert = false
                 }

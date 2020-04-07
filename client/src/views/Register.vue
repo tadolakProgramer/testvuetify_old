@@ -54,7 +54,7 @@
                                     v-model="US_PASS_CONFIRM"
                                     :type="'password'"
                                     :rules="[rules.required, rules.confirmPass]"
-                                    :error-messages="Error"
+                                    :error-messages="error"
                                     label="Powturz hasło"
                             ></v-text-field>
                         </v-col>

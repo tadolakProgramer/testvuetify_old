@@ -1,5 +1,25 @@
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
 const Users = require('../models/users');
 const Hale = require('../models/hale');
+const config = require('../config/config');
+
+const saltRounds = 10;
+
+function jwtSignUser (user) {
+    const ONE_WEEK = 60 * 60 * 24 * 7;
+    return jwt.sign(user, config.authentication.jwtSecret, {
+        expiresIn: ONE_WEEK
+    })
+}
+
+async function isMatchPassword (PASS, Hash){
+    await bcrypt.compare(PASS, Hash, function(err, result) {
+        console.log("ijak", result);
+        return result;
+    })
+}
 
 module.exports = {
     async register(req, res) {
@@ -7,12 +27,24 @@ module.exports = {
 
             const {count, rows} = await Users.findAndCountAll(
                 {where: {US_LOGIN: req.body.US_LOGIN}});
-            console.log(count);
             if (count < 1) {
-                await Users.create(req.body);
-                res.status(400).send({"ServerMessageOK": "Jest OK!!!"})
+                bcrypt.hash(req.body.US_PASS, saltRounds).then(function ( hash)  {
+                 const user = Users.create({
+                        US_Name : req.body.US_Name,
+                        US_SUER_NAME: req.body.US_SUER_NAME,
+                        US_LOGIN :  req.body.US_LOGIN,
+                        US_PASS : hash,
+                    US_PROFESJA: req.body.US_PROFESJA,
+                    Hala_ID: req.body.Hala_ID});
+                    const userJson = user.toJSON();
+                    res.send({
+                        user : userJson,
+                        token: jwtSignUser(userJson)
+                    });
+                    res.status(400).send({"ServerMessageOK": "Jest OK!!!"})
+                });
             } else {
-                res.status(400).send({"ServerMessageE": "Taki login juz istnieje!!!"});
+                res.status(403).send({"ServerMessageE": "Taki login juz istnieje!!!"});
             }
         } catch (err) {
             console.log('error', err);
@@ -29,17 +61,27 @@ module.exports = {
                 where: {
                     US_LOGIN: US_LOGIN
                 }
-            })
+            });
             if (!user) {
-                res.status(400).send({"LoginError":"Nie ma takiego urzytkownika"});
+                res.status(403).send({"LoginError":"Nie ma takiego urzytkownika"});
                 console.log('no user');
             }
-            if (user){
-                console.log('user OK!')
+
+            const validPass = isMatchPassword(US_PASS, user.US_PASS);
+            if (!validPass){
+                res.status(403).send({"LoginError":"Nie pamiętasz hasła"});
             }
+
+            const userJson = user.toJSON();
+            res.send({
+                user : userJson,
+                token: jwtSignUser(userJson)
+            });
+
         } catch (error) {
-            console.log('login error');
-            res.send('dupa');
+            res.status(500).send({
+                error: 'An error has occured trying to log in'
+            })
         }
     },
     async getHale(req, res) {
