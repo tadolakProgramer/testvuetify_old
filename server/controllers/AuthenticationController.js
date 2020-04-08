@@ -16,7 +16,7 @@ function jwtSignUser (user) {
 
 async function isMatchPassword (PASS, Hash){
     await bcrypt.compare(PASS, Hash, function(err, result) {
-        return result;
+       return result;
     })
 }
 
@@ -54,7 +54,7 @@ module.exports = {
     },
     async login(req, res) {
         try {
-            console.log('reqbody ', req.body);
+            console.log('reqbody1 ', req.body);
             const {US_LOGIN, US_PASS} = req.body;
             const user = await Users.findOne({
                 where: {
@@ -65,20 +65,21 @@ module.exports = {
                 res.status(403).send({"LoginError":"Nie ma takiego urzytkownika"});
                 console.log('no user');
             }
-
-            const validPass = isMatchPassword(US_PASS, user.US_PASS);
+            const  hash = await bcrypt.hash(req.body.US_PASS, saltRounds);
+            const validPass = isMatchPassword(hash, user.US_PASS);
             if (!validPass){
                 res.status(403).send({"LoginError":"Nie pamiętasz hasła"});
             }
-
             const userJson = user.toJSON();
             res.send({
                 user : userJson,
                 token: jwtSignUser(userJson)
             });
+            console.log(userJson)
 
-        } catch (error) {
-            res.status(500).send({
+        } catch (err) {
+            console.log(err)
+            res.status(403).send({
                 error: 'An error has occured trying to log in'
             })
         }

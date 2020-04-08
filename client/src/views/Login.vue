@@ -65,7 +65,7 @@
                         US_LOGIN: this.US_LOGIN,
                         US_PASS: this.US_PASS
                     })
-                    this.$router.push('/notification')
+                    await this.$router.push('/notification')
                 } catch (LoginError) {
                     this.LoginError = LoginError.response.data.LoginError;
                     this.alert = true

@@ -7,7 +7,7 @@ const passport = require('passport');
 
 module.exports = (app) => {
 
-    app.get('/notification',isAuthenticated, notificationController.getListaMaszyn);
+    app.get('/notification', notificationController.getListaMaszyn);
 
     app.post('/notification/new', notificationController.postNewNotification);
 };
