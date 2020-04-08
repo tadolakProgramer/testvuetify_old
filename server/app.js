@@ -9,6 +9,8 @@ app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(cors());
 
+require('./policies/passport');
+
 require('./routers/router')(app);
 require('./routers/notification')(app);
 

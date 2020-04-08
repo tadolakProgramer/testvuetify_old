@@ -16,7 +16,6 @@ function jwtSignUser (user) {
 
 async function isMatchPassword (PASS, Hash){
     await bcrypt.compare(PASS, Hash, function(err, result) {
-        console.log("ijak", result);
         return result;
     })
 }
