@@ -85,8 +85,15 @@
 
                     </v-row>
                     <v-alert
+                            :value="alert2"
+                            type="success"
+                            elevation="2"
+                            transition="scale-transition"
+                    >{{ServerMessage2}}
+                    </v-alert>
+                    <v-alert
                             :value="alert"
-                            :type="error"
+                            type="error"
                             elevation="2"
                             transition="scale-transition"
                     >{{ServerMessage}}
@@ -112,6 +119,7 @@
             return {
                 ServerMessage: null,
                 alert: false,
+                alert2: false,
                 valid: false,
                 Hale: [],
                 items: [
@@ -128,6 +136,7 @@
                 Hala_ID: '',
                 listaHal: '',
                 disable: true,
+                type: "error",
                 rules: {
                     required: value => !!value || 'To pole nie może być puste.',
                     min: v => v.length >= 6 || 'Min 6 znaków',
@@ -163,11 +172,14 @@
                         US_PROFESJA: this.Profesje,
                         Hala_ID: this.listaHal
                     });
-                    //this.alert = true
+                    this.ServerMessage2 = "Nowy użytkownik został dodany"
+                    this.alert2 = true
 
                 } catch (ServerMessage) {
-                    this.ServerMessage = ServerMessage.response.data.ServerMessage;
+                    this.type = "error"
                     this.alert = true
+                    this.ServerMessage = ServerMessage.response.data.ServerMessage;
+
                 }
             }
         },
