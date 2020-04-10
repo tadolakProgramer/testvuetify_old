@@ -15,6 +15,24 @@ module.exports = {
     }
 },
     async postNewNotification (req, res){
-
+        try {
+            const {maszynaId} = req.params;
+            console.log(maszynaId)
+            await vMaszyny.findAll({
+                where:{
+                    ID_Maszyna : maszynaId
+                }
+            })
+                .then(Maszyna => {
+                    res.send(Maszyna)
+                })
+                .catch(error => console.log(error))
+        }
+        catch (err) {
+            console.log('error', err);
+            res.status(400).send({
+                error: 'vMaszyny error'
+            })
+        }
     }
 };

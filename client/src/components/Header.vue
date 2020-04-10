@@ -13,14 +13,29 @@
 
             <v-toolbar-title>
                 Naprawy
+                {{Name}}
             </v-toolbar-title>
 
             <v-spacer></v-spacer>
             <span></span>
-            <v-btn depressed color="primary">
+
+            <v-btn
+                    v-if="!$store.state.isUserLoggedIn"
+                    depressed
+                    color="primary"
+                    :to="{
+                    name: 'login'
+                    }">
                 Login
             </v-btn>
 
+            <v-btn
+                    v-if="$store.state.isUserLoggedIn"
+                    depressed
+                    color="primary"
+                    @click="logout">
+                Logout
+            </v-btn>
             <v-avatar color="primary">
                 <v-icon>mdi-account</v-icon>
             </v-avatar>
@@ -30,7 +45,22 @@
 
 <script>
     export default {
-        name: "Header"
+        name: "Header",
+        data() {
+            return {
+            Name: ''
+            }
+            },
+
+        methods: {
+            logout() {
+                this.$store.dispatch('setToken', null)
+                this.$store.dispatch('setUser', null)
+                this.$router.push({
+                    name: 'Home'
+                })
+            }
+        }
     }
 
 </script>

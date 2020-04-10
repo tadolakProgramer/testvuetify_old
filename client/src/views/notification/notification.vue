@@ -21,7 +21,10 @@
                         <v-btn class="ma-2"
                                color="accent" pa="2"
                                dark
-                               @click="register">Zgłoszenie
+                               :to="{name: 'newnotification',
+                               params: {maszynaId: maszyna.ID_Maszyna
+                               }
+                        }">Zgłoszenie
                             <v-icon right>mdi-plus</v-icon>
                         </v-btn>
                         <v-btn class="ma-2"

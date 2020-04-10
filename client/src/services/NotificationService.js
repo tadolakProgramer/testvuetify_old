@@ -4,7 +4,9 @@ export default {
     getListaMaszyn() {
         return Api().get('/notification')
     },
-    newNotification() {
-        return Api().post('/notification/new')
+    newnotification(maszynaId) {
+        return Api().post('/notification/new/',{
+            params: maszynaId}
+        )
     }
 }
