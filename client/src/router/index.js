@@ -4,7 +4,10 @@ import Home from '../views/Home.vue'
 import Register from '../views/Register'
 import Login from "../views/Login";
 
+import IsLogin from './isLogin'
+
 import notification from "../views/notification/notification";
+
 
 Vue.use(VueRouter)
 
@@ -25,7 +28,8 @@ const routes = [
   {
     path: '/register',
     name: 'register',
-    component: Register
+    component: Register,
+    beforeEnter: IsLogin
   },
   {
     path: '/Login',
@@ -35,7 +39,8 @@ const routes = [
   {
     path: '/notification',
     name: 'notification',
-    component: notification
+    component: notification,
+    beforeEnter: IsLogin
   }
 ]
 

@@ -17,7 +17,7 @@ passport.use(
                     id: jwtPayload.id
                 }
             })
-            console.log("jwt")
+            console.log("passport")
             if (!user) {
                 return done(new Error(), false)
             }

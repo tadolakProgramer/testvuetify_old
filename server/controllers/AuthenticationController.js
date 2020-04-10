@@ -8,6 +8,7 @@ const config = require('../config/config');
 const saltRounds = 10;
 
 function jwtSignUser (user) {
+    console.log("user", user)
     const ONE_DAY = 60 * 60 * 24;
     return jwt.sign(user, config.authentication.jwtSecret, {
         expiresIn: ONE_DAY
