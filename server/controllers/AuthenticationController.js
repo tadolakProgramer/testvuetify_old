@@ -64,7 +64,7 @@ module.exports = {
                         token: jwtSignUser(userJson)
                     })
                 }
-            else{
+                else{
                     res.status(403).send({"LoginError": "Nie pamiętasz hasła??"});
                 }
             }
@@ -72,7 +72,7 @@ module.exports = {
         catch (err) {
             console.log(err)
             res.status(403).send(
-            {"LoginError": 'An error has occured trying to log in'})
+                {"LoginError": 'An error has occured trying to log in'})
 
         }
     },
@@ -82,4 +82,3 @@ module.exports = {
             .catch(error => console.log(error));
     }
 };
-

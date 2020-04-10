@@ -27,3 +27,4 @@ yarn-error.log*
 /node_modules/
 /client/database/databases.js
 /client/src/assets/logofolplast.png
+/node_modules/

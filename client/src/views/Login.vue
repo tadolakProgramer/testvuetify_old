@@ -61,11 +61,12 @@
         methods: {
             async login() {
                 try {
-                    await AuthenticationService.login({
+                    const response = await AuthenticationService.login({
                         US_LOGIN: this.US_LOGIN,
                         US_PASS: this.US_PASS
                     })
-                    await this.$router.push('/notification')
+                    this.$store.dispatch('setToken', response.data.token)
+                    this.$router.push('/notification')
                 } catch (LoginError) {
                     this.LoginError = LoginError.response.data.LoginError;
                     this.alert = true
