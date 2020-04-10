@@ -65,7 +65,8 @@
                         US_LOGIN: this.US_LOGIN,
                         US_PASS: this.US_PASS
                     })
-                    this.$store.dispatch('setToken', response.data.token)
+                    await this.$store.dispatch('setToken', response.data.token)
+                    await this.$store.dispatch('setUser', response.data.user)
                     this.$router.push('/notification')
                 } catch (LoginError) {
                     this.LoginError = LoginError.response.data.LoginError;

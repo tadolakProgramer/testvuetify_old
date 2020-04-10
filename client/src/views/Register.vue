@@ -164,7 +164,7 @@
         methods: {
             async register() {
                 try {
-                    await AuthenticationService.register({
+                    const response = await AuthenticationService.register({
                         US_Name: this.US_Name,
                         US_PASS: this.US_PASS,
                         US_SUER_NAME: this.US_SUER_NAME,
@@ -172,6 +172,9 @@
                         US_PROFESJA: this.Profesje,
                         Hala_ID: this.listaHal
                     });
+                    await this.$store.dispatch('setToken', response.data.token)
+                    await this.$store.dispatch('setUser', response.data.user)
+
                     this.ServerMessage2 = "Nowy użytkownik został dodany"
                     this.alert2 = true
 
