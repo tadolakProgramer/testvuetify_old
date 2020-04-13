@@ -12,8 +12,8 @@
         <v-card-title>
           <div>
             <span class="grey--text">Number 10</span><br>
-            <span>Whitehaven Beach</span><br>
-            <span>Whitsunday Island, Whitsunday Islands</span>
+            <span>Whitehaven Beach{{maszyna.NazwaMaszyny}}</span><br>
+            <span></span>
           </div>
         </v-card-title>
         <v-card-actions>
@@ -33,16 +33,21 @@
     props: {
       source: String,
     },
-    data: () => ({
-      drawer: null,
-    }),
+    data() {
+      return {
+        maszynaId:'',
+        NazwaMaszyny:'',
+        maszyna: []
+      }
+      },
     async mounted() {
       try {
         const maszynaId = this.$store.state.route.params.maszynaId;
-        this.Hale = (await NotificationService.newnotification(maszynaId)).data;
-        console.log('Hale: ', this.Hale)
-      } catch (e) {
-        console.log(e)
+
+        this.maszyna = (await NotificationService.newnotification(maszynaId)).data;
+        console.log(this.maszynaId)
+      } catch (errnoError) {
+        console.log(errnoError)
       }
     }
   }

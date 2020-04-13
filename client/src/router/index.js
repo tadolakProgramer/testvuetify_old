@@ -4,10 +4,12 @@ import Home from '../views/Home.vue'
 import Register from '../views/Register'
 import Login from "../views/Login";
 
-import IsLogin from './isLogin'
-
 import notification from "../views/notification/notification";
 import newnotification from "../views/notification/newnotification";
+
+import IsLogin from './isLogin'
+
+
 
 Vue.use(VueRouter)
 

@@ -24,7 +24,8 @@
                                :to="{name: 'newnotification',
                                params: {maszynaId: maszyna.ID_Maszyna
                                }
-                        }">Zgłoszenie
+                        }"
+                        >Zgłoszenie
                             <v-icon right>mdi-plus</v-icon>
                         </v-btn>
                         <v-btn class="ma-2"
@@ -53,6 +54,7 @@
                 NazwaMaszyny: '',
                 NazwaTypu: '',
                 ID: '',
+                maszynaId:'',
                 listaMaszyn: []
             }
         },

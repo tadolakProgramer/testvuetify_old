@@ -5,7 +5,7 @@ export default {
         return Api().get('/notification')
     },
     newnotification(maszynaId) {
-        return Api().post('/notification/new/',{
+        return Api().post('/notification/new/'+{
             params: maszynaId}
         )
     }

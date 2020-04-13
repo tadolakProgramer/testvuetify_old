@@ -17,7 +17,7 @@ module.exports = {
     async postNewNotification (req, res){
         try {
             const {maszynaId} = req.params;
-            console.log(maszynaId)
+
             await vMaszyny.findAll({
                 where:{
                     ID_Maszyna : maszynaId
