@@ -16,15 +16,15 @@ module.exports = {
 },
     async postNewNotification (req, res){
         try {
-            const {maszynaId} = req.params;
-
-            await vMaszyny.findAll({
+            const maszynaId = req.body.params;
+            console.log(maszynaId)
+            await vMaszyny.findOne({
                 where:{
                     ID_Maszyna : maszynaId
                 }
             })
-                .then(Maszyna => {
-                    res.send(Maszyna)
+                .then(maszynka => {
+                    res.send(maszynka)
                 })
                 .catch(error => console.log(error))
         }

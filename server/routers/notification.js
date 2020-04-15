@@ -9,5 +9,7 @@ module.exports = (app) => {
 
     app.get('/notification', notificationController.getListaMaszyn);
 
-    app.post('/notification/new/:maszynaId', notificationController.postNewNotification);
+    app.get('/notification/new/', notificationController.postNewNotification);
+
+    app.post('/notification/new/',  notificationController.postNewNotification);
 };
