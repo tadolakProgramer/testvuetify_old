@@ -16,7 +16,7 @@ module.exports = {
 },
     async postNewNotification (req, res){
         try {
-            const maszynaId = req.body.params;
+            const maszynaId = req.params.maszynaId;
             console.log(maszynaId)
             await vMaszyny.findOne({
                 where:{

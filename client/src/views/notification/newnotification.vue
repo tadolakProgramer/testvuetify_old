@@ -40,9 +40,9 @@
         },
         mounted() {
             try {
-                const maszynaId = this.$store.state.route.params.maszynaId;
+                this.maszynaId = this.$route.params.maszynaId;
                 //this.maszynka = (NotificationService.newnotification(maszynaId)).data;
-                this.maszynka = (NotificationService.getMaszyna(maszynaId)).data;
+                this.maszynka = (NotificationService.getMaszyna(this.maszynaId)).data;
             } catch (errnoError) {
                 console.log(errnoError)
             }

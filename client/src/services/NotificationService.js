@@ -5,8 +5,9 @@ export default {
         return Api().get('/notification')
     },
     newnotification(maszynaId) {
+        const  ID = maszynaId
         return Api().post('/notification/new/',{
-            params: maszynaId}
+            params: ID}
         )
     },
     getMaszyna(maszynaId){
