@@ -9,7 +9,7 @@
                         </v-flex>
                     </v-layout>
                 </v-container>
-                <v-card-title> ZUZUZUZUZZU {{this.NazwaMaszyny}}
+                <v-card-title> ZUZUZUZUZZU {{maszynka.NazwaMaszyny}}
                 </v-card-title>
                 <v-card-text>
                     TEXT
@@ -35,16 +35,21 @@
         data() {
             return {
                 maszynaId:'',
-                maszynka: [],
+                maszynka:'',
                 NazwaMaszyny:''
             }
         },
         async mounted() {
-
-                //this.maszynaId = this.$route.params.maszynaId;
+            try {//this.maszynaId = this.$route.params.maszynaId;
                 this.maszynka = (NotificationService.newnotification(this.$route.params)).data;
                 //this.maszynka = (NotificationService.getMaszyna(this.$route.params)).data;
+                console.log(this.maszynka);
                 this.NazwaMaszyny = await this.maszynka.NazwaMaszyny;
+            }
+            catch (e) {
+                console.log(e)
+
+            }
 
         }
     }
