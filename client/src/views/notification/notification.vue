@@ -21,11 +21,8 @@
                         <v-btn class="ma-2"
                                color="accent" pa="2"
                                dark
-                               :to="{name: 'newnotification',
-                               params: {maszynaId: maszyna.ID_Maszyna
-                               }
-                        }"
-                        >Zgłoszenie
+                               @click="newnotification(maszyna.ID_Maszyna)"
+                               >Zgłoszenie
                             <v-icon right>mdi-plus</v-icon>
                         </v-btn>
                         <v-btn class="ma-2"
@@ -56,6 +53,12 @@
                 ID: '',
                 maszynaId:'',
                 listaMaszyn: []
+            }
+        },
+        methods:{
+            newnotification(maszynaId)
+            {
+                this.$router.push({name:'newnotification', params:{IDS:maszynaId}})
             }
         },
         async mounted() {

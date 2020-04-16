@@ -45,10 +45,9 @@ const routes = [
     beforeEnter: IsLogin
   },
   {
-    path: '/notification/new/:maszynaId?',
+    path: '/notification/new/:IDS',
     name: 'newnotification',
     component: newnotification,
-    props: 'maszynaId',
     beforeEnter: IsLogin
   }
 ]

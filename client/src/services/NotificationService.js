@@ -4,15 +4,14 @@ export default {
     getListaMaszyn() {
         return Api().get('/notification')
     },
-    newnotification(maszynaId) {
-        const  ID = maszynaId
-        return Api().post('/notification/new/',{
-            params: ID}
+    newnotification(IDS) {
+        return Api().post('/notification/new/:IDS',{
+            params: IDS}
         )
     },
-    getMaszyna(maszynaId){
-        return Api().get('/notification/new/', {
-            params: maszynaId
+    getMaszyna(IDS){
+        return Api().get('/notification/new/:IDS', {
+            params: IDS
         })
     }
 }
