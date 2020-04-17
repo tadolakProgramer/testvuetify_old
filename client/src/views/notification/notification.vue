@@ -56,9 +56,9 @@
             }
         },
         methods:{
-            newnotification(maszynaId)
+            newnotification(IDS)
             {
-                this.$router.push({name:'newnotification', params:{IDS:maszynaId}})
+                this.$router.push({name:'newnotification', params:{IDS:IDS}})
             }
         },
         async mounted() {

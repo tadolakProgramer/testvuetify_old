@@ -5,13 +5,12 @@ export default {
         return Api().get('/notification')
     },
     newnotification(IDS) {
-        return Api().post('/notification/new/:IDS',{
-            params: IDS}
+        return Api().post('/notification/new/IDS',{IDS:IDS}
         )
     },
     getMaszyna(IDS){
-        return Api().get('/notification/new/:IDS', {
-            params: IDS
-        })
+        return Api().get('/notification/new/',
+            {params: IDS}
+        )
     }
 }

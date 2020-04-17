@@ -53,8 +53,8 @@
             return {
                 LoginError: null,
                 alert: false,
-                US_LOGIN: '',
-                US_PASS: '',
+                US_LOGIN: 'ONA',
+                US_PASS: 'ONAONA',
                 show1: false,
             }
         },

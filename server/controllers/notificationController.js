@@ -16,7 +16,7 @@ module.exports = {
 },
     async postNewNotification (req, res){
         try {
-            const {IDS} = await req.body.params;
+            const IDS =  req.query.IDS;
             await vMaszyny.findOne({
                 where:{
                     ID_Maszyna : IDS

@@ -33,18 +33,16 @@
             source: String,
         },
         data() {
-            return {
+             return {
                 maszynaId:'',
-                maszynka:'',
+                maszynka: '',
                 NazwaMaszyny:''
             }
         },
         async mounted() {
-            try {//this.maszynaId = this.$route.params.maszynaId;
-                this.maszynka = (NotificationService.newnotification(this.$route.params)).data;
-                //this.maszynka = (NotificationService.getMaszyna(this.$route.params)).data;
-                console.log(this.maszynka);
-                this.NazwaMaszyny = await this.maszynka.NazwaMaszyny;
+            try {
+                this.maszynka =  (await NotificationService.getMaszyna(this.$route.params)).data;
+                console.log('maszyna:',this.maszynka);
             }
             catch (e) {
                 console.log(e)
