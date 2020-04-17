@@ -1,22 +1,35 @@
 <template>
     <v-layout>
-        <v-flex xs12 sm10 offset-sm1>
-            <v-card>
-                <v-container fill-height fluid>
-                    <v-layout fill-height>
-                        <v-flex xs12 align-end flexbox>
-                            <span class="headline">Top 10 Australian beaches </span>
-                        </v-flex>
-                    </v-layout>
-                </v-container>
-                <v-card-title> ZUZUZUZUZZU {{maszynka.NazwaMaszyny}}
+        <v-flex xs2 sm8 offset-sm2>
+            <v-card class="pq-2"
+                    max-width="auto"
+                    color="secondary"
+            >
+                <v-card-title class="primary font-weight-bold justify-space-between">Zgłoszenie awarii:
+                    {{maszynka.NazwaMaszyny}}<span>{{dataGodzina}}</span>
                 </v-card-title>
+                <v-card-subtitle class="pt-10 font-weight-bold">
+                    <span>{{maszynka.NazwaTypu}}<br></span>
+                    <span>{{maszynka.NazwaHali}}</span>
+
+                </v-card-subtitle>
                 <v-card-text>
-                    TEXT
+                    <v-textarea
+                            background-color="white"
+                            color="black"
+                            label="Opisz awarię"
+                            hint="Minimum 25 znaków"
+                            :counter="25"
+                            :rules="[rules.required, rules.min]"
+                            outlined
+                            rows="3"
+                    ></v-textarea>
+                    <span>Zgłaszający: {{user.US_Name}} {{user.US_SUER_NAME}} {{user.US_PROFESJA}}</span>
                 </v-card-text>
                 <v-card-actions>
                     <v-btn flat color="orange">Zapisz</v-btn>
-                    <v-btn flat color="orange">Anuluj</v-btn>
+                    <v-btn flat color="orange"
+                    >Anuluj</v-btn>
                 </v-card-actions>
             </v-card>
         </v-flex>
@@ -26,6 +39,8 @@
 <script>
 
     import NotificationService from "../../services/NotificationService";
+    import moment from 'moment';
+    import store from "../../store/store";
 
 
     export default {
@@ -33,22 +48,26 @@
             source: String,
         },
         data() {
-             return {
-                maszynaId:'',
+            return {
                 maszynka: '',
-                NazwaMaszyny:''
+                dataGodzina: '',
+                user:'',
+                rules: {
+                    required: value => !!value || 'To pole nie może być puste.',
+                    min: v => v.length > 25 || 'Min 25 znaków'
+                }
             }
         },
         async mounted() {
             try {
-                this.maszynka =  (await NotificationService.getMaszyna(this.$route.params)).data;
-                console.log('maszyna:',this.maszynka);
-            }
-            catch (e) {
+                this.maszynka = (await NotificationService.getMaszyna(this.$route.params)).data;
+                moment.locale('pl');
+                this.dataGodzina = moment().format('lll');
+                this.user = store.getters.user;
+            } catch (e) {
                 console.log(e)
 
             }
-
-        }
+        },
     }
 </script>
