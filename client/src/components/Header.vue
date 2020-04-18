@@ -2,27 +2,13 @@
     <div class="Header">
         <v-navigation-drawer
                 v-model="drawer"
-                v-if=login
+                v-if=automatyk
                 app
         >
-            <v-list dense>
-                <v-list-item link>
-                    <v-list-item-action>
-                        <v-icon>mdi-home</v-icon>
-                    </v-list-item-action>
-                    <v-list-item-content>
-                        <v-list-item-title>Home</v-list-item-title>
-                    </v-list-item-content>
-                </v-list-item>
-                <v-list-item link>
-                    <v-list-item-action>
-                        <v-icon>mdi-contact-mail</v-icon>
-                    </v-list-item-action>
-                    <v-list-item-content>
-                        <v-list-item-title>Contact</v-list-item-title>
-                    </v-list-item-content>
-                </v-list-item>
-            </v-list>
+            <v-treeview
+                    activatable
+                    :items="treeView"
+            ></v-treeview>
         </v-navigation-drawer>
         <v-app-bar
                 app
@@ -79,6 +65,7 @@
 <script>
     import AuthenticationService from '../services/AuthenticationService'
     //import store from "../store/store";
+    import items from "../helpers/treeView"
 
     export default {
         name: "Header",
@@ -86,6 +73,7 @@
             return {
                 Name: '',
                 Hale: [],
+                treeView: '',
                 drawer: null,
                 automatyk: false,
                 login: false //control buttons login/logout
@@ -107,7 +95,8 @@
             this.$root.$on('loginOK',(login, automatyk) => {
                 this.login = login
                 this.automatyk = automatyk})
-            console.log("login", this.login);
+            this.treeView = items.items;
+            console.log("login", this.treeView);
 
                 this.Hale = (await AuthenticationService.getHale()).data;
             console.log('Hale: ', this.Hale)

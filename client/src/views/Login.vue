@@ -54,8 +54,8 @@
             return {
                 LoginError: null,
                 alert: false,
-                US_LOGIN: 'ONA',
-                US_PASS: 'ONAONA',
+                US_LOGIN: '',
+                US_PASS: '',
                 show1: false,
             }
         },
@@ -115,11 +115,8 @@
         width: 100%;
         height: 100%;
         padding-top: 18rem;
-        background: url('../assets/MG_8241_1.jpg') fixed;
-        background-position: center;
-        background-repeat: no-repeat;
         background-size: cover;
-        background-color: #00b0ff;
+        background: #00b0ff url('../assets/MG_8241_1.jpg') no-repeat fixed center;
     }
 </style>
 
