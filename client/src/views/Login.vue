@@ -47,6 +47,7 @@
 
 <script>
     import AuthenticationService from '../services/AuthenticationService'
+    import store from "../store/store";
 
     export default {
         data() {
@@ -67,12 +68,29 @@
                     })
                     await this.$store.dispatch('setToken', response.data.token)
                     await this.$store.dispatch('setUser', response.data.user)
-                    this.$root.$emit('loginOK', true)
-                    this.$router.push('/notification')
+
+                    this.user = store.getters.user;
+                    await this.$store.dispatch('setProfesja', this.user.US_PROFESJA)
+
+                    this.$root.$emit('loginOK', true, false); //send loginOk to Header
+
+                    if (store.getters.profesja ==='Operator'){
+                        this.$router.push({name: 'notification'})
+                        this.$root.$emit('loginOK', true, false)
+                    }
+                    if (store.getters.profesja === 'Automatyk'){
+                        this.$router.push({name: 'notification'})
+                        this.$root.$emit('loginOK', true, true)
+                        }
+
+                    /*
+                    this.IdHala = this.user.ID_Hala
+                    //this.$router.push({name: 'notification', params:{IdHala:this.IdHala}})
+                    */
+
                 } catch (LoginError) {
                     this.LoginError = LoginError.response.data.LoginError;
                     this.alert = true
-
                 }
             }
         },

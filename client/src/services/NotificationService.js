@@ -13,7 +13,7 @@ export default {
             {params: IDS}
         )
     },
-    addNewNotification(credentials) {
-        return Api().put('/notification/new/', credentials)
+    addNewNotification() {
+        return Api().put('/notification/new/')
     }
 }

@@ -13,5 +13,5 @@ module.exports = (app) => {
 
     app.post('/notification/new/:IDS',  notificationController.postNewNotification);
 
-    app.put('/notification/new/', notificationController.putNewNotification);
+    app.put('/notification/new', notificationController.putNewNotification);
 };

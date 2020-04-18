@@ -8,7 +8,8 @@ export default  new Vuex.Store({
     state: {
         token: null,
         user: null,
-        inUserLoggedIn: false
+        inUserLoggedIn: false,
+        profesja: null
     },
     mutations: {
         setToken (state, token) {
@@ -17,6 +18,9 @@ export default  new Vuex.Store({
         },
         setUser (state, user) {
             state.user = user
+        },
+        setProfesja (state, profesja){
+            state.profesja = profesja
         }
     },
     actions: {
@@ -25,11 +29,17 @@ export default  new Vuex.Store({
         },
         setUser ({commit}, user) {
             commit('setUser', user)
+        },
+        setProfesja ({commit}, profesja) {
+            commit('setProfesja', profesja)
         }
     },
     getters: {
         user (state) {
             return state.user
+        },
+        profesja (state){
+            return state.profesja
         }
     }
 })
