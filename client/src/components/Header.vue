@@ -20,7 +20,7 @@
             <span></span>
 
             <v-btn
-                    v-if="!$store.state.isUserLoggedIn"
+                    v-if="!login"
                     depressed
                     color="primary"
                     :to="{
@@ -30,7 +30,7 @@
             </v-btn>
 
             <v-btn
-                    v-if="$store.state.isUserLoggedIn"
+                    v-if="login"
                     depressed
                     color="primary"
                     @click="logout">
@@ -44,22 +44,30 @@
 </template>
 
 <script>
+
     export default {
         name: "Header",
         data() {
             return {
-            Name: ''
+                Name: '',
+                login: false
             }
-            },
-
+        },
         methods: {
             logout() {
                 this.$store.dispatch('setToken', null)
                 this.$store.dispatch('setUser', null)
+                this.login=false;
                 this.$router.push({
                     name: 'Home'
                 })
             }
+        },
+        mounted() {
+            this.$root.$on('loginOK',(login) => {
+                this.login = login})
+            console.log("login", this.login)
+
         }
     }
 

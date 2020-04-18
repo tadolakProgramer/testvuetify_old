@@ -67,6 +67,7 @@
                     })
                     await this.$store.dispatch('setToken', response.data.token)
                     await this.$store.dispatch('setUser', response.data.user)
+                    this.$root.$emit('loginOK', true)
                     this.$router.push('/notification')
                 } catch (LoginError) {
                     this.LoginError = LoginError.response.data.LoginError;

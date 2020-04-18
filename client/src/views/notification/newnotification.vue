@@ -15,6 +15,7 @@
                 </v-card-subtitle>
                 <v-card-text>
                     <v-textarea
+                            v-model="AW_OpisAwarii"
                             background-color="white"
                             color="black"
                             label="Opisz awarię"
@@ -27,7 +28,8 @@
                     <span>Zgłaszający: {{user.US_Name}} {{user.US_SUER_NAME}} {{user.US_PROFESJA}}</span>
                 </v-card-text>
                 <v-card-actions>
-                    <v-btn flat color="orange">Zapisz</v-btn>
+                    <v-btn flat color="orange"
+                    @click="AddNewNotification">Zapisz</v-btn>
                     <v-btn flat color="orange"
                     >Anuluj</v-btn>
                 </v-card-actions>
@@ -42,7 +44,6 @@
     import moment from 'moment';
     import store from "../../store/store";
 
-
     export default {
         props: {
             source: String,
@@ -52,6 +53,11 @@
                 maszynka: '',
                 dataGodzina: '',
                 user:'',
+                AW_DataZgloszenia:'',
+                Maszyna_ID:'',
+                AW_Zglaszajacy_ID:'',
+                AW_OpisAwarii:'',
+                AW_Zrealizowane:'',
                 rules: {
                     required: value => !!value || 'To pole nie może być puste.',
                     min: v => v.length > 25 || 'Min 25 znaków'
@@ -69,5 +75,20 @@
 
             }
         },
+        methods: {
+            async AddNewNotification() {
+                try {
+                    await NotificationService.addNewNotification({
+                        Maszyna_ID: this.maszynka.ID_Maszyna,
+                        AW_Zglaszajacy_ID: this.user.ID_USER,
+                        AW_OpisAwarii: this.AW_OpisAwarii,
+                        AW_Zrealizowane: 'Zgłoszenie'
+                    });
+                }
+                catch (e) {
+                    console.log(e)
+                }
+            }
+        }
     }
 </script>

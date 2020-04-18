@@ -49,7 +49,13 @@ const routes = [
     name: 'newnotification',
     component: newnotification,
     beforeEnter: IsLogin
-  }
+  },
+    {
+        path: '/notification/new/',
+        name: 'AddNewNotification',
+        component: newnotification,
+        beforeEnter: IsLogin
+    }
 ]
 
 const router = new VueRouter({
