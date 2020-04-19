@@ -54,8 +54,8 @@
             return {
                 LoginError: null,
                 alert: false,
-                US_LOGIN: 'Tado',
-                US_PASS: '1234',
+                US_LOGIN: '',
+                US_PASS: '',
                 show1: false,
                 IdHala:''
             }
@@ -85,12 +85,6 @@
                         this.$router.push({name: 'failure'})
                         this.$root.$emit('loginOK', true, true)
                         }
-
-                    /*
-
-                    //this.$router.push({name: 'notification', params:{IdHala:this.IdHala}})
-                    */
-
                 } catch (LoginError) {
                     this.LoginError = LoginError.response.data.LoginError;
                     this.alert = true

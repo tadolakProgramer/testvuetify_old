@@ -20,7 +20,7 @@
                     ></v-divider>
                     <v-layout align-center justify-space-between>
                         <v-btn class="ma-2"
-                               color="accent" pa="2"
+                               color="red" pa="2"
                                dark
                                @click="newnotification(maszyna.ID_Maszyna)"
                                >Zgłoszenie
