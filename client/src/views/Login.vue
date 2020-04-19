@@ -54,8 +54,8 @@
             return {
                 LoginError: null,
                 alert: false,
-                US_LOGIN: '',
-                US_PASS: '',
+                US_LOGIN: 'ONA',
+                US_PASS: 'ONAONA',
                 show1: false,
             }
         },
@@ -71,15 +71,15 @@
 
                     this.user = store.getters.user;
                     await this.$store.dispatch('setProfesja', this.user.US_PROFESJA)
-
-                    this.$root.$emit('loginOK', true, false); //send loginOk to Header
+                    //send loginOk to Header
+                    this.$root.$emit('loginOK', true, false);
 
                     if (store.getters.profesja ==='Operator'){
                         this.$router.push({name: 'notification'})
                         this.$root.$emit('loginOK', true, false)
                     }
                     if (store.getters.profesja === 'Automatyk'){
-                        this.$router.push({name: 'notification'})
+                        this.$router.push({name: 'failure'})
                         this.$root.$emit('loginOK', true, true)
                         }
 

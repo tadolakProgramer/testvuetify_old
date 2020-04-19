@@ -22,9 +22,6 @@ const routes = [
   {
     path: '/about',
     name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
   {
@@ -49,7 +46,14 @@ const routes = [
     name: 'newnotification',
     component: newnotification,
     beforeEnter: IsLogin
-  }
+  },
+
+    {
+        path: '/failure',
+        name: 'failure',
+        component: () => import('../views/failure/failure'),
+        beforeEnter: IsLogin
+    },
 ]
 
 const router = new VueRouter({

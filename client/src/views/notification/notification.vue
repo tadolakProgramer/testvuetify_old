@@ -4,7 +4,8 @@
             <v-col v-for="maszyna in listaMaszyn" :key="maszyna"
                    md="4"
             >
-                <v-card class="pq-2"
+                <v-card v-if="IdHala === maszyna.Hala_id"
+                        class="pq-2"
                         max-width="auto"
                         color="secondary"
                 >
@@ -40,17 +41,20 @@
 
 <script>
     import NotificationService from "../../services/NotificationService";
+    import store from "../../store/store";
 
     export default {
         name: "notification",
         data() {
             return {
+                user:'',
                 NazwaHali: '',
                 ID_Maszyna: '',
                 Hala_id: '',
                 NazwaMaszyny: '',
                 NazwaTypu: '',
                 ID: '',
+                IdHala:'',
                 maszynaId:'',
                 listaMaszyn: []
             }
@@ -63,7 +67,9 @@
         },
         async mounted() {
             this.listaMaszyn = (await NotificationService.getListaMaszyn()).data;
-            console.log('Lista: ', this.listaMaszyn)
+            this.user = store.getters.user;
+            this.IdHala = this.user.Hala_ID;
+            console.log('Lista: ', this.listaMaszyn, this.IdHala)
         }
     }
 </script>
