@@ -4,6 +4,9 @@ import Home from '../views/Home.vue'
 import Register from '../views/Register'
 import Login from "../views/Login";
 
+import failure from "../views/failure/failure";
+import newfailure from "../views/failure/newfailure";
+
 import notification from "../views/notification/notification";
 import newnotification from "../views/notification/newnotification";
 
@@ -51,7 +54,13 @@ const routes = [
     {
         path: '/failure',
         name: 'failure',
-        component: () => import('../views/failure/failure'),
+        component: failure,
+        beforeEnter: IsLogin
+    },
+    {
+        path: '/failure/new/:IDS',
+        name: 'newfailure',
+        component: newfailure,
         beforeEnter: IsLogin
     },
 ]

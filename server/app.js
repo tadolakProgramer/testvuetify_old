@@ -13,5 +13,6 @@ require('./policies/passport');
 
 require('./routers/router')(app);
 require('./routers/notification')(app);
+require('./routers/failure')(app)
 
 app.listen(process.env.PORT || 8081);

@@ -1,8 +1,9 @@
 import Api from '../services/Api'
 
 export default {
-    getListaMaszyn() {
-        return Api().get('/notification')
+    getListaMaszyn(IdHala) {
+        return Api().get('/notification',
+            {params: IdHala})
     },
     newnotification() {
         return Api().post('/notification/new/'
@@ -13,7 +14,7 @@ export default {
             {params: IDS}
         )
     },
-    addNewNotification() {
-        return Api().put('/notification/new/')
+    addNewNotification(credentials) {
+        return Api().put('/notification/new/', credentials)
     }
 }

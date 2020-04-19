@@ -1,10 +1,10 @@
 <template>
     <v-flex>
-        <v-row justify="start" class="mb-3">
+        <v-row justify="center" class="mb-3">
             <v-col v-for="maszyna in listaMaszyn" :key="maszyna"
                    md="4"
             >
-                <v-card v-if="IdHala === maszyna.Hala_id"
+                <v-card
                         class="pq-2"
                         max-width="auto"
                         color="secondary"
@@ -66,9 +66,10 @@
             }
         },
         async mounted() {
-            this.listaMaszyn = (await NotificationService.getListaMaszyn()).data;
             this.user = store.getters.user;
             this.IdHala = this.user.Hala_ID;
+            this.listaMaszyn = (await NotificationService.getListaMaszyn(this.$route.params)).data;
+
             console.log('Lista: ', this.listaMaszyn, this.IdHala)
         }
     }

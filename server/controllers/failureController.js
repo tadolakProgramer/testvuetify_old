@@ -4,11 +4,7 @@ const awaria = require('../models/awarie');
 module.exports = {
     async getListaMaszyn(req, res) {
         try {
-            const IdHala = req.query.IdHala;
             await vMaszyny.findAll({
-                where:{
-                    Hala_id:IdHala
-                }
             })
                 .then(listaMaszyn => res.send(listaMaszyn))
                 .catch(error => console.log(error))
@@ -19,7 +15,7 @@ module.exports = {
             })
         }
     },
-    async postNewNotification(req, res) {
+    async postNewFailure(req, res) {
         try {
             const IDS = req.query.IDS;
             await vMaszyny.findOne({
@@ -38,12 +34,12 @@ module.exports = {
             })
         }
     },
-    async putNewNotification(req, res) {
+    async putNewFailure(req, res) {
         console.log(await req.body)
         try {
             awaria.create(req.body)
-                //.this(message => res.send(message, 'Wszystko OK'))
-                //.cache(error => console.log(error))
+               /* .this(message => res.send(message, 'Wszystko OK'))
+                .cache(error => console.log(error))*/
         } catch (e) {
             console.log(e)
         }

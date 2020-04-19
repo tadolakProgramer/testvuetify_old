@@ -54,9 +54,10 @@
             return {
                 LoginError: null,
                 alert: false,
-                US_LOGIN: 'ONA',
-                US_PASS: 'ONAONA',
+                US_LOGIN: 'Tado',
+                US_PASS: '1234',
                 show1: false,
+                IdHala:''
             }
         },
         methods: {
@@ -75,8 +76,10 @@
                     this.$root.$emit('loginOK', true, false);
 
                     if (store.getters.profesja ==='Operator'){
-                        this.$router.push({name: 'notification'})
-                        this.$root.$emit('loginOK', true, false)
+                        this.IdHala = this.user.Hala_ID;
+                        console.log('NrHali:',this.IdHala);
+                        this.$router.push({name: 'notification', params:{IdHala:this.IdHala}});
+                        this.$root.$emit('loginOK', true, false);
                     }
                     if (store.getters.profesja === 'Automatyk'){
                         this.$router.push({name: 'failure'})
@@ -84,7 +87,7 @@
                         }
 
                     /*
-                    this.IdHala = this.user.ID_Hala
+
                     //this.$router.push({name: 'notification', params:{IdHala:this.IdHala}})
                     */
 

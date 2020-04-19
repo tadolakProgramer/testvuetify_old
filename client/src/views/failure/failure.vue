@@ -21,8 +21,15 @@
                         <v-btn class="ma-2"
                                color="accent" pa="2"
                                dark
-                               @click="newnotification(maszyna.ID_Maszyna)"
-                               >Zgłoszenie
+                               @click="failure(maszyna.ID_Maszyna)"
+                               >Nowa awaria
+                            <v-icon right>mdi-plus</v-icon>
+                        </v-btn>
+                        <v-btn class="ma-2"
+                               color="accent" pa="2"
+                               dark
+                               @click="failure(maszyna.ID_Maszyna)"
+                        >Historia
                             <v-icon right>mdi-plus</v-icon>
                         </v-btn>
                         <v-btn class="ma-2"
@@ -39,10 +46,10 @@
 </template>
 
 <script>
-    import NotificationService from "../../services/NotificationService";
+    import FailureService from "../../services/FailureService";
 
     export default {
-        name: "notification",
+        name: "failure",
         data() {
             return {
                 NazwaHali: '',
@@ -56,13 +63,13 @@
             }
         },
         methods:{
-            newnotification(IDS)
+            failure(IDS)
             {
-                this.$router.push({name:'newnotification', params:{IDS:IDS}})
+                this.$router.push({name:'newfailure', params:{IDS:IDS}})
             }
         },
         async mounted() {
-            this.listaMaszyn = (await NotificationService.getListaMaszyn()).data;
+            this.listaMaszyn = (await FailureService.getListaMaszyn()).data;
             console.log('Lista: ', this.listaMaszyn)
         }
     }
