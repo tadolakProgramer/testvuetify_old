@@ -31,7 +31,7 @@
                             <v-btn class="ma-2"
                                    color="accent" pa="2"
                                    dark
-                                   @click="failure(maszyna.ID_Maszyna)"
+                                   @click="goToFailureHistory"
                             >Historia
                                 <v-icon right>mdi-table-large</v-icon>
                             </v-btn>
@@ -74,6 +74,10 @@
         methods: {
             failure(IDS) {
                 this.$router.push({name: 'newfailure', params: {IDS: IDS}})
+            },
+            goToFailureHistory() {
+                this.$router.push({name: 'failureHistory'})
+
             }
         },
         async mounted() {

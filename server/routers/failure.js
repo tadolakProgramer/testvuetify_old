@@ -10,4 +10,6 @@ module.exports = (app) => {
     app.post('/failure/new/:IDS',  failureController.postNewFailure);
 
     app.put('/failure/new', failureController.putNewFailure);
+
+    app.get('/getAllFailure', failureController.getAllFailure);
 };

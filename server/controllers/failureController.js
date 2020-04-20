@@ -1,5 +1,6 @@
 const vMaszyny = require('../models/v_maszyny');
 const awaria = require('../models/awarie');
+const listaAwarii = require('../models/listaAwarii')
 
 module.exports = {
     async getListaMaszyn(req, res) {
@@ -43,5 +44,17 @@ module.exports = {
         } catch (e) {
             console.log(e)
         }
-    }
+    },
+    async getAllFailure (req, res) {
+        try {
+            listaAwarii.findAll(req.body)
+                .then(listaAwarii => res.send(listaAwarii))
+                .catch(e => console.log(e))
+        }
+            catch {
+                res.send('Awaria')
+
+            }
+        }
+
 };

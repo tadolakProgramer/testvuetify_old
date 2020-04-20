@@ -15,5 +15,8 @@ export default {
     },
     addNewFailure(credentials) {
         return Api().put('/failure/new/', credentials)
+    },
+    getAllFailure() {
+        return Api().get('/getAllFailure')
     }
 }

@@ -6,9 +6,11 @@ import Login from "../views/Login";
 
 import failure from "../views/failure/failure";
 import newfailure from "../views/failure/newfailure";
+import failureHistory from "../views/failure/failureHistory";
 
 import notification from "../views/notification/notification";
 import newnotification from "../views/notification/newnotification";
+
 
 import IsLogin from './isLogin'
 
@@ -61,6 +63,12 @@ const routes = [
         path: '/failure/new/:IDS',
         name: 'newfailure',
         component: newfailure,
+        beforeEnter: IsLogin
+    },
+    {
+        path: '/failure/history',
+        name: 'failureHistory',
+        component: failureHistory,
         beforeEnter: IsLogin
     },
 ]
