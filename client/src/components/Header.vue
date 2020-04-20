@@ -5,10 +5,7 @@
                 v-if=automatyk
                 app
         >
-            <v-treeview
-                    activatable
-                    :items="treeView"
-            ></v-treeview>
+            <tree-view></tree-view>
         </v-navigation-drawer>
         <v-app-bar
                 app
@@ -64,11 +61,11 @@
 
 <script>
     import AuthenticationService from '../services/AuthenticationService'
-    //import store from "../store/store";
-    import items from "../helpers/treeView"
+    import TreeView from "./treeView";
 
     export default {
         name: "Header",
+        components: {TreeView},
         data() {
             return {
                 Name: '',
@@ -84,6 +81,8 @@
                 this.$store.dispatch('setToken', null)
                 this.$store.dispatch('setUser', null)
                 this.$store.dispatch('setProfesja', null)
+                this.$store.dispatch('setListaMaszyn', null)
+                this.$store.dispatch('setListaHal', null)
                 this.login = false;
                 this.automatyk = false;
                 this.$router.push({
@@ -95,8 +94,6 @@
             this.$root.$on('loginOK',(login, automatyk) => {
                 this.login = login
                 this.automatyk = automatyk})
-            this.treeView = items.items;
-            console.log("login", this.treeView);
 
                 this.Hale = (await AuthenticationService.getHale()).data;
             console.log('Hale: ', this.Hale)

@@ -57,7 +57,8 @@
                 US_LOGIN: '',
                 US_PASS: '',
                 show1: false,
-                IdHala:''
+                IdHala:'',
+                Hale:''
             }
         },
         methods: {
@@ -74,6 +75,9 @@
                     await this.$store.dispatch('setProfesja', this.user.US_PROFESJA)
                     //send loginOk to Header
                     this.$root.$emit('loginOK', true, false);
+
+                    this.Hale = (await AuthenticationService.getHale()).data;
+                    await this.$store.dispatch('setListaHal', this.Hale);
 
                     if (store.getters.profesja ==='Operator'){
                         this.IdHala = this.user.Hala_ID;
@@ -108,12 +112,15 @@
 
 <style scoped>
     .masthead {
-        min-height: 75rem;
-        width: 100%;
-        height: 100%;
+        min-height: 72rem;
+        width: auto;
+        height: auto%;
         padding-top: 18rem;
         background-size: cover;
-        background: #00b0ff url('../assets/MG_8241_1.jpg') no-repeat fixed center;
+        background-image:url('../assets/MG_8241_1.jpg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
     }
 </style>
 
