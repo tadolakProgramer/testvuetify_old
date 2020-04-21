@@ -45,7 +45,7 @@
             }
         },
         async mounted() {
-            this.Hale = this.$store.getters.listaHal
+            this.Hale = (await this.$store.getters.getListaHal)
             this.Hale.unshift("Pokaż wszystko")
 
         },

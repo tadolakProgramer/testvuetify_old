@@ -25,6 +25,17 @@
                             outlined
                             rows="3"
                     ></v-textarea>
+                    <v-textarea
+                            v-model="AW_Dzialania"
+                            background-color="white"
+                            color="black"
+                            label="Opisz jakie działania zostały podjete aby usunąć usterkę"
+                            hint="Minimum 25 znaków"
+                            :counter="25"
+                            :rules="[rules.required, rules.min]"
+                            outlined
+                            rows="3"
+                    ></v-textarea>
                     <span>Zgłaszający: {{user.US_Name}} {{user.US_SUER_NAME}} {{user.US_PROFESJA}}</span>
                 </v-card-text>
                 <v-card-actions>
@@ -58,6 +69,7 @@
                 AW_Zglaszajacy_ID:'',
                 AW_OpisAwarii:'',
                 AW_Zrealizowane:'',
+                AW_Dzialania:'',
                 rules: {
                     required: value => !!value || 'To pole nie może być puste.',
                     min: v => v.length > 25 || 'Min 25 znaków'
@@ -82,6 +94,7 @@
                         Maszyna_ID: this.maszynka.ID_Maszyna,
                         AW_Zglaszajacy_ID: this.user.ID_USER,
                         AW_OpisAwarii: this.AW_OpisAwarii,
+                        AW_Dzialania: this.AW_Dzialania,
                         AW_Zrealizowane: 'Zgłoszenie'
                     });
                 }

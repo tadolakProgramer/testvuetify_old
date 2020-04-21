@@ -91,12 +91,12 @@
                 this.filterHala = hala
                 if(this.filterHala === 'Pokaż wszystko'){
                     this.viewMachine= this.listaMaszyn
-                }
-                for ( let i=0; i <  this.listaMaszyn.length; i++){
+                }else{
+                    for ( let i=0; i <  this.listaMaszyn.length; i++){
                     if ( this.listaMaszyn[i].Hala_id === this.filterHala) {
-                       this.viewMachine.push(this.listaMaszyn[i])
+                        this.viewMachine.push(this.listaMaszyn[i])
                     }
-                }
+                }}
                 console.log(this.viewMachine)
             })
             this.filterHala = SerchMachine.data().listaHal;
