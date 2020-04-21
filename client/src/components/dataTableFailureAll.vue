@@ -4,7 +4,9 @@
             :items="failures"
             sort-by="calories"
             class="elevation-1"
+            items-per-page="15"
             :search="search"
+            group-by="AW_Zrealizowane"
     >
         <template v-slot:top>
             <v-toolbar flat color="secondary">
@@ -49,7 +51,7 @@
     import FailureService from "../services/FailureService";
 
     export default {
-        name: "dataTableFailure",
+        name: "dataTableFailureAll",
         data: () => ({
             search:'',
             dialog: false,
@@ -61,6 +63,7 @@
                     value: 'ID_AWARIA',
                 },
                 {text: 'Data zgłoszenia', value: 'DataAW'},
+                {text: 'Maszyna', value: 'NazwaMaszyny'},
                 {text: 'Opis awarii', value: 'AW_OpisAwarii'},
                 {text: 'Opis działania', value: 'AW_Dzialania'},
                 {text: 'Status', value: 'AW_Zrealizowane'},

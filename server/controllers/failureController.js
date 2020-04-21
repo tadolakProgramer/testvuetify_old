@@ -36,11 +36,10 @@ module.exports = {
         }
     },
     async putNewFailure(req, res) {
-        console.log(await req.body)
         try {
-            awaria.create(req.body)
-               /* .this(message => res.send(message, 'Wszystko OK'))
-                .cache(error => console.log(error))*/
+            await awaria.create(req.body)
+                .then(awaria => res.status(200).send(awaria))
+                .cache(error => console.log(error))
         } catch (e) {
             console.log(e)
         }

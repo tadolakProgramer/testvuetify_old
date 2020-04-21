@@ -35,7 +35,18 @@
                     }">
                 Nowa awaria
             </v-btn>
-            <v-btn
+            <div class="mx-2">
+            <v-btn mx="11"
+                    v-if="automatyk"
+                    depressed
+                    color="orange"
+                    :to="{
+                    name: 'failureAll'
+                    }">
+                Lista awarii
+            </v-btn>
+            </div>
+            <v-btn mx="1"
                     v-if="!login"
                     depressed
                     color="primary"

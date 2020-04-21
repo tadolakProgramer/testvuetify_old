@@ -34,19 +34,20 @@
 </template>
 
 <script>
-    import AuthenticationService from "../services/AuthenticationService";
 
     export default {
         name: "serchMachine",
         data() {
             return {
                 Hale: [],
+                typesOfMachine: [],
                 listaHal:''
             }
         },
         async mounted() {
-            this.Hale = (await AuthenticationService.getHale()).data;
-            console.log('HaleFail: ', this.Hale)
+            this.Hale = (await this.$store.getters.getListaHal)
+            this.Hale.unshift("Pokaż wszystko")
+
         },
         methods: {
             setFiltrHala(){

@@ -3,7 +3,7 @@
         <serch-machine></serch-machine>
         <v-row justify="center" class="mb-3"
         >
-            <v-col v-for="maszyna in listaMaszyn" :key="maszyna"
+            <v-col v-for="maszyna in viewMachine" :key="maszyna"
                    md="4"
             >
                     <v-card
@@ -80,19 +80,23 @@
 
             }
         },
+        async created() {
+            this.viewMachine = (await FailureService.getListaMaszyn()).data;
+        },
         async mounted() {
             this.listaMaszyn = (await FailureService.getListaMaszyn()).data;
             this.$root.$on('filter', (hala, typMaszyny) => {
-                this.filterHala = hala
+                this.viewMachine=[]
                 this.typMaszyn = typMaszyny
-                this.viewMachine=null
-                let u= 0
-                for ( let i=0; i <  this.listaMaszyn.length; i++){
+                this.filterHala = hala
+                if(this.filterHala === 'Pokaż wszystko'){
+                    this.viewMachine= this.listaMaszyn
+                }else{
+                    for ( let i=0; i <  this.listaMaszyn.length; i++){
                     if ( this.listaMaszyn[i].Hala_id === this.filterHala) {
-                        u++
-                        this.viewMachine[u] = (this.listaMaszyn[i])
+                        this.viewMachine.push(this.listaMaszyn[i])
                     }
-                }
+                }}
                 console.log(this.viewMachine)
             })
             this.filterHala = SerchMachine.data().listaHal;
