@@ -22,7 +22,7 @@
                     {
                         id:20,
                         name: 'Maszyny',
-                        children: [await this.$store.getters.getListaHal],
+                        children: [await this.$store.getters.getListaHal.data],
                     }
                 ]
         }
