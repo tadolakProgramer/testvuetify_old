@@ -108,7 +108,7 @@
                         AW_Zrealizowane: this.AW_Zrealizowane
                     })
                     this.NowaAwaria =  await response.data;
-                    alert('Awaria nr: '+this.NowaAwaria.ID_AWARIA +', maszyny ' +this.maszynka.NazwaMaszyny +' została poprawnie zapisana')
+                    alert('Awaria nr: '+this.NowaAwaria.ID_AWARIA +', maszyny ' +this.maszynka.NazwaMaszyny +' została poprawnie zapisana!')
                 }
                 catch (e) {
                     console.log(e)
