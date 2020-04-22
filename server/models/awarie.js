@@ -31,7 +31,23 @@ const Awarie = sequelize.define('AWARIE', {
   AW_Zrealizowane: {
     type: Sequelize.STRING(25),
     allowNull: true
-  }
+  },
+    AW_DataZakonczenia: {
+        type: Sequelize.DATE,
+        allowNull: true
+    },
+    AW_Zatwierdzone: {
+        type: Sequelize.STRING(1),
+        allowNull: true
+    },
+    AW_Data_Zatwierdzenia: {
+        type: Sequelize.DATE,
+        allowNull: true
+    },
+    AW_ID_Zatwierdzajacy: {
+        type: Sequelize.INTEGER,
+        allowNull: true
+    }
 });
 
 module.exports = Awarie;

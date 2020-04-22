@@ -123,7 +123,7 @@
                 valid: false,
                 Hale: [],
                 items: [
-                    'Operator', 'Automatyk', 'Mechanik'
+                    'Operator', 'Automatyk', 'Mechanik', 'Kierownik'
                 ],
                 Profesje: '',
                 show1: false,
