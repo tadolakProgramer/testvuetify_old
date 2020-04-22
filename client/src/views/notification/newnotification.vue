@@ -28,9 +28,10 @@
                     <span>Zgłaszający: {{user.US_Name}} {{user.US_SUER_NAME}} {{user.US_PROFESJA}}</span>
                 </v-card-text>
                 <v-card-actions>
-                    <v-btn flat color="orange"
+                    <v-btn  color="orange"
                     @click="AddNewNotification">Zapisz</v-btn>
-                    <v-btn flat color="orange"
+                    <v-btn  color="orange"
+                            @click="pageBack"
                     >Anuluj</v-btn>
                 </v-card-actions>
             </v-card>
@@ -58,6 +59,7 @@
                 AW_Zglaszajacy_ID:'',
                 AW_OpisAwarii:'',
                 AW_Zrealizowane:'',
+                NowaAwaria:{},
                 rules: {
                     required: value => !!value || 'To pole nie może być puste.',
                     min: v => v.length > 25 || 'Min 25 znaków'
@@ -78,16 +80,21 @@
         methods: {
             async AddNewNotification() {
                 try {
-                    await NotificationService.addNewNotification({
+                    const response = await NotificationService.addNewNotification({
                         Maszyna_ID: this.maszynka.ID_Maszyna,
                         AW_Zglaszajacy_ID: this.user.ID_USER,
                         AW_OpisAwarii: this.AW_OpisAwarii,
                         AW_Zrealizowane: 'Zgłoszenie'
                     });
+                    this.NowaAwaria = await response.data
+                    alert('Zgłoszenie ' +this.maszynka.NazwaMaszyny +' zostało poprawnie zapisane')
                 }
                 catch (e) {
                     console.log(e)
                 }
+            },
+            pageBack() {
+                this.$router.go(-1)
             }
         }
     }

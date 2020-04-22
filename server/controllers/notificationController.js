@@ -39,13 +39,12 @@ module.exports = {
         }
     },
     async putNewNotification(req, res) {
-        console.log(await req.body)
         try {
-            awaria.create(req.body)
-                //.this(message => res.send(message, 'Wszystko OK'))
-                //.cache(error => console.log(error))
-        } catch (e) {
-            console.log(e)
+            await awaria.create(req.body)
+                .this(awaria => res.send(awaria))
+        }
+    catch (e) {
+            await res.send.status(400).send({error: 'Wystąpił błąd zapisu do bazy danych'})
         }
     }
 };

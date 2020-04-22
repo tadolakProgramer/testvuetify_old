@@ -1,4 +1,5 @@
 <template>
+
     <v-layout>
         <v-flex xs2 sm8 offset-sm2>
             <v-card class="pq-2"
@@ -46,9 +47,9 @@
                     <v-radio color="green" label="Zakończone" value="Zakończone"></v-radio>
                 </v-radio-group>
                 <v-card-actions>
-                    <v-btn flat color="orange"
+                    <v-btn  color="orange"
                     @click="AddNewFailure">Zapisz</v-btn>
-                    <v-btn flat color="orange"
+                    <v-btn  color="orange"
                            @click="pageBack"
                     >Anuluj</v-btn>
                 </v-card-actions>
@@ -107,6 +108,7 @@
                         AW_Zrealizowane: this.AW_Zrealizowane
                     })
                     this.NowaAwaria =  await response.data;
+                    alert('Awaria nr: '+this.NowaAwaria.ID_AWARIA +', maszyny ' +this.maszynka.NazwaMaszyny +' została poprawnie zapisana')
                 }
                 catch (e) {
                     console.log(e)

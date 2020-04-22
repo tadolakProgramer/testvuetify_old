@@ -39,9 +39,10 @@ module.exports = {
         try {
             await awaria.create(req.body)
                 .then(awaria => res.send(awaria))
-                .cache(error => console.log(error))
-        } catch (e) {
-            console.log(e)
+        }
+        catch (e) {
+            await res.send.status(400).send({error: 'Wystąpił błąd zapisu do bazy danych'})
+
         }
     },
     async getAllFailure (req, res) {

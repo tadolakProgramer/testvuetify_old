@@ -31,7 +31,7 @@
                     depressed
                     color="red"
                     :to="{
-                    name: 'login'
+                    name: 'newfailure'
                     }">
                 Nowa awaria
             </v-btn>
