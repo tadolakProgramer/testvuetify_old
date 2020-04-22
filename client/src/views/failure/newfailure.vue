@@ -79,6 +79,7 @@
                 AW_OpisAwarii:'',
                 AW_Zrealizowane:'Zgłoszenie',
                 AW_Dzialania:'',
+                NowaAwaria:{},
                 rules: {
                     required: value => !!value || 'To pole nie może być puste.',
                     min: v => v.length > 25 || 'Min 25 znaków'
@@ -98,18 +99,14 @@
         methods: {
             async AddNewFailure() {
                 try {
-                    await FailureService.addNewFailure({
+                    const response = await FailureService.addNewFailure({
                         Maszyna_ID: this.maszynka.ID_Maszyna,
                         AW_Zglaszajacy_ID: this.user.ID_USER,
                         AW_OpisAwarii: this.AW_OpisAwarii,
                         AW_Dzialania: this.AW_Dzialania,
                         AW_Zrealizowane: this.AW_Zrealizowane
-                    }).then(
-                        result => {
-                            this.newfailure = result.data.ID_AWARIA
-
-                    console.log(result) }
-                )
+                    })
+                    this.NowaAwaria =  await response.data;
                 }
                 catch (e) {
                     console.log(e)
