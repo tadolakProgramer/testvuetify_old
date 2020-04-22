@@ -31,7 +31,7 @@
                     <v-btn  color="orange"
                     @click="AddNewNotification">Zapisz</v-btn>
                     <v-btn  color="orange"
-                            @click="pageBack"
+                            @click="pageBack(maszynka.Hala_id)"
                     >Anuluj</v-btn>
                 </v-card-actions>
             </v-card>
@@ -93,8 +93,8 @@
                     console.log(e)
                 }
             },
-            pageBack() {
-                this.$router.go(-1)
+            pageBack(Hala_id) {
+                this.$router.push({name: 'notification', params:{IdHala:Hala_id}})
             }
         }
     }

@@ -7,7 +7,7 @@
             :search="search"
     >
         <template v-slot:top>
-            <v-toolbar flat color="secondary">
+            <v-toolbar  color="secondary">
                 <v-toolbar-title>
                     <v-text-field
                             v-model="search"
