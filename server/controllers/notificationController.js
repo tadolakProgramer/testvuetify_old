@@ -7,7 +7,7 @@ module.exports = {
             const IdHala = req.query.IdHala;
             await vMaszyny.findAll({
                 where:{
-                    Hala_id:IdHala
+                    Hala_id : IdHala
                 }
             })
                 .then(listaMaszyn => res.send(listaMaszyn))

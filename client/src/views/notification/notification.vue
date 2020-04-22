@@ -69,7 +69,6 @@
             this.user = store.getters.user;
             this.IdHala = this.user.Hala_ID;
             this.listaMaszyn = (await NotificationService.getListaMaszyn(this.$route.params)).data;
-
             console.log('Lista: ', this.listaMaszyn, this.IdHala)
         }
     }
