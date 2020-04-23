@@ -1,7 +1,7 @@
 <template>
     <v-flex>
         <v-row justify="center" class="mb-3">
-            <v-col v-for="maszyna in listaMaszyn" :key="maszyna"
+            <v-col v-for="maszyna in listaMaszyn" :key="maszyna.Maszyna_ID"
                    md="4"
             >
                 <v-card
@@ -29,7 +29,7 @@
                         <v-btn class="ma-2"
                                color="szary" pa="2"
                                dark
-                               @click="register">Edycja
+                               @click="edit">Edycja
                             <v-icon right>mdi-pencil</v-icon>
                         </v-btn>
                     </v-layout>
@@ -63,6 +63,9 @@
             newnotification(IDS)
             {
                 this.$router.push({name:'newnotification', params:{IDS:IDS}})
+            },
+            edit() {
+
             }
         },
         async mounted() {

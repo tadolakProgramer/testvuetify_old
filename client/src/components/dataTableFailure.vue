@@ -2,21 +2,19 @@
     <v-data-table
             :headers="headers"
             :items="failures"
-            sort-by="calories"
+            sort-desc="ID_AWARIA"
             class="elevation-1"
             :search="search"
     >
         <template v-slot:top>
-            <v-toolbar  color="secondary">
-                <v-toolbar-title>
-                    <v-text-field
-                            v-model="search"
-                            append-icon="mdi-magnify"
-                            label="Szukaj"
-                            single-line
-                            hide-details
-                    ></v-text-field>
-                </v-toolbar-title>
+            <v-toolbar color="secondary">
+
+                <v-text-field
+                        v-model="search"
+                        append-icon="mdi-magnify"
+                        label="Szukaj"
+                ></v-text-field>
+
             </v-toolbar>
         </template>
         <template v-slot:item.actions="{ item }">
@@ -36,10 +34,14 @@
         </template>
 
         <template v-slot:no-data>
-            <v-btn color="primary" @click="initialize">Reset</v-btn>
+            <p class="text-lowercase">Lowercased text.</p>
+            <p class="headline
+                      font-weight-bold
+                      primary"
+                    > Ta maszyna niema zapisanych awarii :-)</p>
         </template>
 
-        <template v-slot:item.AW_Zrealizowane="{ item }">
+        <template v-slot:item.AW_Zrealizowane=" { item }">
             <v-chip :color="getColor(item.AW_Zrealizowane)" dark>{{ item.AW_Zrealizowane }}</v-chip>
         </template>
     </v-data-table>
@@ -51,20 +53,21 @@
     export default {
         name: "dataTableFailure",
         data: () => ({
-            search:'',
+            search: '',
             dialog: false,
             headers: [
                 {
                     text: 'Lp',
                     align: 'start',
-                    sortable: true,
+                    //sortable: true,
                     value: 'ID_AWARIA',
+                    width: "2%"
                 },
-                {text: 'Data zgłoszenia', value: 'DataAW'},
-                {text: 'Opis awarii', value: 'AW_OpisAwarii'},
-                {text: 'Opis działania', value: 'AW_Dzialania'},
-                {text: 'Status', value: 'AW_Zrealizowane'},
-                {text: 'Actions', value: 'actions', sortable: false},
+                {text: 'Data zgłoszenia', width: "12%", value: 'DataAW'},
+                {text: 'Opis awarii', width: "36%", value: 'AW_OpisAwarii'},
+                {text: 'Opis działania', width: "36%", value: 'AW_Dzialania'},
+                {text: 'Status', width: "12%", value: 'AW_Zrealizowane'},
+                {text: 'Actions', width: "2%", value: 'actions', sortable: false},
             ],
             failures: [],
             editedIndex: -1,
@@ -101,8 +104,8 @@
         },
 
         methods: {
-           async  initialize (){
-               this.failures = ((await FailureService.getAllFailure()).data);
+            async initialize() {
+                this.failures = (await FailureService.getFailureMachina(this.$route.params)).data;
             },
             editItem(item) {
                 this.editedIndex = this.failures.indexOf(item)
@@ -131,7 +134,7 @@
                 }
                 this.close()
             },
-            getColor (AW_Zrealizowane) {
+            getColor(AW_Zrealizowane) {
                 if (AW_Zrealizowane === 'Zgłoszenie') return 'red'
                 else if (AW_Zrealizowane === 'Zakończone') return 'green'
                 else return 'orange'

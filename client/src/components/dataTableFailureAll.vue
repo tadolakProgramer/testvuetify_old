@@ -2,23 +2,22 @@
     <v-data-table
             :headers="headers"
             :items="failures"
-            sort-by="calories"
+            sort-by="DataAW"
             class="elevation-1"
-            items-per-page="15"
             :search="search"
             group-by="AW_Zrealizowane"
     >
         <template v-slot:top>
             <v-toolbar  color="secondary">
-                <v-toolbar-title>
+
                     <v-text-field
                             v-model="search"
                             append-icon="mdi-magnify"
                             label="Szukaj"
-                            single-line
-                            hide-details
+
+
                     ></v-text-field>
-                </v-toolbar-title>
+
             </v-toolbar>
         </template>
         <template v-slot:item.actions="{ item }">
@@ -61,6 +60,7 @@
                     align: 'start',
                     sortable: true,
                     value: 'ID_AWARIA',
+                    width: "1%"
                 },
                 {text: 'Data zgłoszenia', value: 'DataAW'},
                 {text: 'Maszyna', value: 'NazwaMaszyny'},

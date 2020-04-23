@@ -63,8 +63,13 @@
                     @click="logout">
                 Logout
             </v-btn>
-            <v-avatar color="primary">
+            <v-avatar color="secondary"
+                      v-if="!login">
                 <v-icon>mdi-account</v-icon>
+            </v-avatar>
+            <v-avatar color="success"
+                      v-if="login">
+                <span class="white--text ">{{this.avatar}}</span>
             </v-avatar>
         </v-app-bar>
     </div>
@@ -83,6 +88,7 @@
                 Hale: [],
                 treeView: '',
                 drawer: null,
+                avatar:'',
                 automatyk: false,
                 login: false //control buttons login/logout
             }
@@ -104,8 +110,11 @@
         async mounted() {
             this.$root.$on('loginOK',(login, automatyk) => {
                 this.login = login
-                this.automatyk = automatyk})
-
+                this.automatyk = automatyk
+            //crate avatar
+            this.avatar = this.$store.getters.user.US_Name.charAt(0) + this.$store.getters.user.US_SUER_NAME.charAt(0)
+            }
+            )
                 this.Hale = (await AuthenticationService.getHale()).data;
             console.log('Hale: ', this.Hale)
         }

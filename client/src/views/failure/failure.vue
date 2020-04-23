@@ -3,7 +3,7 @@
         <serch-machine></serch-machine>
         <v-row justify="center" class="mb-3"
         >
-            <v-col v-for="maszyna in viewMachine" :key="maszyna"
+            <v-col v-for="maszyna in viewMachine" :key="maszyna.Maszyna_ID"
                    md="4"
             >
                     <v-card
@@ -31,15 +31,9 @@
                             <v-btn class="ma-2"
                                    color="accent" pa="2"
                                    dark
-                                   @click="goToFailureHistory"
+                                   @click="goToFailureHistory(maszyna.ID_Maszyna)"
                             >Historia
                                 <v-icon right>mdi-table-large</v-icon>
-                            </v-btn>
-                            <v-btn class="ma-2"
-                                   color="szary" pa="2"
-                                   dark
-                                   @click="register">Edycja
-                                <v-icon right>mdi-pencil</v-icon>
                             </v-btn>
                         </v-layout>
                     </v-card>
@@ -75,8 +69,10 @@
             failure(IDS) {
                 this.$router.push({name: 'newfailure', params: {IDS: IDS}})
             },
-            goToFailureHistory() {
-                this.$router.push({name: 'failureHistory'})
+            goToFailureHistory(IdMaszyna) {
+                this.$router.push({name: 'failureHistory', params: {IdMaszyna: IdMaszyna}})
+            },
+            edit() {
 
             }
         },

@@ -11,5 +11,7 @@ module.exports = (app) => {
 
     app.put('/failure/new', failureController.putNewFailure);
 
+    app.get('/getFailureMachine', failureController.getFailureMachine);
+
     app.get('/getAllFailure', failureController.getAllFailure);
 };

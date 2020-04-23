@@ -1,6 +1,6 @@
 <template>
     <v-layout>
-        <v-flex xs12 sm10 offset-sm1>
+        <v-flex >
             <v-card class="pa-4" color="secondary">
                 <v-card-title color="green" class="headline">Historia maszyny</v-card-title>
                     <data-table-failure-all></data-table-failure-all>

@@ -5,8 +5,7 @@ const listaAwarii = require('../models/listaAwarii')
 module.exports = {
     async getListaMaszyn(req, res) {
         try {
-            await vMaszyny.findAll({
-            })
+            await vMaszyny.findAll({})
                 .then(listaMaszyn => res.send(listaMaszyn))
                 .catch(error => console.log(error))
         } catch (err) {
@@ -39,22 +38,36 @@ module.exports = {
         try {
             await awaria.create(req.body)
                 .then(awaria => res.send(awaria))
-        }
-        catch (e) {
+        } catch (e) {
             await res.send.status(400).send({error: 'Wystąpił błąd zapisu do bazy danych'})
 
         }
     },
-    async getAllFailure (req, res) {
+    async getAllFailure(req, res) {
         try {
             listaAwarii.findAll(req.body)
                 .then(listaAwarii => res.send(listaAwarii))
                 .catch(e => console.log(e))
-        }
-            catch {
-                res.send('Awaria')
+        } catch {
+            res.send('Awaria')
 
-            }
         }
+    },
+    async getFailureMachine(req, res) {
+        const IdMaszyna = req.query.IdMaszyna;
+        console.log(IdMaszyna)
+        try {
+            listaAwarii.findAll({
+                where: {
+                    ID_Maszyna: IdMaszyna
+                }
+            })
+                .then(awaria => {
+                    res.send(awaria)})
+        }
+        catch (e) {
+            console.log(e)
+        }
+    }
 
 };

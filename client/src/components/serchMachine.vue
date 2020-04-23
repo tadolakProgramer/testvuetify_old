@@ -40,8 +40,11 @@
         data() {
             return {
                 Hale: [],
+                listaTypow:[],
+                TypMaszyny:[],
                 typesOfMachine: [],
-                listaHal:''
+                listaHal:'',
+                valid: false
             }
         },
         async mounted() {

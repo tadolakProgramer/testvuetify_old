@@ -67,7 +67,7 @@ const routes = [
         beforeEnter: IsLogin
     },
     {
-        path: '/failure/history',
+        path: '/failure/history/:IdMaszyna',
         name: 'failureHistory',
         component: failureHistory,
         beforeEnter: IsLogin

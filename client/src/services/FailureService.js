@@ -18,5 +18,10 @@ export default {
     },
     getAllFailure() {
         return Api().get('/getAllFailure')
+    },
+
+    getFailureMachina(IdMaszyna){
+        return Api().get('/getFailureMachine/',
+            {params: IdMaszyna})
     }
 }
