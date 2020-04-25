@@ -98,7 +98,7 @@
                 this.$store.dispatch('setToken', null)
                 this.$store.dispatch('setUser', null)
                 this.$store.dispatch('setProfesja', null)
-                this.$store.dispatch('setListaMaszyn', null)
+                this.$store.dispatch('setListaTypowMaszyn', null)
                 this.$store.dispatch('setListaHal', null)
                 this.login = false;
                 this.automatyk = false;

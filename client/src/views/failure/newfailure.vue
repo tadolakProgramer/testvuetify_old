@@ -1,13 +1,28 @@
 <template>
 
     <v-layout>
+
         <v-flex xs2 sm8 offset-sm2>
+            <dialog-date-time class=":value"></dialog-date-time>
             <v-card class="pq-2"
                     max-width="auto"
                     color="secondary"
             >
-                <v-card-title class="primary font-weight-bold justify-space-between">Nowa interwencja:
-                    {{maszynka.NazwaMaszyny}}<span>{{dataGodzina}}</span>
+                <v-card-title class="primary font-weight-bold headline justify-space-between">Nowa interwencja:
+                    {{maszynka.NazwaMaszyny}}
+                    <span>{{dataGodzina}}
+                        <v-tooltip bottom>
+                            <template v-slot:activator="{on}">
+                        <v-btn x-small
+                               fab small
+                               v-on="on"
+                        @click=OpenDialogDateTime()>
+                        <v-icon>mdi-calendar</v-icon>
+                        </v-btn>
+                            </template>
+                            <span>Zmiana daty interwencji</span>
+                        </v-tooltip>
+                    </span>
                 </v-card-title>
                 <v-card-subtitle class="pt-10 font-weight-bold">
                     <span>{{maszynka.NazwaTypu}}<br></span>
@@ -40,18 +55,21 @@
                     <span>Zgłaszający: {{user.US_Name}} {{user.US_SUER_NAME}} {{user.US_PROFESJA}}</span>
                 </v-card-text>
                 <hr>
-                <v-radio-group v-model="AW_Zrealizowane" row >Status awarii:
-                    <v-radio color="red" label="Zgłoszenie" value="Zgłoszenie"> </v-radio>
+                <v-radio-group v-model="AW_Zrealizowane" row>Status awarii:
+                    <v-radio color="red" label="Zgłoszenie" value="Zgłoszenie"></v-radio>
                     <v-radio color="orange" label="Oczekiwanie na części" value="Oczekiwanie na części"></v-radio>
-                    <v-radio color="orange" label="Oczekiwanie na zatrzymanie" value="Oczekiwanie na zatrzymanie"></v-radio>
+                    <v-radio color="orange" label="Oczekiwanie na zatrzymanie"
+                             value="Oczekiwanie na zatrzymanie"></v-radio>
                     <v-radio color="green" label="Zakończone" value="Zakończone"></v-radio>
                 </v-radio-group>
                 <v-card-actions>
-                    <v-btn  color="orange"
-                    @click="AddNewFailure">Zapisz</v-btn>
-                    <v-btn  color="orange"
+                    <v-btn color="orange"
+                           @click="AddNewFailure">Zapisz
+                    </v-btn>
+                    <v-btn color="orange"
                            @click="pageBack"
-                    >Anuluj</v-btn>
+                    >Anuluj
+                    </v-btn>
                 </v-card-actions>
             </v-card>
         </v-flex>
@@ -63,24 +81,28 @@
     import FailureService from "../../services/FailureService";
     import moment from 'moment';
     import store from "../../store/store";
+    import DialogDateTime from "../../components/dialogDateTime";
+
 
     export default {
+        components: {DialogDateTime},
         props: {
             source: String,
         },
         data() {
             return {
                 maszynka: '',
-                newFailure:'',
+                newFailure: '',
                 dataGodzina: '',
-                user:'',
-                AW_DataZgloszenia:'',
-                Maszyna_ID:'',
-                AW_Zglaszajacy_ID:'',
-                AW_OpisAwarii:'',
-                AW_Zrealizowane:'Zgłoszenie',
-                AW_Dzialania:'',
-                NowaAwaria:{},
+                user: '',
+                AW_DataZgloszenia: '',
+                Maszyna_ID: '',
+                AW_Zglaszajacy_ID: '',
+                AW_OpisAwarii: '',
+                AW_Zrealizowane: 'Zgłoszenie',
+                AW_Dzialania: '',
+                NowaAwaria: {},
+                value:true,
                 rules: {
                     required: value => !!value || 'To pole nie może być puste.',
                     min: v => v.length > 25 || 'Min 25 znaków'
@@ -107,16 +129,20 @@
                         AW_Dzialania: this.AW_Dzialania,
                         AW_Zrealizowane: this.AW_Zrealizowane
                     })
-                    this.NowaAwaria =  await response.data;
-                    alert('Awaria nr: '+this.NowaAwaria.ID_AWARIA +', maszyny ' +this.maszynka.NazwaMaszyny +' została poprawnie zapisana!')
-                }
-                catch (e) {
+                    this.NowaAwaria = await response.data;
+                    alert('Awaria nr: ' + this.NowaAwaria.ID_AWARIA + ', maszyny ' + this.maszynka.NazwaMaszyny + ' została poprawnie zapisana!')
+                } catch (e) {
                     console.log(e)
                 }
             },
-            pageBack(){
+            OpenDialogDateTime() {
+                const open =  true
+                this.$root.$emit('OpenDialog', open);
+                this.$refs.DialogDateTime.dialog = true;
+            },
+            pageBack() {
                 this.$router.go(-1)
-        }
+            }
         }
     }
 </script>
