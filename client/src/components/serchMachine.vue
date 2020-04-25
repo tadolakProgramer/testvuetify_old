@@ -22,8 +22,9 @@
                                       v-model="listaTypow"
                                       :items=TypMaszyny
                                       item-text="NazwaTypu"
-                                      item-value="ID_Hala"
-                                      label="Filtruj po typie maszyny">
+                                      item-value="ID"
+                                      label="Filtruj po typie maszyny"
+                                @change="setFilterTyp">
                             </v-select>
                         </v-col>
                     </v-row>
@@ -40,7 +41,7 @@
         data() {
             return {
                 Hale: [],
-                listaTypow:[],
+                listaTypow:'',
                 TypMaszyny:[],
                 typesOfMachine: [],
                 listaHal:'',
@@ -51,10 +52,16 @@
             this.Hale = (await this.$store.getters.getListaHal)
             this.Hale.unshift("Pokaż wszystko")
 
+            this.TypMaszyny = (await this.$store.getters.getListaTypowMaszyn)
+            this.TypMaszyny.unshift("Pokaż wszystko")
+
         },
         methods: {
-            setFiltrHala(){
-                this.$root.$emit('filter', this.listaHal)
+            setFiltrHala() {
+                this.$root.$emit('filter', this.listaHal, this.listaTypow)
+            },
+            setFilterTyp() {
+                this.$root.$emit('filter', this.listaHal, this.listaTypow)
             }
         }
     }

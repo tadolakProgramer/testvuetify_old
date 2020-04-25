@@ -10,6 +10,8 @@ module.exports = (app) => {
 
     app.get('/register',  AuthenticationController.getHale);
 
+    app.get('/typyMaszyn', AuthenticationController.getTypeMachine);
+
     app.post('/login', AuthenticationController.login);
 
 }

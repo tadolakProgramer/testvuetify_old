@@ -62,7 +62,7 @@
                 listaMaszyn: [],
                 viewMachine: [],
                 filterHala: '',
-                typMaszyn: ''
+                filterTyp:''
             }
         },
         methods: {
@@ -81,18 +81,32 @@
         },
         async mounted() {
             this.listaMaszyn = (await FailureService.getListaMaszyn()).data;
+
             this.$root.$on('filter', (hala, typMaszyny) => {
                 this.viewMachine=[]
-                this.typMaszyn = typMaszyny
+                this.filterTyp = typMaszyny
                 this.filterHala = hala
-                if(this.filterHala === 'Pokaż wszystko'){
-                    this.viewMachine= this.listaMaszyn
-                }else{
+                if ((this.filterHala === 'Pokaż wszystko') && (this.filterTyp ==='Pokaż wszystko')) {
+                    this.viewMachine = this.listaMaszyn
+                }
+                if ((this.filterHala != 'Pokaż wszystko') && (this.filterTyp != 'Pokaż wszystko')) {
                     for ( let i=0; i <  this.listaMaszyn.length; i++){
-                    if ( this.listaMaszyn[i].Hala_id === this.filterHala) {
+                    if (( this.listaMaszyn[i].Hala_id === this.filterHala) && (this.listaMaszyn[i].ID === this.filterTyp)) {
                         this.viewMachine.push(this.listaMaszyn[i])
                     }
                 }}
+                if ((this.filterHala === 'Pokaż wszystko') && (this.filterTyp != 'Pokaż wszystko')) {
+                    for ( let i=0; i <  this.listaMaszyn.length; i++){
+                        if ((this.listaMaszyn[i].ID === this.filterTyp)) {
+                            this.viewMachine.push(this.listaMaszyn[i])
+                        }
+                    }}
+                if ((this.filterHala != 'Pokaż wszystko') && (this.filterTyp === 'Pokaż wszystko')) {
+                    for ( let i=0; i <  this.listaMaszyn.length; i++){
+                        if (( this.listaMaszyn[i].Hala_id === this.filterHala)) {
+                            this.viewMachine.push(this.listaMaszyn[i])
+                        }
+                    }}
                 console.log(this.viewMachine)
             })
             this.filterHala = SerchMachine.data().listaHal;

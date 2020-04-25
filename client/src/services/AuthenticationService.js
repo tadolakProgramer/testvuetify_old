@@ -9,5 +9,9 @@ export default {
   },
   getHale () {
     return Api().get('/register');
+  },
+  getTypyMaszyn () {
+      return Api().get('/typyMaszyn');
   }
+
 }

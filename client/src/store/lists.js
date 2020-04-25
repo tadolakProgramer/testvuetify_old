@@ -1,28 +1,28 @@
 
 export default {
     state: {
-        listMachinery: null,
+        listTypesMachinery: null,
         listHals: null
     },
     mutations: {
-        setListaMaszyn(state, listaMaszyn) {
-            state.listMachinery = listaMaszyn
+        setListaTypowMaszyn(state, listaMaszyn) {
+            state.listTypesMachinery = listaMaszyn
         },
         setListaHal(state, listHals) {
             state.listHals = listHals
         }
     },
     actions: {
-        setListaMaszyn({commit}, listaMaszyn) {
-            commit('setListaMaszyn', listaMaszyn)
+        setListaTypowMaszyn({commit}, listaMaszyn) {
+            commit('setListaTypowMaszyn', listaMaszyn)
         },
         setListaHal({commit}, listHals) {
             commit('setListaHal', listHals)
         }
     },
     getters: {
-        getListaMaszyn(state) {
-            return state.listMachinery
+        getListaTypowMaszyn(state) {
+            return state.listTypesMachinery
         },
         getListaHal(state) {
             return state.listHals

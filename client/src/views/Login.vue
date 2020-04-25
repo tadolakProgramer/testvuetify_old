@@ -58,7 +58,8 @@
                 US_PASS: '',
                 show1: false,
                 IdHala:'',
-                Hale:''
+                Hale:'',
+                TypyMaszyn:''
             }
         },
         methods: {
@@ -78,6 +79,9 @@
 
                     this.Hale = (await AuthenticationService.getHale()).data;
                     await this.$store.dispatch('setListaHal', this.Hale);
+
+                    this.TypyMaszyn = (await AuthenticationService.getTypyMaszyn()).data;
+                    await this.$store.dispatch( 'setListaTypowMaszyn', this.TypyMaszyn);
 
                     if (store.getters.profesja ==='Operator'){
                         this.IdHala = this.user.Hala_ID;

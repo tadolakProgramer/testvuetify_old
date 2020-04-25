@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 
 const Users = require('../models/users');
 const Hale = require('../models/hale');
+const typesMachine = require('../models/typeMachine');
 const config = require('../config/config');
 
 const saltRounds = 10;
@@ -80,6 +81,11 @@ module.exports = {
     async getHale(req, res) {
         await Hale.findAll()
             .then(hale => res.send(hale))
+            .catch(error => console.log(error));
+    },
+    async getTypeMachine(req, res) {
+        await typesMachine.findAll()
+            .then(typesMachine => res.send(typesMachine))
             .catch(error => console.log(error));
     }
 };
