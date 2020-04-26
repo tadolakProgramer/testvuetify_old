@@ -3,7 +3,7 @@
     <v-layout>
 
         <v-flex xs2 sm8 offset-sm2>
-            <dialog-date-time class=":value"></dialog-date-time>
+<dialog-date-time></dialog-date-time>
             <v-card class="pq-2"
                     max-width="auto"
                     color="secondary"
@@ -91,6 +91,7 @@
         },
         data() {
             return {
+                dialog:'',
                 maszynka: '',
                 newFailure: '',
                 dataGodzina: '',
@@ -102,7 +103,6 @@
                 AW_Zrealizowane: 'Zgłoszenie',
                 AW_Dzialania: '',
                 NowaAwaria: {},
-                value:true,
                 rules: {
                     required: value => !!value || 'To pole nie może być puste.',
                     min: v => v.length > 25 || 'Min 25 znaków'
@@ -136,9 +136,8 @@
                 }
             },
             OpenDialogDateTime() {
-                const open =  true
-                this.$root.$emit('OpenDialog', open);
-                this.$refs.DialogDateTime.dialog = true;
+                const open = true
+                this.$root.$emit('openDialog', open);
             },
             pageBack() {
                 this.$router.go(-1)
