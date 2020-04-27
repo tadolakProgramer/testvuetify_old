@@ -96,6 +96,7 @@
                 newFailure: '',
                 dataGodzina: '',
                 user: '',
+                dataZakonczeniaView: false,
                 AW_DataZgloszenia: '',
                 Maszyna_ID: '',
                 AW_Zglaszajacy_ID: '',
@@ -109,12 +110,21 @@
                 }
             }
         },
+        created() {
+            moment.locale('pl');
+            this.dataGodzina = moment().format('lll');
+        },
         async mounted() {
             try {
                 this.maszynka = (await FailureService.getMaszyna(this.$route.params)).data;
-                moment.locale('pl');
-                this.dataGodzina = moment().format('lll');
+
+                //Get User login to system
                 this.user = store.getters.user;
+
+                //Get date from dialogDateTime
+                this.$root.$on('data',(DataCzas) => {
+                    this.dataGodzina = moment(DataCzas).format('lll');
+                })
             } catch (e) {
                 console.log(e)
             }
@@ -141,6 +151,13 @@
             },
             pageBack() {
                 this.$router.go(-1)
+            }
+        },
+        watch: {
+            AW_Zrealizowane: function () {
+                if (this.AW_Zrealizowane === 'Zakończone'){
+                    this.dataZakonczeniaView = true;
+                }
             }
         }
     }

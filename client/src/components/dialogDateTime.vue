@@ -35,8 +35,8 @@
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="green darken-1" text @click="dialog = false">Disagree</v-btn>
-                    <v-btn color="green darken-1" text @click="dialog = false">Agree</v-btn>
+                    <v-btn color="green darken-1" text @click="dialog = false">Anuluj</v-btn>
+                    <v-btn color="green darken-1" text @click="saveDate">OK</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -44,18 +44,25 @@
 </template>
 
 <script>
+    import moment from 'moment';
+
     export default {
         name: "dialogDateTime",
         data: () => ({
             dialog: false,
+            time: '',
+            date: new Date().toISOString().substr(0, 10),
+            menu:'',
             return: {
-                date: new Date().toISOString().substr(0, 10),
                 dataUsterki: false,
-                time: null,
                 menu2: false,
+                Teraz:'',
+                DataCzas: null
             },
         }),
         async mounted() {
+            this.time = moment().format('LT');
+            //this.date = moment().format('l');
             await this.$root.$on('openDialog', (open) => {
                 console.log('openDialog', open)
                 this.dialog = open
@@ -63,7 +70,14 @@
         },
         computed: {
             DataCzas(){
-                return this.date + this.time
+               return  this.date + ' ' + this.time
+            }
+        },
+        methods:{
+            saveDate() {
+                this.Teraz = this.date + ' ' + this.time
+                this.$root.$emit('data', this.Teraz)
+                this.dialog = false
             }
         }
     }
