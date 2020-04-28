@@ -9,10 +9,10 @@ import dateTimeDialog from "./dateTimeDialog";
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-    static: true,
-    modules: {
-        user: user,
-        lists : lists,
-        dateTimeDialog: dateTimeDialog
+    "static": true,
+    "modules": {
+        "user": user,
+        "lists": lists,
+        "dateTimeDialog": dateTimeDialog
     }
 })

@@ -1,39 +1,49 @@
 export default {
     state: {
         titleDialog: null,
-        dateTime: '',
-        dialogType: ''
+        dateTimeStart: null,
+        dateTimeEnd: null,
+        dialogType: null
     },
     mutations: {
         setTitleDialog(state, title) {
             state.titleDialog = title
         },
-        setDateTime(state, dateTime) {
-            state.dateTime = dateTime
+        setDateTimeStart(state, dateTimeStart) {
+            state.dateTimeStart = dateTimeStart
+        },
+        setDateTimeEnd(state, dateTimeEnd) {
+            state.dateTimeEnd = dateTimeEnd
         },
         setDialogType(state, dialogType) {
-            state.type = dialogType
+            state.dialogType = dialogType
         }
     },
     action: {
         setTitleDialog({commit}, title) {
             commit('setTitleDialog', title)
         },
-        setDateTime({commit}, dateTime) {
-            commit('setDateTime', dateTime)
+        setDateTimeStart({commit}, dateTimeStart) {
+            commit('setDateTimeStart', dateTimeStart)
+        },
+        setDateTimeEnd({commit}, dateTimeEnd) {
+            commit('setDateTimeEnd', dateTimeEnd)
         },
         setDialogType({commit}, dialogType) {
-            commit('setType', dialogType)
+            commit('setDialogType', dialogType)
         }
     },
     getters: {
-        getTitle(state) {
+        getTitleDialog(state) {
             return state.titleDialog
         },
-        getDateTime(state) {
-            return state.dateTime
+        getDateTimeStart(state) {
+            return state.dateTimeStart
         },
-        getTypeDialog(state) {
+        getDateTimeEnd(state) {
+            return state.dateTimeEnd
+        },
+        getDialogType(state) {
             return state.dialogType
         }
     }

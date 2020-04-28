@@ -67,11 +67,11 @@
                                 <v-btn x-small
                                        fab small
                                        v-on="on"
-                                       @click=OpenDialogDateTime()>
+                                       @click=OpenDialogDateTimeEnd()>
                                     <v-icon>mdi-calendar</v-icon>
                                 </v-btn>
                             </template>
-                            <span>Zmiana daty interwencji</span>
+                            <span>Zmiana daty zakończenia</span>
                         </v-tooltip></div>
                 </v-radio-group>
 
@@ -95,7 +95,7 @@
     import moment from 'moment';
     import store from "../../store/store";
     import DialogDateTime from "../../components/dialogDateTime";
-    import {mapMutations} from "vuex";
+    import {mapMutations, mapGetters} from "vuex";
 
 
     export default {
@@ -110,6 +110,7 @@
                 newFailure: '',
                 dataGodzina: '',
                 user: '',
+                dialogType:'',
                 viewDataZakonczenia: false,
                 ID_AWARIA:0,
                 AW_DataZgloszenia: '',
@@ -120,6 +121,7 @@
                 AW_Dzialania: '',
                 AW_DataZakonczenia:'',
                 NowaAwaria: {},
+                DataTimeEnd:'',
                 rules: {
                     required: value => !!value || 'To pole nie może być puste.',
                     min: v => v.length > 25 || 'Min 25 znaków'
@@ -129,6 +131,15 @@
         created() {
             moment.locale('pl');
             this.dataGodzina = moment().format('lll');
+
+        },
+        computed:{
+            DateTimeEnd(){
+                return this.getDateTimeEnd
+            },
+            DateTimeStart() {
+                return this.getDataTimeStart
+            }
         },
         async mounted() {
             try {
@@ -147,8 +158,10 @@
         },
         methods: {
         ...mapMutations([
-            'setTitleDialog'
+            'setTitleDialog','setDialogType'
         ]),
+            ...mapGetters(['getDialogTitle', 'getDateTimeEnd', 'getDataTimeStart']),
+
             async AddNewFailure() {
                 try {
                     const response = await FailureService.addNewFailure({
@@ -169,8 +182,17 @@
 
             },
             async OpenDialogDateTime() {
-                this.setTitleDialog('Wystąpienie usterki')
+                await this.setTitleDialog('Wystąpienie usterki')
+                await this.setDialogType('Start')
                 const open = true
+                this.$root.$emit('openDialog', open);
+            },
+            async OpenDialogDateTimeEnd() {
+                await this.setTitleDialog('Usunięcie usterki')
+                await this.setDialogType( 'End')
+                let dt = this.getDialogTitle
+                const open = true
+                console.log(dt)
                 this.$root.$emit('openDialog', open);
             },
             pageBack() {

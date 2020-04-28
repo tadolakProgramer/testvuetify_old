@@ -2,7 +2,7 @@
     <v-row justify="center">
         <v-dialog v-model="dialog" persistent max-width="390">
             <v-card class="secondary">
-                <v-card-title class="headline primary">{{Title}}</v-card-title>
+                <v-card-title class="headline primary">{{titleDialog()}}</v-card-title>
                 <v-card-text>
                     <v-menu
                             v-model="dataUsterki"
@@ -46,6 +46,7 @@
 <script>
     import moment from 'moment';
     //import store from "../store/store";
+    import {mapMutations, mapGetters} from "vuex";
 
     export default {
         name: "dialogDateTime",
@@ -59,28 +60,49 @@
                 menu2: false,
                 Teraz:'',
                 title:'',
-                DataCzas: null
+                dialogType: '',
+                DataCzas: null,
+                titleDialog:null
             },
         }),
+
         async mounted() {
             this.time = moment().format('LT');
             await this.$root.$on('openDialog', (open) => {
                 console.log('openDialog', open)
                 this.dialog = open
             })
+            this.typeDialog = await this.getDialogType
         },
         computed: {
-            DataCzas(){
-               return  this.date + ' ' + this.time
+            DataCzas() {
+                return this.date + ' ' + this.time
             },
-            Title(){
-                return this.$store.getters.getTitle
+            titleDialog() {
+                return this.getTitleDialog
+            },
+            dialogType() {
+                return this.getDialogType
             }
         },
+
         methods:{
+            ...mapMutations([
+                'setDateTimeStart', 'setDateTimeEnd'
+            ]),
+            ...mapGetters(['getDialogType', 'getTitleDialog'
+            ]),
             saveDate() {
                 this.Teraz = this.date + ' ' + this.time
+
+                if (this.dialogType() === "End"){
                 this.$root.$emit('data', this.Teraz)
+                    this.setDateTimeEnd(this.Teraz)
+                }
+                if (this.dialogType() === "Start"){
+                    this.$root.$emit('data', this.Teraz)
+                    this.setDateTimeStart(this.Teraz)
+                }
                 this.dialog = false
             }
         }
