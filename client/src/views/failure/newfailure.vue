@@ -161,7 +161,7 @@
                         AW_DataZakonczenia: moment(this.AW_DataZakonczenia.toISOString)
                     })
                     this.NowaAwaria = await response.data;
-                    this.ID_AWARIA = this.NowaAwaria
+                    this.ID_AWARIA = this.NowaAwaria.ID_AWARIA
                     alert('Awaria nr: ' + this.NowaAwaria.ID_AWARIA + ', maszyny ' + this.maszynka.NazwaMaszyny + ' została poprawnie zapisana!')
                 } catch (e) {
                     console.log(e)

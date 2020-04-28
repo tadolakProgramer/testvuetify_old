@@ -37,19 +37,30 @@ module.exports = {
     async putNewFailure(req, res) {
         try {
             if (req.body.ID_AWARIA === 0){
-            console.log("AwariaCreate:",req.body.ID_AWARIA)
             await awaria.create(req.body)
                 .then(awaria => res.send(awaria))
+                .catch(e => console.log(e))
             }else{
-                console.log("AwariaUpdate:",req.body.ID_AWARIA)
-                const Dane = req.body.ID_AWARIA
-                console.log("AwariaDane:",Dane)
-                console.log("AwariaUpdate:",Dane.ID_AWARIA)
-                const ID_Awaria = Dane.ID_AWARIA
-                await awaria.update({AW_OpisAwarii:Dane.AW_OpisAwarii},{
+                const ID_Awaria = req.body.ID_AWARIA
+                console.log(ID_Awaria)
+                console.log("ID", req.body)
+                await awaria.update({
+                    Maszyna_ID: req.body.ID_Maszyna,
+                        AW_DataZgloszenia: req.body.AW_DataZgloszenia,
+                    AW_Zglaszajacy_ID: req.body.AW_Zglaszajacy_ID,
+                    AW_OpisAwarii: req.body.AW_OpisAwarii,
+                    AW_Dzialania: req.body.AW_Dzialania,
+                    AW_Zrealizowane: req.body.AW_Zrealizowane,
+                    AW_DataZakonczenia: req.body.AW_DataZakonczenia},
+                    {
                     where:{ ID_AWARIA: ID_Awaria
                     }})
-                    .then(awaria => res.send(awaria))
+                    .then(() => {
+                        awaria.findOne({where:{ID_AWARIA: ID_Awaria
+                            }}).then(awaria => res.send(awaria))
+                        console.log("update",awaria)
+                    })
+                    .catch(e => console.log("e",e))
             }
         } catch (e) {
             await res.send.status(400).send({error: 'Wystąpił błąd zapisu do bazy danych'})
