@@ -36,8 +36,21 @@ module.exports = {
     },
     async putNewFailure(req, res) {
         try {
+            if (req.body.ID_AWARIA === 0){
+            console.log("AwariaCreate:",req.body.ID_AWARIA)
             await awaria.create(req.body)
                 .then(awaria => res.send(awaria))
+            }else{
+                console.log("AwariaUpdate:",req.body.ID_AWARIA)
+                const Dane = req.body.ID_AWARIA
+                console.log("AwariaDane:",Dane)
+                console.log("AwariaUpdate:",Dane.ID_AWARIA)
+                const ID_Awaria = Dane.ID_AWARIA
+                await awaria.update({AW_OpisAwarii:Dane.AW_OpisAwarii},{
+                    where:{ ID_AWARIA: ID_Awaria
+                    }})
+                    .then(awaria => res.send(awaria))
+            }
         } catch (e) {
             await res.send.status(400).send({error: 'Wystąpił błąd zapisu do bazy danych'})
 

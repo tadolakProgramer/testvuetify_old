@@ -55,13 +55,26 @@
                     <span>Zgłaszający: {{user.US_Name}} {{user.US_SUER_NAME}} {{user.US_PROFESJA}}</span>
                 </v-card-text>
                 <hr>
-                <v-radio-group v-model="AW_Zrealizowane" row>Status awarii:
-                    <v-radio color="red" label="Zgłoszenie" value="Zgłoszenie"></v-radio>
+                <v-radio-group v-model="AW_Zrealizowane" row>Status awarii
+                    <v-radio  :color="red" label="Zgłoszenie" value="Zgłoszenie"></v-radio>
                     <v-radio color="orange" label="Oczekiwanie na części" value="Oczekiwanie na części"></v-radio>
                     <v-radio color="orange" label="Oczekiwanie na zatrzymanie"
                              value="Oczekiwanie na zatrzymanie"></v-radio>
                     <v-radio color="green" label="Zakończone" value="Zakończone"></v-radio>
+                    <div v-if="viewDataZakonczenia">{{AW_DataZakonczenia}}
+                        <v-tooltip bottom>
+                            <template v-slot:activator="{on}">
+                                <v-btn x-small
+                                       fab small
+                                       v-on="on"
+                                       @click=OpenDialogDateTime()>
+                                    <v-icon>mdi-calendar</v-icon>
+                                </v-btn>
+                            </template>
+                            <span>Zmiana daty interwencji</span>
+                        </v-tooltip></div>
                 </v-radio-group>
+
                 <v-card-actions>
                     <v-btn color="orange"
                            @click="AddNewFailure">Zapisz
@@ -82,6 +95,7 @@
     import moment from 'moment';
     import store from "../../store/store";
     import DialogDateTime from "../../components/dialogDateTime";
+    import {mapMutations} from "vuex";
 
 
     export default {
@@ -96,13 +110,15 @@
                 newFailure: '',
                 dataGodzina: '',
                 user: '',
-                dataZakonczeniaView: false,
+                viewDataZakonczenia: false,
+                ID_AWARIA:0,
                 AW_DataZgloszenia: '',
                 Maszyna_ID: '',
                 AW_Zglaszajacy_ID: '',
                 AW_OpisAwarii: '',
                 AW_Zrealizowane: 'Zgłoszenie',
                 AW_Dzialania: '',
+                AW_DataZakonczenia:'',
                 NowaAwaria: {},
                 rules: {
                     required: value => !!value || 'To pole nie może być puste.',
@@ -130,22 +146,30 @@
             }
         },
         methods: {
+        ...mapMutations([
+            'setTitleDialog'
+        ]),
             async AddNewFailure() {
                 try {
                     const response = await FailureService.addNewFailure({
+                        ID_AWARIA: this.ID_AWARIA,
                         Maszyna_ID: this.maszynka.ID_Maszyna,
                         AW_Zglaszajacy_ID: this.user.ID_USER,
                         AW_OpisAwarii: this.AW_OpisAwarii,
                         AW_Dzialania: this.AW_Dzialania,
-                        AW_Zrealizowane: this.AW_Zrealizowane
+                        AW_Zrealizowane: this.AW_Zrealizowane,
+                        AW_DataZakonczenia: moment(this.AW_DataZakonczenia.toISOString)
                     })
                     this.NowaAwaria = await response.data;
+                    this.ID_AWARIA = this.NowaAwaria
                     alert('Awaria nr: ' + this.NowaAwaria.ID_AWARIA + ', maszyny ' + this.maszynka.NazwaMaszyny + ' została poprawnie zapisana!')
                 } catch (e) {
                     console.log(e)
                 }
+
             },
-            OpenDialogDateTime() {
+            async OpenDialogDateTime() {
+                this.setTitleDialog('Wystąpienie usterki')
                 const open = true
                 this.$root.$emit('openDialog', open);
             },
@@ -156,7 +180,11 @@
         watch: {
             AW_Zrealizowane: function () {
                 if (this.AW_Zrealizowane === 'Zakończone'){
-                    this.dataZakonczeniaView = true;
+                    this.AW_DataZakonczenia = moment().format('lll')
+                    this.viewDataZakonczenia = true;
+                }
+                else{
+                    this.viewDataZakonczenia = false;
                 }
             }
         }

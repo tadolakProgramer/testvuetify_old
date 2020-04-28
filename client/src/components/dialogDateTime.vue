@@ -1,8 +1,8 @@
 <template>
     <v-row justify="center">
         <v-dialog v-model="dialog" persistent max-width="390">
-            <v-card>
-                <v-card-title class="headline primary">Data wystąpienia usterki</v-card-title>
+            <v-card class="secondary">
+                <v-card-title class="headline primary">{{Title}}</v-card-title>
                 <v-card-text>
                     <v-menu
                             v-model="dataUsterki"
@@ -45,6 +45,7 @@
 
 <script>
     import moment from 'moment';
+    //import store from "../store/store";
 
     export default {
         name: "dialogDateTime",
@@ -57,12 +58,12 @@
                 dataUsterki: false,
                 menu2: false,
                 Teraz:'',
+                title:'',
                 DataCzas: null
             },
         }),
         async mounted() {
             this.time = moment().format('LT');
-            //this.date = moment().format('l');
             await this.$root.$on('openDialog', (open) => {
                 console.log('openDialog', open)
                 this.dialog = open
@@ -71,6 +72,9 @@
         computed: {
             DataCzas(){
                return  this.date + ' ' + this.time
+            },
+            Title(){
+                return this.$store.getters.getTitle
             }
         },
         methods:{
