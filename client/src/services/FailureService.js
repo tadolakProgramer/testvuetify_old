@@ -9,7 +9,7 @@ export default {
         )
     },
     getMaszyna(IDS){
-        return Api().get('/failure/new/',
+        return Api().get('/getMaszyna/',
             {params: IDS}
         )
     },
@@ -20,8 +20,13 @@ export default {
         return Api().get('/getAllFailure')
     },
 
-    getFailureMachina(IdMaszyna){
+    getOneFailure(ID_AWARIA) {
+        return Api().get('/getOneFailure',
+            {params: ID_AWARIA})
+    },
+
+    getFailureMachina(IDS){
         return Api().get('/getFailureMachine/',
-            {params: IdMaszyna})
+            {params: IDS})
     }
 }

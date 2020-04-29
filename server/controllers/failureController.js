@@ -34,6 +34,41 @@ module.exports = {
             })
         }
     },
+
+    async getMaszyna(req, res) {
+        try {
+            const IDS = req.query.IDS;
+            await vMaszyny.findOne({
+                where: {
+                    ID_Maszyna: IDS
+                }
+            })
+                .then(maszynka => {
+                    res.send(maszynka)
+                })
+                .catch(error => console.log(error))
+        } catch (err) {
+            console.log('error', err);
+            res.status(400).send({
+                error: 'vMaszyny error'
+            })
+        }
+    },
+
+    async getOneFailure(req, res) {
+        try{
+            const ID_AWARIA = req.query.ID_AWARIA;
+            console.log("ID", ID_AWARIA)
+            await listaAwarii.findByPk(ID_AWARIA)
+                .then(awaria => res.send(awaria))
+        }catch (e) {
+            console.log('error', err);
+            res.status(400).send({
+                error: 'vMaszyny error'
+            })
+        }
+    },
+
     async putNewFailure(req, res) {
         try {
             if (req.body.ID_AWARIA === 0){
@@ -77,7 +112,7 @@ module.exports = {
         }
     },
     async getFailureMachine(req, res) {
-        const IdMaszyna = req.query.IdMaszyna;
+        const IdMaszyna = req.query.IDS;
         console.log(IdMaszyna)
         try {
             listaAwarii.findAll({

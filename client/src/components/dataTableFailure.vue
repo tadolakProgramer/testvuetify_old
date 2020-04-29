@@ -2,7 +2,6 @@
     <v-data-table
             :headers="headers"
             :items="failures"
-            sort-desc="ID_AWARIA"
             class="elevation-1"
             :search="search"
     >
@@ -21,7 +20,7 @@
             <v-icon
                     small
                     class="mr-2"
-                    @click="editItem(item)"
+                    @click="editItem(item.ID_AWARIA)"
             >
                 mdi-pencil
             </v-icon>
@@ -107,10 +106,9 @@
             async initialize() {
                 this.failures = (await FailureService.getFailureMachina(this.$route.params)).data;
             },
-            editItem(item) {
-                this.editedIndex = this.failures.indexOf(item)
-                this.editedItem = Object.assign({}, item)
-                this.dialog = true
+            async editItem(id) {
+                console.log("item",id )
+                await this.$router.push({name: 'editFailure', params: {ID_AWARIA: id}})
             },
 
             deleteItem(item) {

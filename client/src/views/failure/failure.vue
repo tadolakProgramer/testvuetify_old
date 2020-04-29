@@ -76,8 +76,8 @@
                 this.setfailureCreate();
                 this.$router.push({name: 'newfailure', params: {IDS: IDS}})
             },
-            goToFailureHistory(IdMaszyna) {
-                this.$router.push({name: 'failureHistory', params: {IdMaszyna: IdMaszyna}})
+            goToFailureHistory(IDS) {
+                this.$router.push({name: 'failureHistory', params: {IDS: IDS}})
             },
             edit() {
 
@@ -115,7 +115,6 @@
                             this.viewMachine.push(this.listaMaszyn[i])
                         }
                     }}
-                console.log(this.viewMachine)
             })
             this.filterHala = SerchMachine.data().listaHal;
         }

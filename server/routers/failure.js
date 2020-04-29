@@ -7,6 +7,8 @@ module.exports = (app) => {
 
     app.get('/failure/new/', failureController.postNewFailure);
 
+    app.get('/getMaszyna/', failureController.getMaszyna);
+
     app.post('/failure/new/:IDS',  failureController.postNewFailure);
 
     app.put('/failure/new', failureController.putNewFailure);
@@ -14,4 +16,6 @@ module.exports = (app) => {
     app.get('/getFailureMachine', failureController.getFailureMachine);
 
     app.get('/getAllFailure', failureController.getAllFailure);
+
+    app.get('/getOneFailure', failureController.getOneFailure);
 };

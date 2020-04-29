@@ -161,7 +161,7 @@
 
         async mounted() {
             try {
-                this.maszynka = (await FailureService.getMaszyna(this.$route.params)).data;
+                this.maszynka = (await FailureService.getOneFailure(this.$route.params)).data;
 
                 //Get User login to system
                 this.user = store.getters.user;
