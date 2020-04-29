@@ -37,13 +37,13 @@ module.exports = {
     async putNewFailure(req, res) {
         try {
             if (req.body.ID_AWARIA === 0){
+                //Nowa awaria
             await awaria.create(req.body)
                 .then(awaria => res.send(awaria))
                 .catch(e => console.log(e))
             }else{
+                //Edycja awarii
                 const ID_Awaria = req.body.ID_AWARIA
-                console.log(ID_Awaria)
-                console.log("ID", req.body)
                 await awaria.update({
                     Maszyna_ID: req.body.ID_Maszyna,
                         AW_DataZgloszenia: req.body.AW_DataZgloszenia,
@@ -58,7 +58,6 @@ module.exports = {
                     .then(() => {
                         awaria.findOne({where:{ID_AWARIA: ID_Awaria
                             }}).then(awaria => res.send(awaria))
-                        console.log("update",awaria)
                     })
                     .catch(e => console.log("e",e))
             }

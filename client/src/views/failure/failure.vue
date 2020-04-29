@@ -46,6 +46,7 @@
 <script>
     import FailureService from "../../services/FailureService";
     import SerchMachine from "../../components/serchMachine";
+    import {mapMutations, mapGetters} from  "vuex";
 
     export default {
         name: "failure",
@@ -66,7 +67,13 @@
             }
         },
         methods: {
+            ...mapMutations([
+                'setfailureCreate', 'setfailureEdit'
+            ]),
+            ...mapGetters(['getDialogType', 'getTitleDialog'
+            ]),
             failure(IDS) {
+                this.setfailureCreate();
                 this.$router.push({name: 'newfailure', params: {IDS: IDS}})
             },
             goToFailureHistory(IdMaszyna) {
@@ -86,6 +93,7 @@
                 this.viewMachine=[]
                 this.filterTyp = typMaszyny
                 this.filterHala = hala
+                if (this.filterHala === null) {this.filterHala = 'Pokaż wszystko' }
                 if ((this.filterHala === 'Pokaż wszystko') && (this.filterTyp ==='Pokaż wszystko')) {
                     this.viewMachine = this.listaMaszyn
                 }

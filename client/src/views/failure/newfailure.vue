@@ -149,8 +149,12 @@
                 this.user = store.getters.user;
 
                 //Get date from dialogDateTime
-                this.$root.$on('data',(DataCzas) => {
+                this.$root.$on('dataStart',(DataCzas) => {
                     this.dataGodzina = moment(DataCzas).format('lll');
+                })
+
+                this.$root.$on('dataEnd',(DataCzas) => {
+                    this.AW_DataZakonczenia = moment(DataCzas).format('lll');
                 })
             } catch (e) {
                 console.log(e)
@@ -160,7 +164,7 @@
         ...mapMutations([
             'setTitleDialog','setDialogType'
         ]),
-            ...mapGetters(['getDialogTitle', 'getDateTimeEnd', 'getDataTimeStart']),
+            ...mapGetters(['getDateTimeEnd', 'getDataTimeStart']),
 
             async AddNewFailure() {
                 try {
@@ -190,9 +194,7 @@
             async OpenDialogDateTimeEnd() {
                 await this.setTitleDialog('Usunięcie usterki')
                 await this.setDialogType( 'End')
-                let dt = this.getDialogTitle
                 const open = true
-                console.log(dt)
                 this.$root.$emit('openDialog', open);
             },
             pageBack() {
@@ -208,6 +210,9 @@
                 else{
                     this.viewDataZakonczenia = false;
                 }
+            },
+            DataTimeEnd() {
+                console.log("Zmiana")
             }
         }
     }

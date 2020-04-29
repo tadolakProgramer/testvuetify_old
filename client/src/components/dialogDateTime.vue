@@ -18,7 +18,7 @@
                                     v-model="date"
                                     label="Data wystąpienia usterki"
                                     prepend-icon="event"
-                                    readonly
+
                                     v-on="on"
                             ></v-text-field>
                         </template>
@@ -35,6 +35,7 @@
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
+                    <v-btn color="green darken-1" text @click="SetNow">Teraz</v-btn>
                     <v-btn color="green darken-1" text @click="dialog = false">Anuluj</v-btn>
                     <v-btn color="green darken-1" text @click="saveDate">OK</v-btn>
                 </v-card-actions>
@@ -65,6 +66,10 @@
                 titleDialog:null
             },
         }),
+        created() {
+            moment.locale('pl')
+            this.SetNow();
+        },
 
         async mounted() {
             this.time = moment().format('LT');
@@ -72,7 +77,6 @@
                 console.log('openDialog', open)
                 this.dialog = open
             })
-            this.typeDialog = await this.getDialogType
         },
         computed: {
             DataCzas() {
@@ -96,14 +100,18 @@
                 this.Teraz = this.date + ' ' + this.time
 
                 if (this.dialogType() === "End"){
-                this.$root.$emit('data', this.Teraz)
+                this.$root.$emit('dataEnd', this.Teraz)
                     this.setDateTimeEnd(this.Teraz)
                 }
                 if (this.dialogType() === "Start"){
-                    this.$root.$emit('data', this.Teraz)
+                    this.$root.$emit('dataStart', this.Teraz)
                     this.setDateTimeStart(this.Teraz)
                 }
                 this.dialog = false
+            },
+            SetNow(){
+                this.date = moment().format('YYYY-MM-DD')
+                this.time = moment().format('HH:mm')
             }
         }
     }
