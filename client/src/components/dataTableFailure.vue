@@ -20,7 +20,7 @@
             <v-icon
                     small
                     class="mr-2"
-                    @click="editItem(item.ID_AWARIA)"
+                    @click="editItem(item)"
             >
                 mdi-pencil
             </v-icon>
@@ -84,6 +84,9 @@
                 carbs: 0,
                 protein: 0,
             },
+            return: {
+                idtext:''
+            }
         }),
 
         computed: {
@@ -106,9 +109,10 @@
             async initialize() {
                 this.failures = (await FailureService.getFailureMachina(this.$route.params)).data;
             },
-            async editItem(id) {
-                console.log("item",id )
-                await this.$router.push({name: 'editFailure', params: {ID_AWARIA: id}})
+            async editItem(item) {
+                console.log("item",item.ID_AWARIA )
+                //item.value.ID_AWARIA
+                await this.$router.push({name: 'editFailure', params: {ID_AWARIA: item.ID_AWARIA}})
             },
 
             deleteItem(item) {

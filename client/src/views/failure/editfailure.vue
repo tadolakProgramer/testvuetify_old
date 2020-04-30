@@ -72,8 +72,7 @@
                 <v-radio-group v-model="AW_Zrealizowane" row>Status awarii
                     <v-radio :color="red" label="Zgłoszenie" value="Zgłoszenie"></v-radio>
                     <v-radio color="orange" label="Oczekiwanie na części" value="Oczekiwanie na części"></v-radio>
-                    <v-radio color="orange" label="Oczekiwanie na zatrzymanie"
-                             value="Oczekiwanie na zatrzymanie"></v-radio>
+                    <v-radio color="orange" label="Oczekiwanie na zatrzymanie" value="Oczekiwanie na zatrzymanie"></v-radio>
                     <v-radio color="green" label="Zakończone" value="Zakończone"></v-radio>
                     <div v-if="viewDataZakonczenia">{{AW_DataZakonczenia}}
                         <v-tooltip bottom>
@@ -147,7 +146,7 @@
 
         created() {
             moment.locale('pl');
-            this.dataGodzina = moment().format('lll');
+           // this.dataGodzina = moment().format('lll');
 
         },
         computed: {
@@ -162,6 +161,16 @@
         async mounted() {
             try {
                 this.maszynka = (await FailureService.getOneFailure(this.$route.params)).data;
+                this.ID_AWARIA = this.maszynka.ID_AWARIA
+                    this.AW_DataZgloszenia =this.maszynka.AW_DataZgloszenia
+                    //Maszyna_ID: '',
+                    //AW_Zglaszajacy_ID: '',
+                    this.AW_OpisAwarii = this.maszynka.AW_OpisAwarii
+                    this.AW_Zrealizowane =  this.maszynka.AW_Zrealizowane
+                    this.AW_Dzialania = this.maszynka.AW_Dzialania
+                    //AW_DataZakonczenia: '',
+
+
 
                 //Get User login to system
                 this.user = store.getters.user;
