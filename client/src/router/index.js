@@ -17,44 +17,42 @@ import editfailure from "../views/failure/editfailure";
 import IsLogin from './isLogin'
 
 
-
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'About',
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  },
-  {
-    path: '/register',
-    name: 'register',
-    component: Register,
-    beforeEnter: IsLogin
-  },
-  {
-    path: '/Login',
-    name: 'login',
-    component: Login
-  },
-  {
-    path: '/notification',
-    name: 'notification',
-    component: notification,
-    beforeEnter: IsLogin
-  },
-  {
-    path: '/notification/new/:IDS',
-    name: 'newnotification',
-    component: newnotification,
-    beforeEnter: IsLogin
-  },
-
+    {
+        path: '/',
+        name: 'Home',
+        component: Home
+    },
+    {
+        path: '/about',
+        name: 'About',
+        component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    },
+    {
+        path: '/register',
+        name: 'register',
+        component: Register,
+        beforeEnter: IsLogin
+    },
+    {
+        path: '/Login',
+        name: 'login',
+        component: Login
+    },
+    {
+        path: '/notification',
+        name: 'notification',
+        component: notification,
+        beforeEnter: IsLogin
+    },
+    {
+        path: '/notification/new/:IDS',
+        name: 'newnotification',
+        component: newnotification,
+        beforeEnter: IsLogin
+    },
     {
         path: '/failure',
         name: 'failure',
@@ -88,7 +86,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  routes
+    routes
 })
 
 export default router

@@ -25,6 +25,22 @@ const Listaawarii = sequelize.define('LISTAAWARII', {
     },
     AW_Zrealizowane: {
         type: Sequelize.STRING
+    },
+    AW_DataZakonczenia: {
+        type: Sequelize.DATE,
+        allowNull: true
+    },
+    AW_Zatwierdzone: {
+        type: Sequelize.STRING(1),
+        allowNull: true
+    },
+    AW_Data_Zatwierdzenia: {
+        type: Sequelize.DATE,
+        allowNull: true
+    },
+    AW_ID_Zatwierdzajacy: {
+        type: Sequelize.INTEGER,
+        allowNull: true
     }
 });
 

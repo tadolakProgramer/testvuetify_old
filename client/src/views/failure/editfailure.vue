@@ -7,12 +7,11 @@
                     <v-dialog v-model="dialog" persistent max-width="390">
                         <v-card>
                             <v-card-title class="headline primary">Info</v-card-title>
-                            <v-card-text>{{dialogText}} <br>Możesz dopisać dodadtke informacje klikając na przycsik szczeguły
+                            <v-card-text>{{dialogText}}
                             </v-card-text>
                             <v-card-actions>
                                 <v-spacer></v-spacer>
-                                <v-btn color="green darken-1"  @click="dialog = false">Szczeguły</v-btn>
-                                <v-btn color="green darken-1"  @click="closeNewFailure">OK</v-btn>
+                                <v-btn color="green darken-1" @click="closeNewFailure">OK</v-btn>
                             </v-card-actions>
                         </v-card>
                     </v-dialog>
@@ -69,11 +68,12 @@
                     <span>Zgłaszający: {{user.US_Name}} {{user.US_SUER_NAME}} {{user.US_PROFESJA}}</span>
                 </v-card-text>
                 <hr>
-                <v-radio-group v-model="AW_Zrealizowane" row>Status awarii
+                <v-radio-group v-model="AW_Zrealizowane" @change="changeRadioGroup" row >Status awarii
                     <v-radio :color="red" label="Zgłoszenie" value="Zgłoszenie"></v-radio>
                     <v-radio color="orange" label="Oczekiwanie na części" value="Oczekiwanie na części"></v-radio>
-                    <v-radio color="orange" label="Oczekiwanie na zatrzymanie" value="Oczekiwanie na zatrzymanie"></v-radio>
-                    <v-radio color="green" label="Zakończone" value="Zakończone"></v-radio>
+                    <v-radio color="orange" label="Oczekiwanie na zatrzymanie"
+                             value="Oczekiwanie na zatrzymanie"></v-radio>
+                    <v-radio color="green" label="Zakończone" value="Zakończone" ></v-radio>
                     <div v-if="viewDataZakonczenia">{{AW_DataZakonczenia}}
                         <v-tooltip bottom>
                             <template v-slot:activator="{on}">
@@ -120,7 +120,7 @@
         data() {
             return {
                 dialog: '',
-                dialogText:'',
+                dialogText: '',
                 maszynka: '',
                 newFailure: '',
                 dataGodzina: '',
@@ -146,7 +146,7 @@
 
         created() {
             moment.locale('pl');
-           // this.dataGodzina = moment().format('lll');
+            // this.dataGodzina = moment().format('lll');
 
         },
         computed: {
@@ -162,15 +162,15 @@
             try {
                 this.maszynka = (await FailureService.getOneFailure(this.$route.params)).data;
                 this.ID_AWARIA = this.maszynka.ID_AWARIA
-                    this.AW_DataZgloszenia =this.maszynka.AW_DataZgloszenia
-                    //Maszyna_ID: '',
-                    //AW_Zglaszajacy_ID: '',
-                    this.AW_OpisAwarii = this.maszynka.AW_OpisAwarii
-                    this.AW_Zrealizowane =  this.maszynka.AW_Zrealizowane
-                    this.AW_Dzialania = this.maszynka.AW_Dzialania
-                    //AW_DataZakonczenia: '',
-
-
+                this.AW_DataZgloszenia = this.maszynka.AW_DataZgloszenia
+                this.dataGodzina = moment(this.AW_DataZgloszenia).format('lll')
+                this.AW_OpisAwarii = this.maszynka.AW_OpisAwarii
+                this.AW_Zrealizowane = this.maszynka.AW_Zrealizowane
+                if (this.AW_Zrealizowane === 'Zakończone'){
+                    this.changeRadioGroup()
+                }
+                this.AW_Dzialania = this.maszynka.AW_Dzialania
+                this.AW_DataZakonczenia = this.maszynka.AW_DataZakonczenia
 
                 //Get User login to system
                 this.user = store.getters.user;
@@ -195,6 +195,20 @@
             ...mapGetters([
                 'getDateTimeEnd', 'getDataTimeStart']),
 
+             async changeRadioGroup(){
+                if (this.AW_Zrealizowane === 'Zakończone') {
+                    this.viewDataZakonczenia = true;
+                    if (this.AW_DataZakonczenia != null){
+                        this.AW_DataZakonczenia = await moment(this.maszynka.AW_DataZakonczenia).format('lll')
+                    }
+                    else {
+                        this.AW_DataZakonczenia = moment().format('lll')
+                    }
+                } else {
+                    this.viewDataZakonczenia = false;
+                }
+            },
+
             async AddNewFailure() {
                 try {
                     const response = await FailureService.addNewFailure({
@@ -210,7 +224,6 @@
                     this.ID_AWARIA = this.NowaAwaria.ID_AWARIA
                     this.dialogText = 'Awaria nr: ' + this.NowaAwaria.ID_AWARIA + ', maszyny ' + this.maszynka.NazwaMaszyny + ' została poprawnie zapisana!'
                     this.dialog = true;
-                    //alert('Awaria nr: ' + this.NowaAwaria.ID_AWARIA + ', maszyny ' + this.maszynka.NazwaMaszyny + ' została poprawnie zapisana!')
                 } catch (e) {
                     console.log(e)
                 }
@@ -237,14 +250,7 @@
         },
 
         watch: {
-            AW_Zrealizowane: function () {
-                if (this.AW_Zrealizowane === 'Zakończone') {
-                    this.AW_DataZakonczenia = moment().format('lll')
-                    this.viewDataZakonczenia = true;
-                } else {
-                    this.viewDataZakonczenia = false;
-                }
-            },
+
             DataTimeEnd() {
                 console.log("Zmiana")
             }
