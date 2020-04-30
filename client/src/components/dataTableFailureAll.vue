@@ -48,6 +48,7 @@
 
 <script>
     import FailureService from "../services/FailureService";
+    import {mapMutations} from "vuex";
 
     export default {
         name: "dataTableFailureAll",
@@ -104,13 +105,15 @@
         },
 
         methods: {
+            ...mapMutations(['setfailureEdit', 'setfailureCreate' ]),
+
            async  initialize (){
                this.failures = ((await FailureService.getAllFailure()).data);
             },
-            editItem(item) {
-                this.editedIndex = this.failures.indexOf(item)
-                this.editedItem = Object.assign({}, item)
-                this.dialog = true
+            async editItem(item) {
+                const ID_AWARIA = item.ID_AWARIA
+                this.setfailureEdit(ID_AWARIA)
+                await this.$router.push({name: 'editFailure', params: {ID_AWARIA: ID_AWARIA}})
             },
 
             deleteItem(item) {

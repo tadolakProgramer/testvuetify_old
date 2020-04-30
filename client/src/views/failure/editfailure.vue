@@ -1,6 +1,6 @@
 <template>
     <v-layout>
-        <v-flex xs2 sm8 offset-sm2>
+        <v-flex>
             <dialog-date-time></dialog-date-time>
             <template>
                 <v-row justify="center">
@@ -21,7 +21,7 @@
                     max-width="auto"
                     color="secondary"
             >
-                <v-card-title class="primary font-weight-bold headline justify-space-between">Nowa interwencja:
+                <v-card-title class="primary font-weight-bold headline justify-space-between">Edycja interwencja nr {{maszynka.ID_AWARIA}} maszyny:
                     {{maszynka.NazwaMaszyny}}
                     <span>{{dataGodzina}}
                         <v-tooltip bottom>
@@ -69,7 +69,7 @@
                 </v-card-text>
                 <hr>
                 <v-radio-group v-model="AW_Zrealizowane" @change="changeRadioGroup" row >Status awarii
-                    <v-radio :color="red" label="Zgłoszenie" value="Zgłoszenie"></v-radio>
+                    <v-radio color="red" label="Zgłoszenie" value="Zgłoszenie"></v-radio>
                     <v-radio color="orange" label="Oczekiwanie na części" value="Oczekiwanie na części"></v-radio>
                     <v-radio color="orange" label="Oczekiwanie na zatrzymanie"
                              value="Oczekiwanie na zatrzymanie"></v-radio>
@@ -99,7 +99,20 @@
                     </v-btn>
                 </v-card-actions>
             </v-card>
+            <v-row justify="center" class="mb-1"
+            >
+                <v-col md="3">
+            <failure-workers></failure-workers>
+                </v-col>
+                <v-col md="6">
+                    <failure-workers></failure-workers>
+                </v-col>
+                <v-col md="3">
+                    <failure-workers></failure-workers>
+                </v-col>
+            </v-row>
         </v-flex>
+
     </v-layout>
 </template>
 
@@ -110,10 +123,11 @@
     import store from "../../store/store";
     import DialogDateTime from "../../components/dialogDateTime";
     import {mapMutations, mapGetters} from "vuex";
+    import FailureWorkers from "../../components/failureWorkers";
 
 
     export default {
-        components: {DialogDateTime},
+        components: {FailureWorkers, DialogDateTime},
         props: {
             source: String,
         },
@@ -235,8 +249,8 @@
                 this.$root.$emit('openDialog', open);
             },
             async OpenDialogDateTimeEnd() {
-                await this.setTitleDialog('Usunięcie usterki')
-                await this.setDialogType('End')
+                await this.setTitleDialog('Usunięcie usterki');
+                await this.setDialogType('End');
                 const open = true
                 this.$root.$emit('openDialog', open);
             },
@@ -245,7 +259,7 @@
                 this.pageBack()
             },
             pageBack() {
-                this.$router.go(-1)
+                this.$router.push({name:'failure'})
             }
         },
 

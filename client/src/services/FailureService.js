@@ -28,5 +28,9 @@ export default {
     getFailureMachina(IDS){
         return Api().get('/getFailureMachine/',
             {params: IDS})
+    },
+
+    getAllWorkers(){
+      return Api().get('/getAllWorkers')
     }
 }
