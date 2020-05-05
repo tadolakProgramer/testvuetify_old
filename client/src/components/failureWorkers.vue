@@ -41,7 +41,9 @@
             ID:''
         },
         async created() {
+            const ID_AWARIA = this.$store.getters.getIdFailure;
             this.items = (await FailureService.getAllWorkers()).data
+            this.workers = (await FailureService.getWorkersFromAwariaPracownik({ID_AWARIA:ID_AWARIA})).data
         },
         watch: {
             workers: function () {

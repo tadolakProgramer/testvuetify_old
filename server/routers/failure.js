@@ -20,4 +20,6 @@ module.exports = (app) => {
     app.get('/getOneFailure', failureController.getOneFailure);
 
     app.get('/getAllWorkers', failureController.getAllWorkers);
+
+    app.get('/getWorkersFromAwariaPracownik', failureController.getWorkersFromAwariaPracownik);
 };

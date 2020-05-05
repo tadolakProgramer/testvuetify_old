@@ -32,5 +32,9 @@ export default {
 
     getAllWorkers(){
       return Api().get('/getAllWorkers')
+    },
+    getWorkersFromAwariaPracownik(ID_AWARIA) {
+        return Api().get('/getWorkersFromAwariaPracownik/',
+            {params: ID_AWARIA})
     }
 }

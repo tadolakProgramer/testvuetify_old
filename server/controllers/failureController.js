@@ -2,6 +2,7 @@ const vMaszyny = require('../models/v_maszyny');
 const awaria = require('../models/awarie');
 const listaAwarii = require('../models/listaAwarii')
 const workers = require('../models/workers')
+const failureWorkers = require('../models/awariaPracownik')
 
 module.exports = {
     async getListaMaszyn(req, res) {
@@ -133,6 +134,19 @@ module.exports = {
                 where:{PR_Aktywny :1 }
             })
                 .then(workers => res.send(workers))
+        }
+        catch (e) {
+            console.log(e)
+        }
+    },
+    async getWorkersFromAwariaPracownik (req, res) {
+        try{
+            console.log("IDDDD", req.query.ID_AWARIA)
+            const ID_AWARIA = req.query.ID_AWARIA
+
+            failureWorkers.findAll({
+                where: {AWPR_ID_AWARIA : ID_AWARIA}
+            }).then(failureWorkers => res.send(failureWorkers))
         }
         catch (e) {
             console.log(e)
