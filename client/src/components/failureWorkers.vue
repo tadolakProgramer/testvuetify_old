@@ -41,7 +41,7 @@
         name: "failureWorkers",
         data: () => ({
             workers: [],
-            addListWorkers: {},
+            addListWorkers: [],
             delListWorkers: [],
             ID_AWARIA:'',
             value: '',
@@ -49,7 +49,8 @@
             pr:[]
         }),
         return:{
-            ID:''
+            ID:'',
+            x:''
         },
         async created() {
             this.ID_AWARIA = this.getIdFailure();
@@ -74,6 +75,13 @@
                 for (let j=0; j < this.workers.length; j++){
                     this.addListWorkers[j] = await ({"AWPR_ID_PR": this.workers[j],
                     "AWPR_ID_AWARIA": this.ID_AWARIA})
+                }
+                try{
+                    const response = await FailureService.addWorkersToFailure(this.addListWorkers,{ID_AWARIA: this.ID_AWARIA})
+                    this.x = await response.data
+                }
+                catch (e) {
+                    console.log(e)
                 }
             }
         }

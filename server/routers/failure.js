@@ -22,4 +22,6 @@ module.exports = (app) => {
     app.get('/getAllWorkers', failureController.getAllWorkers);
 
     app.get('/getWorkersFromAwariaPracownik', failureController.getWorkersFromAwariaPracownik);
+
+    app.put('/addWorkersToFailure', failureController.putAddWorkersToFailure);
 };

@@ -33,5 +33,16 @@
         data: () => ({
             drawer: null,
         }),
+        methods: {
+            yourCallBackFunction () {
+                this.route.go(-1);
+            }
+        },
+        mounted () {
+            document.addEventListener("backbutton", this.yourCallBackFunction, false);
+        },
+        beforeDestroy () {
+            document.removeEventListener("backbutton", this.yourCallBackFunction);
+        }
     }
 </script>

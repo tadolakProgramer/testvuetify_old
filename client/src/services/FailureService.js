@@ -36,5 +36,9 @@ export default {
     getWorkersFromAwariaPracownik(ID_AWARIA) {
         return Api().get('/getWorkersFromAwariaPracownik/',
             {params: ID_AWARIA})
+    },
+    addWorkersToFailure(credential, ID_AWARIA){
+        return Api().put('/addWorkersToFailure', credential,
+            {params: ID_AWARIA});
     }
 }

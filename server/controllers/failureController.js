@@ -139,7 +139,7 @@ module.exports = {
             console.log(e)
         }
     },
-    async getWorkersFromAwariaPracownik (req, res) {
+    async getWorkersFromAwariaPracownik(req, res) {
         try{
             console.log("IDDDD", req.query.ID_AWARIA)
             const ID_AWARIA = req.query.ID_AWARIA
@@ -151,6 +151,17 @@ module.exports = {
         catch (e) {
             console.log(e)
         }
+    },
+    async putAddWorkersToFailure(req, res){
+        const wpis = req.body;
+        const AWPR_ID_AWARIA = req.body[0].AWPR_ID_AWARIA;
+        failureWorkers.destroy({
+            where:{
+                AWPR_ID_AWARIA:AWPR_ID_AWARIA
+            }
+        })
+            failureWorkers.bulkCreate(wpis).then(failureWorkers => res.send(failureWorkers)
+        )
     }
 
 };
