@@ -23,17 +23,27 @@
                 >(+{{ workers.length - 1 }} więcej)</span>
             </template>
         </v-select>
+        <v-card-actions>
+            <v-btn
+                color="orange"
+                @click="saveWorkers">Zapisz
+            </v-btn>
+        </v-card-actions>
     </v-card>
 
 </template>
 
 <script>
     import FailureService from "../services/FailureService";
+    import {mapGetters} from "vuex";
 
     export default {
         name: "failureWorkers",
         data: () => ({
             workers: [],
+            addListWorkers: {},
+            delListWorkers: [],
+            ID_AWARIA:'',
             value: '',
             items: [],
             pr:[]
@@ -42,18 +52,29 @@
             ID:''
         },
         async created() {
-            const ID_AWARIA = this.$store.getters.getIdFailure;
+            this.ID_AWARIA = this.getIdFailure();
             this.items = (await FailureService.getAllWorkers()).data
-            const pr = (await FailureService.getWorkersFromAwariaPracownik({ID_AWARIA:ID_AWARIA})).data
+            const pr = (await FailureService.getWorkersFromAwariaPracownik({ID_AWARIA:this.ID_AWARIA})).data
             for (let i=0; i < pr.length; i++ ){
-                console.log("AWPR_ID_PR:" , pr[i].AWPR_ID_PR)
                 this.workers.push(pr[i].AWPR_ID_PR)
             }
         },
+
         watch: {
             workers: function () {
                 //let i = this.items.length
                 this.ID = this.workers.length
+            }
+        },
+        methods: {
+            ...mapGetters([
+                'getIdFailure']),
+
+            async saveWorkers() {
+                for (let j=0; j < this.workers.length; j++){
+                    this.addListWorkers[j] = await ({"AWPR_ID_PR": this.workers[j],
+                    "AWPR_ID_AWARIA": this.ID_AWARIA})
+                }
             }
         }
     }
