@@ -33,9 +33,10 @@
     export default {
         name: "failureWorkers",
         data: () => ({
-            workers: '',
+            workers: [],
             value: '',
-            items: []
+            items: [],
+            pr:[]
         }),
         return:{
             ID:''
@@ -43,7 +44,11 @@
         async created() {
             const ID_AWARIA = this.$store.getters.getIdFailure;
             this.items = (await FailureService.getAllWorkers()).data
-            this.workers = (await FailureService.getWorkersFromAwariaPracownik({ID_AWARIA:ID_AWARIA})).data
+            const pr = (await FailureService.getWorkersFromAwariaPracownik({ID_AWARIA:ID_AWARIA})).data
+            for (let i=0; i < pr.length; i++ ){
+                console.log("AWPR_ID_PR:" , pr[i].AWPR_ID_PR)
+                this.workers.push(pr[i].AWPR_ID_PR)
+            }
         },
         watch: {
             workers: function () {
