@@ -38,8 +38,8 @@
                     </span>
                 </v-card-title>
                 <v-card-subtitle class="pt-10 font-weight-bold">
-                    <span>{{maszynka.NazwaTypu}}<br></span>
-                    <span>{{maszynka.NazwaHali}}</span>
+                    <span>{{ maszynka.NazwaTypu }}  </span>
+                    <span>{{ maszynka.NazwaHali }}</span>
 
                 </v-card-subtitle>
                 <v-card-text>
