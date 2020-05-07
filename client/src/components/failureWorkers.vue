@@ -1,5 +1,4 @@
 <template>
-
     <v-card class="md-2 my-1"
             width="auto"
             color="secondary">
