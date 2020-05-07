@@ -27,6 +27,7 @@
             <v-btn
                 color="orange"
                 @click="saveWorkers">Zapisz
+                <v-icon right>mdi-content-save</v-icon>
             </v-btn>
         </v-card-actions>
     </v-card>

@@ -12,7 +12,9 @@
                     hint="Wpisz swoje Login"
                     label="Login"
                     outlined
-            ></v-text-field>
+            >
+
+            </v-text-field>
             <v-text-field
                     v-model="US_PASS"
                     :type="show1 ? 'text' : 'password'"

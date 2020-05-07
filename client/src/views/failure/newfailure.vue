@@ -93,10 +93,12 @@
                 <v-card-actions>
                     <v-btn color="orange"
                            @click="AddNewFailure">Zapisz
+                        <v-icon right>mdi-content-save</v-icon>
                     </v-btn>
                     <v-btn color="orange"
                            @click="pageBack"
                     >Anuluj
+                        <v-icon right>mdi-cancel</v-icon>
                     </v-btn>
                 </v-card-actions>
             </v-card>
