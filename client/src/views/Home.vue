@@ -1,38 +1,21 @@
 <template>
-  <v-layout>
-    <v-flex xs12 sm10 offset-sm1>
-      <v-card>
-        <v-img
-                class="white--text"
-                height="200px"
-                src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-        >
-          <v-container  fill-height fluid>
-            <v-layout fill-height>
-              <v-flex xs12 align-end flexbox>
-                <span class="headline">Top 10 Australian beaches</span>
-              </v-flex>
-            </v-layout>
-          </v-container>
-        </v-img>
-        <v-card-title>
-          <div>
-            <span class="grey--text">Number 10</span><br>
-            <span>Whitehaven Beach</span><br>
-            <span>Whitsunday Island, Whitsunday Islands</span>
-          </div>
-        </v-card-title>
-        <v-card-actions>
-          <v-btn  color="orange">Share</v-btn>
-          <v-btn  color="orange">Explore</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-flex>
-  </v-layout>
+    <v-row class="masthead scroll-off-screen">
+        <v-col class="text-center" cols="12">
+            <div class="my-2">
+                <p class="text-center display-2 primary--text">Dział Utrzymania Ruchu Folplast<br>
+                    zaprasza</p>
+            </div>
+            <div class="my-2">
+                <v-btn x-large color="success"
+                :to="{
+                    name: 'login'
+                    }">Przejdź do strony logowania</v-btn>
+            </div>
+        </v-col>
+    </v-row>
 </template>
 
 content_copy
-
 
 <script>
 
@@ -41,4 +24,18 @@ content_copy
 
     }
 </script>
+
+<style scoped>
+    .masthead {
+        min-height: 72rem;
+        width: auto;
+        height: auto;
+        padding-top: 18rem;
+        background-size: cover;
+        background-image:url('../assets/MG_8241_1.jpg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+</style>
 

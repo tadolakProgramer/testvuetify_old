@@ -28,3 +28,4 @@ yarn-error.log*
 /server/database/databases.js
 /client/src/assets/logofolplast.png
 /node_modules/
+/client/vue.config.js

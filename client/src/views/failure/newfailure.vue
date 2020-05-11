@@ -70,7 +70,7 @@
                 </v-card-text>
                 <hr>
                 <v-radio-group v-model="AW_Zrealizowane" row>Status awarii
-                    <v-radio :color="red" label="Zgłoszenie" value="Zgłoszenie"></v-radio>
+                    <v-radio color="red" label="Zgłoszenie" value="Zgłoszenie"></v-radio>
                     <v-radio color="orange" label="Oczekiwanie na części" value="Oczekiwanie na części"></v-radio>
                     <v-radio color="orange" label="Oczekiwanie na zatrzymanie"
                              value="Oczekiwanie na zatrzymanie"></v-radio>
@@ -189,6 +189,9 @@
                 'getDateTimeEnd', 'getDataTimeStart']),
 
             async AddNewFailure() {
+                if (this.AW_OpisAwarii.isError){
+                    console.log("error")
+                }
                 try {
                     const response = await FailureService.addNewFailure({
                         ID_AWARIA: this.ID_AWARIA,

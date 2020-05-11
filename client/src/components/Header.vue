@@ -15,7 +15,7 @@
             <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
             <v-toolbar-items>
                 <div>
-                    <v-img src="../assets/logo.png" alt=""></v-img>
+                    <v-img src="../assets/logofolplast.png" alt=""></v-img>
                 </div>
             </v-toolbar-items>
 
@@ -29,6 +29,7 @@
             <v-btn
                     v-if="automatyk"
                     depressed
+                    disabled
                     color="red"
                     :to="{
                     name: 'newfailure'

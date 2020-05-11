@@ -120,7 +120,7 @@
     .masthead {
         min-height: 72rem;
         width: auto;
-        height: auto%;
+        height: auto;
         padding-top: 18rem;
         background-size: cover;
         background-image:url('../assets/MG_8241_1.jpg');
