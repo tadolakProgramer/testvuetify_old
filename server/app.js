@@ -5,7 +5,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 
 const server = require('http').createServer();
-const port = process.env.PORT || 803;
+const port = process.env.PORT || 3000;
 
 const app = express();
 app.use(morgan('combined'));
