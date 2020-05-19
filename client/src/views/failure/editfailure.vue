@@ -106,12 +106,12 @@
                 <v-col md="3">
             <failure-workers></failure-workers>
                 </v-col>
-                <v-col md="6">
+               <!-- <v-col md="6">
                     <failure-workers></failure-workers>
                 </v-col>
                 <v-col md="3">
                     <failure-workers></failure-workers>
-                </v-col>
+                </v-col>-->
             </v-row>
         </v-flex>
 
