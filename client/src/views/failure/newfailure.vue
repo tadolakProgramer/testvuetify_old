@@ -11,7 +11,7 @@
                             </v-card-text>
                             <v-card-actions>
                                 <v-spacer></v-spacer>
-                                <v-btn color="green darken-1"  @click="dialog = false">Szczeguły</v-btn>
+                                <v-btn color="green darken-1"  @click="goToEditFailure">Szczeguły</v-btn>
                                 <v-btn color="green darken-1"  @click="closeNewFailure">OK</v-btn>
                             </v-card-actions>
                         </v-card>
@@ -24,7 +24,7 @@
             >
                 <v-card-title class="primary font-weight-bold headline justify-space-between">Nowa interwencja:
                     {{maszynka.NazwaMaszyny}}
-                    <span>{{dataGodzina}}
+                    <span>{{dataGodzinaView}}
                         <v-tooltip bottom>
                             <template v-slot:activator="{on}">
                         <v-btn x-small
@@ -75,7 +75,7 @@
                     <v-radio color="orange" label="Oczekiwanie na zatrzymanie"
                              value="Oczekiwanie na zatrzymanie"></v-radio>
                     <v-radio color="green" label="Zakończone" value="Zakończone"></v-radio>
-                    <div v-if="viewDataZakonczenia">{{AW_DataZakonczenia}}
+                    <div v-if="viewDataZakonczenia">{{AW_DataZakonczeniaView}}
                         <v-tooltip bottom>
                             <template v-slot:activator="{on}">
                                 <v-btn x-small
@@ -138,6 +138,8 @@
                 AW_Zrealizowane: 'Zgłoszenie',
                 AW_Dzialania: '',
                 AW_DataZakonczenia: '',
+                AW_DataZakonczeniaView: '',
+                dataGodzinaView:'',
                 NowaAwaria: {},
                 DataTimeEnd: '',
                 rules: {
@@ -149,6 +151,7 @@
 
         created() {
             moment.locale('pl');
+            this.dataGodzinaView = moment().format('lll');
             this.dataGodzina = moment().format('lll');
 
         },
@@ -170,11 +173,13 @@
 
                 //Get date from dialogDateTime
                 this.$root.$on('dataStart', (DataCzas) => {
-                    this.dataGodzina = moment(DataCzas).format('lll');
+                    this.dataGodzinaView = moment(DataCzas).format('lll');
+                    this.dataGodzina = moment(DataCzas).format("MM DD YYYY hh:mm:ss", true);
                 })
 
                 this.$root.$on('dataEnd', (DataCzas) => {
-                    this.AW_DataZakonczenia = moment(DataCzas).format('lll');
+                    this.AW_DataZakonczenia = moment(DataCzas).format("MM DD YYYY hh:mm:ss", true);
+                    this.AW_DataZakonczeniaView = moment(DataCzas).format('lll');
                 })
             } catch (e) {
                 console.log(e)
@@ -196,11 +201,12 @@
                     const response = await FailureService.addNewFailure({
                         ID_AWARIA: this.ID_AWARIA,
                         Maszyna_ID: this.maszynka.ID_Maszyna,
+                        AW_DataZgloszenia: (this.dataGodzina),
                         AW_Zglaszajacy_ID: this.user.ID_USER,
                         AW_OpisAwarii: this.AW_OpisAwarii,
                         AW_Dzialania: this.AW_Dzialania,
                         AW_Zrealizowane: this.AW_Zrealizowane,
-                        AW_DataZakonczenia: moment(this.AW_DataZakonczenia.toISOString)
+                        AW_DataZakonczenia:(this.AW_DataZakonczenia)
                     })
                     this.NowaAwaria = await response.data;
                     this.ID_AWARIA = this.NowaAwaria.ID_AWARIA
@@ -227,6 +233,14 @@
                 this.dialog = false
                 this.pageBack()
             },
+
+            async goToEditFailure() {
+                this.dialog = false
+                const ID_AWARIA = this.NowaAwaria.ID_AWARIA
+                this.setfailureEdit(ID_AWARIA)
+                await this.$router.push({name: 'editFailure', params: {ID_AWARIA: ID_AWARIA}})
+            },
+
             pageBack() {
                 this.$router.go(-1)
             }
@@ -235,7 +249,8 @@
         watch: {
             AW_Zrealizowane: function () {
                 if (this.AW_Zrealizowane === 'Zakończone') {
-                    this.AW_DataZakonczenia = moment().format('lll')
+                    this.AW_DataZakonczenia = moment().format("MM DD YYYY hh:mm:ss", true);
+                    this.AW_DataZakonczeniaView = moment().format('lll')
                     this.viewDataZakonczenia = true;
                 } else {
                     this.viewDataZakonczenia = false;

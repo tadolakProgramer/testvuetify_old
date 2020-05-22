@@ -23,7 +23,7 @@
             >
                 <v-card-title class="primary font-weight-bold headline justify-space-between">Edycja interwencja nr {{maszynka.ID_AWARIA}} maszyny:
                     {{maszynka.NazwaMaszyny}}
-                    <span>{{dataGodzina}}
+                    <span>{{dataGodzinaView}}
                         <v-tooltip bottom>
                             <template v-slot:activator="{on}">
                         <v-btn x-small
@@ -74,7 +74,7 @@
                     <v-radio color="orange" label="Oczekiwanie na zatrzymanie"
                              value="Oczekiwanie na zatrzymanie"></v-radio>
                     <v-radio color="green" label="Zakończone" value="Zakończone" ></v-radio>
-                    <div v-if="viewDataZakonczenia">{{AW_DataZakonczenia}}
+                    <div v-if="viewDataZakonczenia">{{AW_DataZakonczeniaView}}
                         <v-tooltip bottom>
                             <template v-slot:activator="{on}">
                                 <v-btn x-small
@@ -151,6 +151,8 @@
                 AW_Zrealizowane: 'Zgłoszenie',
                 AW_Dzialania: '',
                 AW_DataZakonczenia: '',
+                AW_DataZakonczeniaView: '',
+                dataGodzinaView:'',
                 NowaAwaria: {},
                 DataTimeEnd: '',
                 rules: {
@@ -178,14 +180,15 @@
             try {
                 this.maszynka = (await FailureService.getOneFailure(this.$route.params)).data;
                 this.ID_AWARIA = this.maszynka.ID_AWARIA
-                this.AW_DataZgloszenia = this.maszynka.AW_DataZgloszenia
-                this.dataGodzina = moment(this.AW_DataZgloszenia).format('lll')
+                this.dataGodzina = this.maszynka.AW_DataZgloszenia
+                this.dataGodzinaView = moment(this.maszynka.AW_DataZgloszenia).format('lll')
                 this.AW_OpisAwarii = this.maszynka.AW_OpisAwarii
                 this.AW_Zrealizowane = this.maszynka.AW_Zrealizowane
                 if (this.AW_Zrealizowane === 'Zakończone'){
                     this.changeRadioGroup()
                 }
                 this.AW_Dzialania = this.maszynka.AW_Dzialania
+                this.AW_DataZakonczeniaView = moment(this.maszynka.AW_DataZakonczenia).format('lll')
                 this.AW_DataZakonczenia = this.maszynka.AW_DataZakonczenia
 
                 //Get User login to system
@@ -193,11 +196,13 @@
 
                 //Get date from dialogDateTime
                 this.$root.$on('dataStart', (DataCzas) => {
-                    this.dataGodzina = moment(DataCzas).format('lll');
+                    this.dataGodzinaView = moment(DataCzas).format('lll');
+                    this.dataGodzina = moment(DataCzas).format("MM DD YYYY hh:mm:ss", true);
                 })
 
                 this.$root.$on('dataEnd', (DataCzas) => {
-                    this.AW_DataZakonczenia = moment(DataCzas).format('lll');
+                    this.AW_DataZakonczenia = moment(DataCzas).format("MM DD YYYY hh:mm:ss", true);
+                    this.AW_DataZakonczeniaView = moment(DataCzas).format('lll');
                 })
             } catch (e) {
                 console.log(e)
@@ -218,7 +223,8 @@
                         this.AW_DataZakonczenia = await moment(this.maszynka.AW_DataZakonczenia).format('lll')
                     }
                     else {
-                        this.AW_DataZakonczenia = moment().format('lll')
+                        this.AW_DataZakonczenia = moment().format("MM DD YYYY hh:mm:ss", true);
+                        this.AW_DataZakonczeniaView = moment().format('lll')
                     }
                 } else {
                     this.viewDataZakonczenia = false;
@@ -230,11 +236,12 @@
                     const response = await FailureService.addNewFailure({
                         ID_AWARIA: this.ID_AWARIA,
                         Maszyna_ID: this.maszynka.ID_Maszyna,
+                        AW_DataZgloszenia: this.dataGodzina,
                         AW_Zglaszajacy_ID: this.user.ID_USER,
                         AW_OpisAwarii: this.AW_OpisAwarii,
                         AW_Dzialania: this.AW_Dzialania,
                         AW_Zrealizowane: this.AW_Zrealizowane,
-                        AW_DataZakonczenia: moment(this.AW_DataZakonczenia.toISOString)
+                        AW_DataZakonczenia:(this.AW_DataZakonczenia)
                     })
                     this.NowaAwaria = await response.data;
                     this.ID_AWARIA = this.NowaAwaria.ID_AWARIA
