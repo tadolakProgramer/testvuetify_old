@@ -40,5 +40,13 @@ export default {
     addWorkersToFailure(credential, ID_AWARIA){
         return Api().put('/addWorkersToFailure', credential,
             {params: ID_AWARIA});
+    },
+    getPartsFromFailureParts(ID_AWARIA) {
+        return Api().get('/getPartsFromFailureParts',
+            {params: ID_AWARIA})
+    },
+    postAddPartToFailure(credential ){
+        return Api().post('/failure/addPartToFailutre', credential)
     }
+
 }

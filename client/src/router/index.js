@@ -12,6 +12,7 @@ import notification from "../views/notification/notification";
 import newnotification from "../views/notification/newnotification";
 import AllfailureHistory from "../views/failure/AllfailureHistory";
 import editfailure from "../views/failure/editfailure";
+import allParts from "../views/parts/allParts";
 
 
 import IsLogin from './isLogin'
@@ -81,6 +82,12 @@ const routes = [
         path: '/failure/edit/:ID_AWARIA',
         name: 'editFailure',
         component: editfailure,
+        beforeEnter: IsLogin
+    },
+    {
+        path: '/failure/edit/parts',
+        name: 'allParts',
+        component: allParts,
         beforeEnter: IsLogin
     },
 ]

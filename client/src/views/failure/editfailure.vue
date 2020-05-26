@@ -106,10 +106,10 @@
                 <v-col md="3">
             <failure-workers></failure-workers>
                 </v-col>
-               <!-- <v-col md="6">
-                    <failure-workers></failure-workers>
+               <v-col md="3">
+                    <failure-parts></failure-parts>
                 </v-col>
-                <v-col md="3">
+                <!-- <v-col md="3">
                     <failure-workers></failure-workers>
                 </v-col>-->
             </v-row>
@@ -126,10 +126,11 @@
     import DialogDateTime from "../../components/dialogDateTime";
     import {mapMutations, mapGetters} from "vuex";
     import FailureWorkers from "../../components/failureWorkers";
+    import FailureParts from "../../components/failureParts";
 
 
     export default {
-        components: {FailureWorkers, DialogDateTime},
+        components: {FailureParts, FailureWorkers, DialogDateTime},
         props: {
             source: String,
         },

@@ -3,6 +3,8 @@ const awaria = require('../models/awarie');
 const listaAwarii = require('../models/listaAwarii')
 const workers = require('../models/workers')
 const failureWorkers = require('../models/awariaPracownik')
+const failureParts = require('../models/v_failureParts')
+const failurePart = require('../models/failurePart')
 
 module.exports = {
     async getListaMaszyn(req, res) {
@@ -142,9 +144,7 @@ module.exports = {
     },
     async getWorkersFromAwariaPracownik(req, res) {
         try{
-            console.log("IDDDD", req.query.ID_AWARIA)
             const ID_AWARIA = req.query.ID_AWARIA
-
             failureWorkers.findAll({
                 where: {AWPR_ID_AWARIA : ID_AWARIA}
             }).then(failureWorkers => res.send(failureWorkers))
@@ -163,6 +163,24 @@ module.exports = {
         })
             failureWorkers.bulkCreate(wpis).then(failureWorkers => res.send(failureWorkers)
         )
-    }
-
+    },
+    async getPartsFromFailureParts(req, res) {
+        try {
+            const ID_AWARIA = req.query.ID_AWARIA
+            failureParts.findAll({
+                where: {AWCZ_AW_ID: ID_AWARIA}
+            }).then(failureParts => res.send(failureParts))
+        } catch (e) {
+            console.log(e)
+        }
+    },
+    async postAddPartToFailure(req, res){
+        try {
+            const partToFailure = req.body;
+            failurePart.create(partToFailure)
+                .then(failurePart => res.send(failurePart))
+        }catch (e) {
+            console.log(e)
+        }
+    },
 };
