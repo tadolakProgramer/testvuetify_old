@@ -1,5 +1,5 @@
 const failureController = require('../controllers/failureController');
-const isAuth = require('../policies/isAuthenticated')
+
 
 module.exports = (app) => {
 

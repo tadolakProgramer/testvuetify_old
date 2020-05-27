@@ -37,6 +37,17 @@
                 Nowa awaria
             </v-btn>
             <div class="mx-2">
+                <v-btn mx="11"
+                       v-if="automatyk"
+                       depressed
+                       color="blue"
+                       :to="{
+                    name: 'failure'
+                    }">
+                    Lista maszyn
+                </v-btn>
+            </div>
+            <div class="mx-2">
             <v-btn mx="11"
                     v-if="automatyk"
                     depressed
@@ -106,6 +117,9 @@
                 this.$router.push({
                     name: 'Home'
                 })
+            },
+            goToFailure(){
+                this.$router.push({name: 'failure'})
             }
         },
         async mounted() {

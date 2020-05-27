@@ -74,7 +74,7 @@ module.exports = {
     },
 
     async putNewFailure(req, res) {
-        try {
+        try { console.log(req.body)
             console.log("Awaria: ",req.body)
             if (req.body.ID_AWARIA === 0){
                 //Nowa awaria
@@ -84,6 +84,7 @@ module.exports = {
             }else{
                 //Edycja awarii
                 const ID_Awaria = req.body.ID_AWARIA
+
                 await awaria.update({
                     Maszyna_ID: req.body.ID_Maszyna,
                         AW_DataZgloszenia: req.body.AW_DataZgloszenia,
