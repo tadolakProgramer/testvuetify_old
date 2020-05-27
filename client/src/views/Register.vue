@@ -55,7 +55,7 @@
                                     :type="'password'"
                                     :rules="[rules.required, rules.confirmPass]"
                                     :error-messages="error"
-                                    label="Powturz hasło"
+                                    label="Powtórz hasło"
                             ></v-text-field>
                         </v-col>
                     </v-row>

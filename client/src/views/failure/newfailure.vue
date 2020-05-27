@@ -7,11 +7,11 @@
                     <v-dialog v-model="dialog" persistent max-width="390">
                         <v-card>
                             <v-card-title class="headline primary">Info</v-card-title>
-                            <v-card-text>{{dialogText}} <br>Możesz dopisać dodadtke informacje klikając na przycsik szczeguły
+                            <v-card-text>{{dialogText}} <br>Możesz dopisać dodatkowe informacje klikając na przycisk szczegóły
                             </v-card-text>
                             <v-card-actions>
                                 <v-spacer></v-spacer>
-                                <v-btn color="green darken-1"  @click="goToEditFailure">Szczeguły</v-btn>
+                                <v-btn color="green darken-1"  @click="goToEditFailure">Szczegóły</v-btn>
                                 <v-btn color="green darken-1"  @click="closeNewFailure">OK</v-btn>
                             </v-card-actions>
                         </v-card>

@@ -66,6 +66,7 @@
                 {text: 'Data zgłoszenia', width: "12%", value: 'DataAW'},
                 {text: 'Opis awarii', width: "36%", value: 'AW_OpisAwarii'},
                 {text: 'Opis działania', width: "36%", value: 'AW_Dzialania'},
+                {text: 'Osoba', width:"10%", value: 'US_Name'},
                 {text: 'Status', width: "12%", value: 'AW_Zrealizowane'},
                 {text: 'Actions', width: "2%", value: 'actions', sortable: false},
             ],

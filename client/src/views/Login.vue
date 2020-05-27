@@ -9,7 +9,7 @@
         >
             <v-text-field
                     v-model="US_LOGIN"
-                    hint="Wpisz swoje Login"
+                    hint="Wpisz swój Login"
                     label="Login"
                     outlined
             >

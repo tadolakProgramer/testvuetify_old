@@ -66,6 +66,7 @@
                 {text: 'Data zgłoszenia', value: 'DataAW'},
                 {text: 'Maszyna', value: 'NazwaMaszyny'},
                 {text: 'Opis awarii', value: 'AW_OpisAwarii'},
+                {text: 'Osoba', width:"10%", value: 'US_Name'},
                 {text: 'Opis działania', value: 'AW_Dzialania'},
                 {text: 'Status', value: 'AW_Zrealizowane'},
                 {text: 'Actions', value: 'actions', sortable: false},

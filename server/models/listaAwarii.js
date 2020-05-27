@@ -12,6 +12,8 @@ const Listaawarii = sequelize.define('LISTAAWARII', {
         type: Sequelize.STRING},
     ID_Maszyna: {
         type: Sequelize.INTEGER},
+    ID_USER: {
+        type: Sequelize.INTEGER},
     NazwaMaszyny: {
         type: Sequelize.STRING },
     NazwaTypu: {
@@ -21,6 +23,11 @@ const Listaawarii = sequelize.define('LISTAAWARII', {
     AW_OpisAwarii: {
         type: Sequelize.STRING },
     AW_Dzialania: {
+        type: Sequelize.STRING
+    },
+    US_Name: {
+        type: Sequelize.STRING },
+    US_SUER_NAME: {
         type: Sequelize.STRING
     },
     AW_Zrealizowane: {

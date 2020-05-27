@@ -27,6 +27,7 @@
                         <v-tooltip bottom>
                             <template v-slot:activator="{on}">
                         <v-btn x-small
+                               :disabled="disabledEdit"
                                fab small
                                v-on="on"
                                @click=OpenDialogDateTime()>
@@ -45,6 +46,7 @@
                 <v-card-text>
                     <v-textarea
                             v-model="AW_OpisAwarii"
+                            :disabled="disabledEdit"
                             background-color="white"
                             color="black"
                             label="Opisz awarię"
@@ -56,6 +58,7 @@
                     ></v-textarea>
                     <v-textarea
                             v-model="AW_Dzialania"
+                            :disabled="disabledEdit"
                             background-color="white"
                             color="black"
                             label="Opisz jakie działania zostały podjete aby usunąć usterkę"
@@ -68,7 +71,9 @@
                     <span>Zgłaszający: {{user.US_Name}} {{user.US_SUER_NAME}} {{user.US_PROFESJA}}</span>
                 </v-card-text>
                 <hr>
-                <v-radio-group v-model="AW_Zrealizowane" @change="changeRadioGroup" row >Status awarii
+                <v-radio-group v-model="AW_Zrealizowane" @change="changeRadioGroup" row
+                               :disabled="disabledEdit"
+                >Status awarii
                     <v-radio color="red" label="Zgłoszenie" value="Zgłoszenie"></v-radio>
                     <v-radio color="orange" label="Oczekiwanie na części" value="Oczekiwanie na części"></v-radio>
                     <v-radio color="orange" label="Oczekiwanie na zatrzymanie"
@@ -91,6 +96,7 @@
 
                 <v-card-actions>
                     <v-btn color="orange"
+                           :disabled="disabledEdit"
                            @click="AddNewFailure">Zapisz
                         <v-icon right>mdi-content-save</v-icon>
                     </v-btn>
@@ -137,6 +143,7 @@
         data() {
             return {
                 dialog: '',
+                disabledEdit: false,
                 dialogText: '',
                 maszynka: '',
                 newFailure: '',
@@ -194,6 +201,12 @@
 
                 //Get User login to system
                 this.user = store.getters.user;
+                if (this.user.ID_USER === this.maszynka.ID_USER){
+                    this.disabledEdit = false;
+                }
+                else{
+                    this.disabledEdit = true;
+                }
 
                 //Get date from dialogDateTime
                 this.$root.$on('dataStart', (DataCzas) => {
