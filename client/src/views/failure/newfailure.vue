@@ -174,11 +174,11 @@
                 //Get date from dialogDateTime
                 this.$root.$on('dataStart', (DataCzas) => {
                     this.dataGodzinaView = moment(DataCzas).format('lll');
-                    this.dataGodzina = moment(DataCzas).format("MM DD YYYY hh:mm:ss", true);
+                    this.dataGodzina = moment(DataCzas).format("MM DD YYYY HH:mm:ss", true);
                 })
 
                 this.$root.$on('dataEnd', (DataCzas) => {
-                    this.AW_DataZakonczenia = moment(DataCzas).format("MM DD YYYY hh:mm:ss", true);
+                    this.AW_DataZakonczenia = moment(DataCzas).format("MM DD YYYY HH:mm:ss", true);
                     this.AW_DataZakonczeniaView = moment(DataCzas).format('lll');
                 })
             } catch (e) {
@@ -249,7 +249,7 @@
         watch: {
             AW_Zrealizowane: function () {
                 if (this.AW_Zrealizowane === 'Zakończone') {
-                    this.AW_DataZakonczenia = moment().format("MM DD YYYY hh:mm:ss", true);
+                    this.AW_DataZakonczenia = moment().format("MM DD YYYY HH:mm:ss", true);
                     this.AW_DataZakonczeniaView = moment().format('lll')
                     this.viewDataZakonczenia = true;
                 } else {

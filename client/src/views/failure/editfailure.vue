@@ -68,7 +68,7 @@
                             outlined
                             rows="3"
                     ></v-textarea>
-                    <span>Zgłaszający: {{user.US_Name}} {{user.US_SUER_NAME}} {{user.US_PROFESJA}}</span>
+                    <span>Zgłaszający: {{US_Name}} {{US_SUER_NAME}}</span>
                 </v-card-text>
                 <hr>
                 <v-radio-group v-model="AW_Zrealizowane" @change="changeRadioGroup" row
@@ -154,6 +154,8 @@
                 ID_AWARIA: 0,
                 AW_DataZgloszenia: '',
                 Maszyna_ID: '',
+                US_Name:'',
+                US_SUER_NAME:'',
                 AW_Zglaszajacy_ID: '',
                 AW_OpisAwarii: '',
                 AW_Zrealizowane: 'Zgłoszenie',
@@ -192,6 +194,8 @@
                 this.dataGodzinaView = moment(this.maszynka.AW_DataZgloszenia).format('lll')
                 this.AW_OpisAwarii = this.maszynka.AW_OpisAwarii
                 this.AW_Zrealizowane = this.maszynka.AW_Zrealizowane
+                this.US_Name = this.maszynka.US_Name
+                this.US_SUER_NAME = this.maszynka.US_SUER_NAME
                 if (this.AW_Zrealizowane === 'Zakończone'){
                     this.changeRadioGroup()
                 }
@@ -211,11 +215,11 @@
                 //Get date from dialogDateTime
                 this.$root.$on('dataStart', (DataCzas) => {
                     this.dataGodzinaView = moment(DataCzas).format('lll');
-                    this.dataGodzina = moment(DataCzas).format("MM DD YYYY hh:mm:ss", true);
+                    this.dataGodzina = moment(DataCzas).format("MM DD YYYY HH:mm:ss", true);
                 })
 
                 this.$root.$on('dataEnd', (DataCzas) => {
-                    this.AW_DataZakonczenia = moment(DataCzas).format("MM DD YYYY hh:mm:ss", true);
+                    this.AW_DataZakonczenia = moment(DataCzas).format("MM DD YYYY HH:mm:ss", true);
                     this.AW_DataZakonczeniaView = moment(DataCzas).format('lll');
                 })
             } catch (e) {
@@ -237,7 +241,7 @@
                         this.AW_DataZakonczenia = await moment(this.maszynka.AW_DataZakonczenia).format('lll')
                     }
                     else {
-                        this.AW_DataZakonczenia = moment().format("MM DD YYYY hh:mm:ss", true);
+                        this.AW_DataZakonczenia = moment().format("MM DD YYYY HH:mm:ss", true);
                         this.AW_DataZakonczeniaView = moment().format('lll')
                     }
                 } else {
