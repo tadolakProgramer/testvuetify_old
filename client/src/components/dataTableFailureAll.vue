@@ -3,21 +3,18 @@
             :headers="headers"
             :items="failures"
             sort-by="DataAW"
+            sort-desc="true"
             class="elevation-1"
             :search="search"
             group-by="AW_Zrealizowane"
     >
         <template v-slot:top>
             <v-toolbar  color="secondary">
-
                     <v-text-field
                             v-model="search"
                             append-icon="mdi-magnify"
                             label="Szukaj"
-
-
                     ></v-text-field>
-
             </v-toolbar>
         </template>
         <template v-slot:item.actions="{ item }">
@@ -27,12 +24,6 @@
                     @click="editItem(item)"
             >
                 mdi-pencil
-            </v-icon>
-            <v-icon
-                    small
-                    @click="deleteItem(item)"
-            >
-                mdi-delete
             </v-icon>
         </template>
 
@@ -66,10 +57,11 @@
                 {text: 'Data zgłoszenia', value: 'DataAW'},
                 {text: 'Maszyna', value: 'NazwaMaszyny'},
                 {text: 'Opis awarii', value: 'AW_OpisAwarii'},
-                {text: 'Osoba', width:"10%", value: 'US_Name'},
                 {text: 'Opis działania', value: 'AW_Dzialania'},
+                {text: 'Typ', value: 'AW_Typ'},
+                {text: 'Osoba', width:"10%", value: 'US_Name'},
                 {text: 'Status', value: 'AW_Zrealizowane'},
-                {text: 'Actions', value: 'actions', sortable: false},
+                {text: 'Akcje', value: 'actions', sortable: false},
             ],
             failures: [],
             editedIndex: -1,
@@ -88,7 +80,6 @@
                 protein: 0,
             },
         }),
-
         computed: {
             formTitle() {
                 return this.editedIndex === -1 ? 'New Item' : 'Edit Item'

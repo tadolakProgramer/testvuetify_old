@@ -28,6 +28,10 @@ const Awarie = sequelize.define('AWARIE', {
     type: Sequelize.STRING(250),
     allowNull: true
   },
+    AW_Typ: {
+        type: Sequelize.STRING(1),
+        allowNull: true
+    },
   AW_Zrealizowane: {
     type: Sequelize.STRING(25),
     allowNull: true

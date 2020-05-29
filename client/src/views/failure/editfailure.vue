@@ -38,10 +38,13 @@
                         </v-tooltip>
                     </span>
                 </v-card-title>
-                <v-card-subtitle class="pt-10 font-weight-bold">
-                    <span>{{ maszynka.NazwaTypu }}  </span>
-                    <span>{{ maszynka.NazwaHali }}</span>
-
+                <v-card-subtitle>
+                    <div class=" d-flex justify-space-between"> {{maszynka.NazwaTypu}}   {{maszynka.NazwaHali}}
+                        <v-radio-group v-model="AW_Typ" row dense pa="0" ma="0">Typ awarii
+                            <v-radio color="green" label="Elektroniczna" value="A"></v-radio>
+                            <v-radio color="blue" label="Mechaniczna" value="M"></v-radio>
+                        </v-radio-group>
+                    </div>
                 </v-card-subtitle>
                 <v-card-text>
                     <v-textarea
@@ -54,7 +57,7 @@
                             :counter="25"
                             :rules="[rules.required, rules.min]"
                             outlined
-                            rows="3"
+                            rows="2"
                     ></v-textarea>
                     <v-textarea
                             v-model="AW_Dzialania"
@@ -66,7 +69,7 @@
                             :counter="25"
                             :rules="[rules.required, rules.min]"
                             outlined
-                            rows="3"
+                            rows="2"
                     ></v-textarea>
                     <span>Zgłaszający: {{US_Name}} {{US_SUER_NAME}}</span>
                 </v-card-text>
@@ -104,6 +107,11 @@
                            @click="pageBack"
                     >Anuluj
                         <v-icon right>mdi-cancel</v-icon>
+                    </v-btn>
+                    <v-btn color="red"
+                           @click="deleteFailure"
+                    >Usuń
+                        <v-icon right>mdi-delete</v-icon>
                     </v-btn>
                 </v-card-actions>
             </v-card>
@@ -157,6 +165,7 @@
                 US_Name:'',
                 US_SUER_NAME:'',
                 AW_Zglaszajacy_ID: '',
+                AW_Typ:'',
                 AW_OpisAwarii: '',
                 AW_Zrealizowane: 'Zgłoszenie',
                 AW_Dzialania: '',
@@ -192,6 +201,7 @@
                 this.ID_AWARIA = this.maszynka.ID_AWARIA
                 this.dataGodzina = this.maszynka.AW_DataZgloszenia
                 this.dataGodzinaView = moment(this.maszynka.AW_DataZgloszenia).format('lll')
+                this.AW_Typ = this.maszynka.AW_Typ
                 this.AW_OpisAwarii = this.maszynka.AW_OpisAwarii
                 this.AW_Zrealizowane = this.maszynka.AW_Zrealizowane
                 this.US_Name = this.maszynka.US_Name
@@ -257,6 +267,7 @@
                         AW_DataZgloszenia: this.dataGodzina,
                         AW_Zglaszajacy_ID: this.user.ID_USER,
                         AW_OpisAwarii: this.AW_OpisAwarii,
+                        AW_Typ: this.AW_Typ,
                         AW_Dzialania: this.AW_Dzialania,
                         AW_Zrealizowane: this.AW_Zrealizowane,
                         AW_DataZakonczenia:(this.AW_DataZakonczenia)

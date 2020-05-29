@@ -22,6 +22,8 @@ const Listaawarii = sequelize.define('LISTAAWARII', {
         type: Sequelize.STRING },
     AW_OpisAwarii: {
         type: Sequelize.STRING },
+    AW_Typ: {
+        type: Sequelize.STRING },
     AW_Dzialania: {
         type: Sequelize.STRING
     },

@@ -51,10 +51,12 @@
         async mounted() {
             this.Hale = (await this.$store.getters.getListaHal)
             this.Hale.unshift("Pokaż wszystko")
+            this.listaHal = "Pokaż wszystko"
 
 
             this.TypMaszyny = (await this.$store.getters.getListaTypowMaszyn)
             this.TypMaszyny.unshift("Pokaż wszystko")
+            this.listaTypow = "Pokaż wszystko"
 
 
         },

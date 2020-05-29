@@ -74,8 +74,7 @@ module.exports = {
     },
 
     async putNewFailure(req, res) {
-        try { console.log(req.body)
-            console.log("Awaria: ",req.body)
+        try {
             if (req.body.ID_AWARIA === 0){
                 //Nowa awaria
             await awaria.create(req.body)
@@ -90,6 +89,7 @@ module.exports = {
                         AW_DataZgloszenia: req.body.AW_DataZgloszenia,
                     AW_Zglaszajacy_ID: req.body.AW_Zglaszajacy_ID,
                     AW_OpisAwarii: req.body.AW_OpisAwarii,
+                    AW_Typ: req.body.AW_Typ,
                     AW_Dzialania: req.body.AW_Dzialania,
                     AW_Zrealizowane: req.body.AW_Zrealizowane,
                     AW_DataZakonczenia: req.body.AW_DataZakonczenia},

@@ -2,6 +2,8 @@
     <v-data-table
             :headers="headers"
             :items="failures"
+            sort-by="DataAW"
+            sort-desc="true"
             class="elevation-1"
             :search="search"
     >
@@ -23,12 +25,6 @@
                     @click="editItem(item)"
             >
                 mdi-pencil
-            </v-icon>
-            <v-icon
-                    small
-                    @click="deleteItem(item)"
-            >
-                mdi-delete
             </v-icon>
         </template>
 
@@ -63,12 +59,13 @@
                     value: 'ID_AWARIA',
                     width: "2%"
                 },
-                {text: 'Data zgłoszenia', width: "12%", value: 'DataAW'},
-                {text: 'Opis awarii', width: "36%", value: 'AW_OpisAwarii'},
-                {text: 'Opis działania', width: "36%", value: 'AW_Dzialania'},
+                {text: 'Data zgłoszenia', value: 'DataAW'},
+                {text: 'Opis awarii', value: 'AW_OpisAwarii'},
+                {text: 'Opis działania', value: 'AW_Dzialania'},
+                {text: 'Typ', value: 'AW_Typ'},
                 {text: 'Osoba', width:"10%", value: 'US_Name'},
-                {text: 'Status', width: "12%", value: 'AW_Zrealizowane'},
-                {text: 'Actions', width: "2%", value: 'actions', sortable: false},
+                {text: 'Status', value: 'AW_Zrealizowane'},
+                {text: 'Akcje', value: 'actions', sortable: false},
             ],
             failures: [],
             editedIndex: -1,
