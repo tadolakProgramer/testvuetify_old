@@ -184,4 +184,24 @@ module.exports = {
             console.log(e)
         }
     },
+    async deleteOneFailure(req, res){
+        try {
+            const ID_AWARIA = req.body.params
+            await awaria.destroy({
+                where: {ID_AWARIA: ID_AWARIA}
+            }).then(awaria => res.send("awaria"))
+
+            failureWorkers.destroy({
+                where:{
+                    AWPR_ID_AWARIA:ID_AWARIA
+                }
+            })
+            failureParts.destroy({
+                where: {AWCZ_AW_ID: ID_AWARIA}
+            })
+        }catch (e) {
+            console.log("delete", e)
+        }
+
+    }
 };

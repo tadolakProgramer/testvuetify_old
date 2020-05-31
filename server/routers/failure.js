@@ -28,4 +28,6 @@ module.exports = (app) => {
     app.get('/getPartsFromFailureParts', failureController.getPartsFromFailureParts);
 
     app.post('/failure/addPartToFailutre', failureController.postAddPartToFailure);
+
+    app.post('/failure/deleteOneFailure/', failureController.deleteOneFailure);
 };

@@ -4,6 +4,24 @@
             <dialog-date-time></dialog-date-time>
             <template>
                 <v-row justify="center">
+                    <v-dialog v-model="dialogPytanie" persistent max-width="390">
+                        <v-card>
+                            <v-card-title class="headline red">Pytanie
+                                <v-icon big right>mdi-delete</v-icon>
+                            </v-card-title>
+                            <v-card-text>{{dialogPytanieText}}
+                            </v-card-text>
+                            <v-card-actions>
+                                <v-spacer></v-spacer>
+                                <v-btn color="red darken-1" @click="deleteOneFailure">Tak</v-btn>
+                                <v-btn color="green darken-1" @click="dialogPytanie = false">Nie</v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-dialog>
+                </v-row>
+            </template>
+            <template>
+                <v-row justify="center">
                     <v-dialog v-model="dialog" persistent max-width="390">
                         <v-card>
                             <v-card-title class="headline primary">Info</v-card-title>
@@ -108,9 +126,12 @@
                     >Anuluj
                         <v-icon right>mdi-cancel</v-icon>
                     </v-btn>
+                    <v-spacer></v-spacer>
                     <v-btn color="red"
+                           :disabled="disabledEdit"
+                           justify="end"
                            @click="deleteFailure"
-                    >Usuń
+                    >Usuń wpis
                         <v-icon right>mdi-delete</v-icon>
                     </v-btn>
                 </v-card-actions>
@@ -151,8 +172,10 @@
         data() {
             return {
                 dialog: '',
+                dialogPytanie:false,
                 disabledEdit: false,
                 dialogText: '',
+                dialogPytanieText:'',
                 maszynka: '',
                 newFailure: '',
                 dataGodzina: '',
@@ -162,16 +185,16 @@
                 ID_AWARIA: 0,
                 AW_DataZgloszenia: '',
                 Maszyna_ID: '',
-                US_Name:'',
-                US_SUER_NAME:'',
+                US_Name: '',
+                US_SUER_NAME: '',
                 AW_Zglaszajacy_ID: '',
-                AW_Typ:'',
+                AW_Typ: '',
                 AW_OpisAwarii: '',
                 AW_Zrealizowane: 'Zgłoszenie',
                 AW_Dzialania: '',
                 AW_DataZakonczenia: '',
                 AW_DataZakonczeniaView: '',
-                dataGodzinaView:'',
+                dataGodzinaView: '',
                 NowaAwaria: {},
                 DataTimeEnd: '',
                 rules: {
@@ -206,7 +229,7 @@
                 this.AW_Zrealizowane = this.maszynka.AW_Zrealizowane
                 this.US_Name = this.maszynka.US_Name
                 this.US_SUER_NAME = this.maszynka.US_SUER_NAME
-                if (this.AW_Zrealizowane === 'Zakończone'){
+                if (this.AW_Zrealizowane === 'Zakończone') {
                     this.changeRadioGroup()
                 }
                 this.AW_Dzialania = this.maszynka.AW_Dzialania
@@ -215,10 +238,9 @@
 
                 //Get User login to system
                 this.user = store.getters.user;
-                if (this.user.ID_USER === this.maszynka.ID_USER){
+                if (this.user.ID_USER === this.maszynka.ID_USER) {
                     this.disabledEdit = false;
-                }
-                else{
+                } else {
                     this.disabledEdit = true;
                 }
 
@@ -244,13 +266,12 @@
             ...mapGetters([
                 'getDateTimeEnd', 'getDataTimeStart']),
 
-             async changeRadioGroup(){
+            async changeRadioGroup() {
                 if (this.AW_Zrealizowane === 'Zakończone') {
                     this.viewDataZakonczenia = true;
-                    if (this.AW_DataZakonczenia != null){
+                    if (this.AW_DataZakonczenia != null) {
                         this.AW_DataZakonczenia = await moment(this.maszynka.AW_DataZakonczenia).format('lll')
-                    }
-                    else {
+                    } else {
                         this.AW_DataZakonczenia = moment().format("MM DD YYYY HH:mm:ss", true);
                         this.AW_DataZakonczeniaView = moment().format('lll')
                     }
@@ -270,7 +291,7 @@
                         AW_Typ: this.AW_Typ,
                         AW_Dzialania: this.AW_Dzialania,
                         AW_Zrealizowane: this.AW_Zrealizowane,
-                        AW_DataZakonczenia:(this.AW_DataZakonczenia)
+                        AW_DataZakonczenia: (this.AW_DataZakonczenia)
                     })
                     this.NowaAwaria = await response.data;
                     this.ID_AWARIA = this.NowaAwaria.ID_AWARIA
@@ -297,14 +318,27 @@
                 this.pageBack()
             },
             pageBack() {
-                this.$router.push({name:'failure'})
-            }
-        },
+                this.$router.push({name: 'failure'})
+            },
+            deleteFailure() {
+                this.dialogPytanieText = 'Czy chcesz usunąć aktualny wpis? Tej czynności nie można już cofnąć!!!'
+                this.dialogPytanie = true
 
-        watch: {
+            },
+            async deleteOneFailure() {
+                try {
+                    await FailureService.deleteOneFailure(this.maszynka.ID_AWARIA)
+                    this.dialogPytanie = false
+                    this.pageBack()
+                } catch (e) {
+                    console.log(e)
+                }
+            },
 
-            DataTimeEnd() {
-                console.log("Zmiana")
+            watch: {
+                DataTimeEnd() {
+                    console.log("Zmiana")
+                }
             }
         }
     }

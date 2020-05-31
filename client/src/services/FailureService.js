@@ -48,6 +48,10 @@ export default {
     },
     postAddPartToFailure(credential ){
         return Api().post('/failure/addPartToFailutre', credential)
+    },
+    deleteOneFailure(ID_AWARIA) {
+        return Api().post('/failure/deleteOneFailure',
+            {params: ID_AWARIA})
     }
 
 }

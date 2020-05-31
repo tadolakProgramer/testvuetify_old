@@ -12,6 +12,21 @@
                 label="Dodaj osoby"
                 multiple
         >
+            <template>
+                <v-row justify="center">
+                    <v-dialog v-model="dialog" persistent max-width="390">
+                        <v-card>
+                            <v-card-title class="headline primary">Info</v-card-title>
+                            <v-card-text>{{dialogText}}
+                            </v-card-text>
+                            <v-card-actions>
+                                <v-spacer></v-spacer>
+                                <v-btn color="green darken-1" @click="dialog = false" >OK</v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-dialog>
+                </v-row>
+            </template>
             <template v-slot:selection="{ item, index }">
                 <v-chip v-if="index === 0">
                     <span>{{ item.PR_imie }}</span>
@@ -49,6 +64,7 @@
             pr:[]
         }),
         return:{
+            dialog: false,
             ID:'',
             x:''
         },
@@ -83,7 +99,9 @@
                 try{
                     const response = await FailureService.addWorkersToFailure(this.addListWorkers,{ID_AWARIA: this.ID_AWARIA})
                     this.x = await response.data
+                    this.dialog = true
                 }
+
                 catch (e) {
                     console.log(e)
                 }
