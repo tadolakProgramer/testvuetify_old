@@ -214,7 +214,7 @@
                 return this.getDateTimeEnd
             },
             DateTimeStart() {
-                return this.getDataTimeStart
+                return this.getDateTimeStart
             }
         },
 
@@ -264,7 +264,7 @@
                 'setTitleDialog', 'setDialogType'
             ]),
             ...mapGetters([
-                'getDateTimeEnd', 'getDataTimeStart']),
+                'getDateTimeEnd', 'getDateTimeStart']),
 
             async changeRadioGroup() {
                 if (this.AW_Zrealizowane === 'Zakończone') {

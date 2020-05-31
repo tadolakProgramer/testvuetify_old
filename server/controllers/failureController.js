@@ -189,16 +189,16 @@ module.exports = {
             const ID_AWARIA = req.body.params
             await awaria.destroy({
                 where: {ID_AWARIA: ID_AWARIA}
-            }).then(awaria => res.send("awaria"))
+            })
 
             failureWorkers.destroy({
                 where:{
                     AWPR_ID_AWARIA:ID_AWARIA
                 }
             })
-            failureParts.destroy({
+            failurePart.destroy({
                 where: {AWCZ_AW_ID: ID_AWARIA}
-            })
+            }).then(failurePart => res.send("failurePart"))
         }catch (e) {
             console.log("delete", e)
         }
