@@ -52,6 +52,11 @@ export default {
     deleteOneFailure(ID_AWARIA) {
         return Api().post('/failure/deleteOneFailure',
             {params: ID_AWARIA})
+    },
+    getMachinaArea(ID) {
+        return Api().get('/failure/gatMachineArea',{
+            params:ID
+        })
     }
 
 }

@@ -56,6 +56,7 @@
                 },
                 {text: 'Data zgłoszenia', value: 'DataAW'},
                 {text: 'Maszyna', value: 'NazwaMaszyny'},
+                {text: 'Obszar Maszyny', value: 'ObszarMaszyny'},
                 {text: 'Opis awarii', value: 'AW_OpisAwarii'},
                 {text: 'Opis działania', value: 'AW_Dzialania'},
                 {text: 'Typ', value: 'AW_Typ'},

@@ -24,6 +24,11 @@ const Listaawarii = sequelize.define('LISTAAWARII', {
         type: Sequelize.STRING },
     AW_Typ: {
         type: Sequelize.STRING },
+    ObszarMaszyny: {
+        type: Sequelize.STRING },
+    AW_MO_SYMBOL: {
+        type: Sequelize.STRING
+    },
     AW_Dzialania: {
         type: Sequelize.STRING
     },

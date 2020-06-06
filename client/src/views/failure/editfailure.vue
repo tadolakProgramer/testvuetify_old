@@ -58,13 +58,32 @@
                 </v-card-title>
                 <v-card-subtitle>
                     <div class=" d-flex justify-space-between"> {{maszynka.NazwaTypu}}   {{maszynka.NazwaHali}}
-                        <v-radio-group v-model="AW_Typ" row dense pa="0" ma="0">Typ awarii
-                            <v-radio color="green" label="Elektroniczna" value="A"></v-radio>
-                            <v-radio color="blue" label="Mechaniczna" value="M"></v-radio>
-                        </v-radio-group>
                     </div>
                 </v-card-subtitle>
                 <v-card-text>
+                    <v-row>
+                        <v-col cols="10" sm="2" md="3">
+                            <v-select
+                                    v-model="obszarMaszyny"
+                                    :items=obszar
+                                    item-text="OM_Nazwa"
+                                    item-value="ID_OM"
+                                    label="Obszar"
+                            ></v-select>
+                        </v-col>
+                        <v-col cols="8" sm="4" md="2">
+                            <v-text-field
+                                    v-model="AW_MO_Symbol"
+                                    label="Symbol obszaru"
+                            ></v-text-field>
+                        </v-col>
+                        <v-col cols="8" sm="4" md="6" class="ma-lg-auto">
+                            <v-radio-group v-model="AW_Typ" row  pa="1" ma="1">Typ awarii
+                                <v-radio color="green" label="Elektroniczna" value="A"></v-radio>
+                                <v-radio color="blue" label="Mechaniczna" value="M"></v-radio>
+                            </v-radio-group>
+                        </v-col>
+                    </v-row>
                     <v-textarea
                             v-model="AW_OpisAwarii"
                             :disabled="disabledEdit"
@@ -185,6 +204,7 @@
                 ID_AWARIA: 0,
                 AW_DataZgloszenia: '',
                 Maszyna_ID: '',
+                AW_MO_Symbol:'',
                 US_Name: '',
                 US_SUER_NAME: '',
                 AW_Zglaszajacy_ID: '',
@@ -223,6 +243,7 @@
                 this.maszynka = (await FailureService.getOneFailure(this.$route.params)).data;
                 this.ID_AWARIA = this.maszynka.ID_AWARIA
                 this.dataGodzina = this.maszynka.AW_DataZgloszenia
+                this.AW_MO_Symbol = this.maszynka.AW_MO_SYMBOL
                 this.dataGodzinaView = moment(this.maszynka.AW_DataZgloszenia).format('lll')
                 this.AW_Typ = this.maszynka.AW_Typ
                 this.AW_OpisAwarii = this.maszynka.AW_OpisAwarii
@@ -285,6 +306,7 @@
                     const response = await FailureService.addNewFailure({
                         ID_AWARIA: this.ID_AWARIA,
                         Maszyna_ID: this.maszynka.ID_Maszyna,
+                        AW_MO_SYMBOL: this.AW_MO_Symbol,
                         AW_DataZgloszenia: this.dataGodzina,
                         AW_Zglaszajacy_ID: this.user.ID_USER,
                         AW_OpisAwarii: this.AW_OpisAwarii,

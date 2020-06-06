@@ -16,6 +16,14 @@ const Awarie = sequelize.define('AWARIE', {
     type: Sequelize.INTEGER,
     allowNull: true
   },
+    AW_MO_ID: {
+        type: Sequelize.INTEGER,
+        allowNull: true
+    },
+    AW_MO_Symbol: {
+        type: Sequelize.STRING,
+        allowNull: true
+    },
   AW_Zglaszajacy_ID: {
     type: Sequelize.INTEGER,
     allowNull: true

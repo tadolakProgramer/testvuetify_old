@@ -1,4 +1,7 @@
 const vParts = require('../models/v_parts')
+const partsType = require('../models/partsType')
+const partsProducer = require('../models/partsProducer')
+
 module.exports = {
     async getAllParts(req, res){
         try{
@@ -12,5 +15,28 @@ module.exports = {
                 error: 'partsList error'
             })
         }
+    },
+    async addPart(req, res){
+
+    },
+
+    async getAllProducer(req, res){
+        await partsProducer.findAll({})
+            .then(partsProducer => res.send(partsProducer))
+            .catch(error => console.log(error))
+    },
+
+    async postAddProducer(rq, res){
+
+    },
+
+    async getAllTypePart(req, res){
+        await partsType.findAll({})
+            .then(partsType => res.send(partsType))
+            .catch(error => console.log(error))
+    },
+
+    async postAddTypePart(rq, res){
+
     }
 }

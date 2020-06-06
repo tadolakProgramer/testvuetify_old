@@ -5,6 +5,7 @@ const workers = require('../models/workers')
 const failureWorkers = require('../models/awariaPracownik')
 const failureParts = require('../models/v_failureParts')
 const failurePart = require('../models/failurePart')
+const machineryArea = require('../models/v_maszynaObszar')
 
 module.exports = {
     async getListaMaszyn(req, res) {
@@ -203,5 +204,13 @@ module.exports = {
             console.log("delete", e)
         }
 
+    },
+    async getMachineArea(req, res){
+        console.log("getMachineArea", req.query.ID)
+        const ID = req.query.ID;
+        machineryArea.findAll({where:{
+            ID_Typ:ID
+            }})
+            .then(machineryArea => res.send(machineryArea))
     }
 };
