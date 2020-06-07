@@ -87,7 +87,9 @@ module.exports = {
 
                 await awaria.update({
                     Maszyna_ID: req.body.ID_Maszyna,
-                        AW_DataZgloszenia: req.body.AW_DataZgloszenia,
+                    AW_MO_ID: req.body.AW_MO_ID,
+                    AW_MO_Symbol: req.body.AW_MO_Symbol,
+                    AW_DataZgloszenia: req.body.AW_DataZgloszenia,
                     AW_Zglaszajacy_ID: req.body.AW_Zglaszajacy_ID,
                     AW_OpisAwarii: req.body.AW_OpisAwarii,
                     AW_Typ: req.body.AW_Typ,

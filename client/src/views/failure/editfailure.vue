@@ -66,6 +66,7 @@
                             <v-select
                                     v-model="obszarMaszyny"
                                     :items=obszar
+                                    :disabled="disabledEdit"
                                     item-text="OM_Nazwa"
                                     item-value="ID_OM"
                                     label="Obszar"
@@ -74,6 +75,7 @@
                         <v-col cols="8" sm="4" md="2">
                             <v-text-field
                                     v-model="AW_MO_Symbol"
+                                    :disabled="disabledEdit"
                                     label="Symbol obszaru"
                             ></v-text-field>
                         </v-col>
@@ -196,6 +198,8 @@
                 dialogText: '',
                 dialogPytanieText:'',
                 maszynka: '',
+                obszar:[],
+                obszarMaszyny:[],
                 newFailure: '',
                 dataGodzina: '',
                 user: '',
@@ -257,6 +261,16 @@
                 this.AW_DataZakonczeniaView = moment(this.maszynka.AW_DataZakonczenia).format('lll')
                 this.AW_DataZakonczenia = this.maszynka.AW_DataZakonczenia
 
+                this.obszar = (await FailureService.getMachinaArea({ID:this.maszynka.TypMaszynyID})).data;
+
+                for (let k=0; k<this.obszar.length; k++) {
+                    if (this.obszar[k].ID_OM === this.maszynka.ID_OM){
+                        this.obszarMaszyny =(this.obszar[k].ID_OM)
+                    }
+                }
+                //this.obszarMaszyny.push(this.AW_MO_ID)
+
+
                 //Get User login to system
                 this.user = store.getters.user;
                 if (this.user.ID_USER === this.maszynka.ID_USER) {
@@ -306,7 +320,8 @@
                     const response = await FailureService.addNewFailure({
                         ID_AWARIA: this.ID_AWARIA,
                         Maszyna_ID: this.maszynka.ID_Maszyna,
-                        AW_MO_SYMBOL: this.AW_MO_Symbol,
+                        AW_MO_ID: this.obszarMaszyny,
+                        AW_MO_Symbol: this.AW_MO_Symbol,
                         AW_DataZgloszenia: this.dataGodzina,
                         AW_Zglaszajacy_ID: this.user.ID_USER,
                         AW_OpisAwarii: this.AW_OpisAwarii,

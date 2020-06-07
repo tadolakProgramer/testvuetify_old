@@ -16,5 +16,6 @@ require('./routers/router')(app);
 require('./routers/notification')(app);
 require('./routers/failure')(app);
 require('./routers/parts')(app);
+require('./routers/statistics')(app);
 
 app.listen(process.env.PORT || 3000);

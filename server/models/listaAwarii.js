@@ -12,6 +12,10 @@ const Listaawarii = sequelize.define('LISTAAWARII', {
         type: Sequelize.STRING},
     ID_Maszyna: {
         type: Sequelize.INTEGER},
+    TypMaszynyID: {
+        type: Sequelize.INTEGER},
+    ID_OM: {
+        type: Sequelize.INTEGER},
     ID_USER: {
         type: Sequelize.INTEGER},
     NazwaMaszyny: {

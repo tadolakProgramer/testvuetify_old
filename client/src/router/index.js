@@ -14,6 +14,7 @@ import AllfailureHistory from "../views/failure/AllfailureHistory";
 import editfailure from "../views/failure/editfailure";
 import allParts from "../views/parts/allParts";
 
+import lineCharts from "../components/charts/MonthlySalesChart"
 
 import IsLogin from './isLogin'
 
@@ -89,6 +90,12 @@ const routes = [
         name: 'allParts',
         component: allParts,
         beforeEnter: IsLogin
+    },
+    {
+        path: '/charts/line',
+        name: 'chartsLine',
+        component: lineCharts,
+        //beforeEnter: IsLogin
     },
 ]
 
