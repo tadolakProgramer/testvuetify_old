@@ -26,6 +26,16 @@
                     <v-list-item-title v-text="statystyka[0].text"></v-list-item-title>
                 </v-list-item-content>
             </v-list-item>
+            <v-list-item
+                    link
+                    :to="{name: 'failurePreMonth'}">
+                <v-list-item-icon>
+                    <v-icon v-text="statystyka[1].icon"></v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                    <v-list-item-title v-text="statystyka[1].text"></v-list-item-title>
+                </v-list-item-content>
+            </v-list-item>
         </v-list-group>
 
 
@@ -92,7 +102,8 @@
     export default {
         data: () => ({
             statystyka: [
-                { text: 'Suma Awarii', icon: 'mdi-chart-gantt' }
+                { text: 'Suma Awarii', icon: 'mdi-chart-gantt' },
+                { text: 'Rok', icon: 'mdi-chart-line' }
             ],
             admins: [
                 ['Management', 'people_outline'],

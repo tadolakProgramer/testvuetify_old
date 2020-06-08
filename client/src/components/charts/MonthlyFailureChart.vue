@@ -17,7 +17,7 @@
 
         <line-chart
                 :width="500"
-                :height="300"
+                :height="200"
                 :labels="labels"
                 :datasets="displayedDatasets"
                 :options="$options.options"
