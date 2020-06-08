@@ -6,7 +6,6 @@
             sort-desc="true"
             class="elevation-1"
             :search="search"
-            group-by="AW_Zrealizowane"
     >
         <template v-slot:top>
             <v-toolbar  color="secondary">

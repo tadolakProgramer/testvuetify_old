@@ -8,6 +8,7 @@ const v_countFailure = sequelize.define('V_LicznikZgloszen', {
         primaryKey: true
     },
     NazwaMaszyny: {type: Sequelize.STRING},
+    NazwaTypu: {type: Sequelize.STRING},
     SumaAwariiA: {type: Sequelize.INTEGER},
     SumaAwariiM: {type: Sequelize.INTEGER},
 });

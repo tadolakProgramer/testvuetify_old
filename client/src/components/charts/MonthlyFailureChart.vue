@@ -27,7 +27,7 @@
 
 <script>
     //import numeral from 'numeral';
-    import LineChart from './horizontalBarChart';
+    import LineChart from './lineChart';
     import StatisticService from "../../services/StatisticService";
     const options = {
         scales: {
@@ -40,7 +40,7 @@
 
     };
     export default {
-        name: 'monthly-sales-chart',
+        name: 'monthly-failure-chart',
         options,
         components: {
             LineChart
@@ -55,13 +55,13 @@
                     2018: {
                         label: 'Mechaniczne',
                         borderColor: 'rgba(50, 115, 220, 0.5)',
-                        backgroundColor: 'rgba(23,43,222,0.79)',
+                        backgroundColor: 'rgba(23,43,222,0.6)',
                         data: []
                     },
                     2017: {
                         label: 'Elektroniczne',
                         borderColor: 'rgb(23,72,17)',
-                        backgroundColor: 'rgba(107,177,7,0.74)',
+                        backgroundColor: 'rgba(107,177,7,0.53)',
                         data: []
                     }
                 }
@@ -73,14 +73,14 @@
             }
         },
         async mounted() {
-
-            this.dane = (await StatisticService.getCountFailureByMachine()).data
+            this.dane = (await StatisticService.getFailurePerMonth()).data
+            console.log("DDDDDDD", this.dane)
             for (let k = 0; k<this.dane.length; k++){
-                    this.labels.push(this.dane[k].NazwaMaszyny);
+                    this.labels.push(this.dane[k].Month);
                     this.datasets["2017"].data.push(this.dane[k].SumaAwariiA)
                     this.datasets["2018"].data.push(this.dane[k].SumaAwariiM)
             }
-
+            console.log("DDDDDDD", this.dane)
             //this.datasets["2017"].labels = this.labels;
             //this.datasets["2017"].data = this.count;
         }

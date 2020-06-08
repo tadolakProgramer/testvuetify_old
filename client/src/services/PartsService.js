@@ -4,4 +4,5 @@ export default {
     getALLParts() {
         return Api().get('/getAllParts')
     },
+
 }
