@@ -80,7 +80,7 @@
                             ></v-text-field>
                         </v-col>
                         <v-col cols="8" sm="4" md="6" class="ma-lg-auto">
-                            <v-radio-group v-model="AW_Typ" row  pa="1" ma="1">Typ awarii
+                            <v-radio-group v-model="AW_Typ" row  pa="1" ma="1" :disabled="disabledEdit" >Typ awarii
                                 <v-radio color="green" label="Elektroniczna" value="A"></v-radio>
                                 <v-radio color="blue" label="Mechaniczna" value="M"></v-radio>
                             </v-radio-group>
@@ -100,7 +100,6 @@
                     ></v-textarea>
                     <v-textarea
                             v-model="AW_Dzialania"
-                            :disabled="disabledEdit"
                             background-color="white"
                             color="black"
                             label="Opisz jakie działania zostały podjete aby usunąć usterkę"

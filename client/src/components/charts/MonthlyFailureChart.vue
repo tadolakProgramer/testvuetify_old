@@ -29,6 +29,8 @@
     //import numeral from 'numeral';
     import LineChart from './lineChart';
     import StatisticService from "../../services/StatisticService";
+    import moment from 'moment'
+
     const options = {
         scales: {
             yAxes: [{
@@ -47,7 +49,7 @@
         },
         data() {
             return {
-                selectedYears: [2017, 2018],
+                selectedYears: [],
                 dane:[],
                 labels:[],
                 count:[],
@@ -67,6 +69,11 @@
                 }
             };
         },
+        created() {
+            moment.locale('pl');
+            // this.dataGodzina = moment().format('lll');
+
+        },
         computed: {
             displayedDatasets() {
                 return this.selectedYears.map(year => this.datasets[year]);
@@ -74,15 +81,14 @@
         },
         async mounted() {
             this.dane = (await StatisticService.getFailurePerMonth()).data
-            console.log("DDDDDDD", this.dane)
             for (let k = 0; k<this.dane.length; k++){
-                    this.labels.push(this.dane[k].Month);
+                let data = (this.dane[k].Year_ID).toString() +" "+(moment().month(this.dane[k].Month).format("MMMM")).toString()
+                    this.labels.push(data);
                     this.datasets["2017"].data.push(this.dane[k].SumaAwariiA)
                     this.datasets["2018"].data.push(this.dane[k].SumaAwariiM)
+
             }
-            console.log("DDDDDDD", this.dane)
-            //this.datasets["2017"].labels = this.labels;
-            //this.datasets["2017"].data = this.count;
-        }
+            this.selectedYears = [2017, 2018]
+       }
     }
 </script>

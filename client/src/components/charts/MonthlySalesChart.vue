@@ -80,9 +80,8 @@
                     this.datasets["2017"].data.push(this.dane[k].SumaAwariiA)
                     this.datasets["2018"].data.push(this.dane[k].SumaAwariiM)
             }
+            this.selectedYears = [2017, 2018]
 
-            //this.datasets["2017"].labels = this.labels;
-            //this.datasets["2017"].data = this.count;
         }
     }
 </script>
