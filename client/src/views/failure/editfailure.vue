@@ -58,6 +58,7 @@
                 </v-card-title>
                 <v-card-subtitle>
                     <div class=" d-flex justify-space-between"> {{maszynka.NazwaTypu}}   {{maszynka.NazwaHali}}
+                        <span></span> około: {{fromData}}
                     </div>
                 </v-card-subtitle>
                 <v-card-text>
@@ -201,6 +202,7 @@
                 obszarMaszyny:[],
                 newFailure: '',
                 dataGodzina: '',
+                fromData:'',
                 user: '',
                 dialogType: '',
                 viewDataZakonczenia: false,
@@ -248,6 +250,7 @@
                 this.dataGodzina = this.maszynka.AW_DataZgloszenia
                 this.AW_MO_Symbol = this.maszynka.AW_MO_SYMBOL
                 this.dataGodzinaView = moment(this.maszynka.AW_DataZgloszenia).format('lll')
+                this.fromData = moment(this.maszynka.AW_DataZgloszenia).fromNow()
                 this.AW_Typ = this.maszynka.AW_Typ
                 this.AW_OpisAwarii = this.maszynka.AW_OpisAwarii
                 this.AW_Zrealizowane = this.maszynka.AW_Zrealizowane
