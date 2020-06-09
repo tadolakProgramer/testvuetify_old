@@ -13,9 +13,21 @@
                     >
                         <v-card-title class="primary font-weight-bold">
                             {{maszyna.NazwaMaszyny}}
+                            <v-chip
+                                    v-if="maszyna.SumAwarii >0"
+                                    class="ml-12"
+                                    small
+                                    color="szary"
+                                    text-color="white"
+                                    align="end"
+                            >
+                                Ilość interwencji: {{maszyna.SumAwarii}}
+                                <v-icon right>mdi-hammer-screwdriver</v-icon>
+                            </v-chip>
                         </v-card-title>
                         <v-card-subtitle class="pt-10 font-weight-bold">
                             {{maszyna.NazwaTypu}}
+
                         </v-card-subtitle>
                         <v-divider
                                 class="mx-lg-4"
@@ -60,6 +72,7 @@
                 NazwaTypu: '',
                 ID: '',
                 maszynaId: '',
+                sumAwarii:'',
                 listaMaszyn: [],
                 viewMachine: [],
                 filterHala: '',
