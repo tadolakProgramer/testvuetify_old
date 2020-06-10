@@ -1,11 +1,12 @@
 <template>
     <v-row justify="center">
+        <template>
         <v-dialog v-model="dialog" persistent max-width="390">
             <v-card class="secondary">
                 <v-card-title class="headline primary">{{titleDialog()}}</v-card-title>
                 <v-card-text>
                     <v-menu
-                            v-model="dataUsterki"
+
                             :close-on-content-click="true"
                             :nudge-right="40"
                             transition="scale-transition"
@@ -22,7 +23,7 @@
                                     v-on="on"
                             ></v-text-field>
                         </template>
-                        <v-date-picker v-model="date" @input="dataUsterki = false"></v-date-picker>
+                        <v-date-picker v-model="date" locale="pl"></v-date-picker>
                     </v-menu>
 
                         <v-time-picker
@@ -41,6 +42,7 @@
                 </v-card-actions>
             </v-card>
         </v-dialog>
+        </template>
     </v-row>
 </template>
 
@@ -57,7 +59,7 @@
             date: new Date().toISOString().substr(0, 10),
             menu:'',
             return: {
-                dataUsterki: false,
+
                 menu2: false,
                 Teraz:'',
                 title:'',

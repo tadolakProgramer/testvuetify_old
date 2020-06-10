@@ -1,6 +1,6 @@
 <template>
     <v-layout>
-        <v-flex xs2 sm8 offset-sm2>
+        <v-flex  >
             <dialog-date-time></dialog-date-time>
             <template>
                 <v-row justify="center">
@@ -51,6 +51,9 @@
                                     item-text="OM_Nazwa"
                                     item-value="ID_OM"
                                     label="Obszar"
+                                    @change="changeHint"
+                                    persistent-hint
+                                    :hint="obszarMaszynyHint"
                             ></v-select>
                         </v-col>
                         <v-col cols="8" sm="4" md="2">
@@ -133,7 +136,7 @@
     import FailureService from "../../services/FailureService";
     import moment from 'moment';
     import store from "../../store/store";
-    import DialogDateTime from "../../components/dialogDateTime";
+    import DialogDateTime from "../../components/dialogs/dialogDateTime";
     import {mapMutations, mapGetters} from "vuex";
 
 
@@ -147,8 +150,11 @@
                 dialog: '',
                 dialogText:'',
                 maszynka: '',
-                obszar:'',
+                obszar:[],
+                obszarMaszyny:'',
+                obszarMaszynyHint:'',
                 ID_OM:'',
+                OM_Komentarz:'',
                 newFailure: '',
                 dataGodzina: '',
                 user: '',
@@ -195,6 +201,7 @@
             try {
                 this.maszynka = (await FailureService.getMaszyna(this.$route.params)).data;
                 this.obszar = (await FailureService.getMachinaArea({ID:this.maszynka.ID})).data;
+                console.log(this.obszar)
 
                 //Get User login to system
                 this.user = store.getters.user;
@@ -273,6 +280,16 @@
                 this.dialog = false
             },
 
+            changeHint(){
+
+                for(let h=0; h<this.obszar.length; h++){
+                    if (this.obszar[h].ID_OM === this.obszarMaszyny){
+                        this.obszarMaszynyHint = this.obszar[h].OM_Komentarz
+                        break
+                    }
+                }
+            },
+
             pageBack() {
                 this.$router.go(-1)
             }
@@ -282,6 +299,7 @@
             AW_Zrealizowane: function () {
                 if (this.AW_Zrealizowane === 'Zakończone') {
                     this.AW_DataZakonczenia = moment().format("MM DD YYYY HH:mm:ss", true);
+                    console.log("Zmiana", this.AW_DataZakonczenia)
                     this.AW_DataZakonczeniaView = moment().format('lll')
                     this.viewDataZakonczenia = true;
                 } else {

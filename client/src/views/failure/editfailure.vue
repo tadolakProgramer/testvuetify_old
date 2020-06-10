@@ -70,7 +70,9 @@
                                     :disabled="disabledEdit"
                                     item-text="OM_Nazwa"
                                     item-value="ID_OM"
+                                    @change="changeHint"
                                     label="Obszar"
+                                    :hint="obszarMaszynyHint"
                             ></v-select>
                         </v-col>
                         <v-col cols="8" sm="4" md="2">
@@ -179,7 +181,7 @@
     import FailureService from "../../services/FailureService";
     import moment from 'moment';
     import store from "../../store/store";
-    import DialogDateTime from "../../components/dialogDateTime";
+    import DialogDateTime from "../../components/dialogs/dialogDateTime";
     import {mapMutations, mapGetters} from "vuex";
     import FailureWorkers from "../../components/failureWorkers";
     import FailureParts from "../../components/failureParts";
@@ -200,6 +202,7 @@
                 maszynka: '',
                 obszar:[],
                 obszarMaszyny:[],
+                obszarMaszynyHint:'',
                 newFailure: '',
                 dataGodzina: '',
                 fromData:'',
@@ -371,6 +374,15 @@
                     this.pageBack()
                 } catch (e) {
                     console.log(e)
+                }
+            },
+            changeHint(){
+
+                for(let h=0; h<this.obszar.length; h++){
+                    if (this.obszar[h].ID_OM === this.obszarMaszyny){
+                        this.obszarMaszynyHint = this.obszar[h].OM_Komentarz
+                        break
+                    }
                 }
             },
 

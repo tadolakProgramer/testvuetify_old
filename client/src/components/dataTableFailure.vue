@@ -3,7 +3,7 @@
             :headers="headers"
             :items="failures"
             sort-by="DataAW"
-            sort-desc="true"
+            sort-desc= "DataAW"
             dense
             class="elevation-1"
             :search="search"
