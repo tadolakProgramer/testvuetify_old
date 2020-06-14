@@ -15,31 +15,47 @@
             <template v-slot:activator>
                 <v-list-item-title>Statystyka</v-list-item-title>
             </template>
-
             <v-list-item
                     link
                     :to="{name: 'chartsLine'}">
-                <v-list-item-icon>
-                    <v-icon v-text="statystyka[0].icon"></v-icon>
-                </v-list-item-icon>
                 <v-list-item-content>
                     <v-list-item-title v-text="statystyka[0].text"></v-list-item-title>
                 </v-list-item-content>
+                <v-list-item-icon>
+                    <v-icon v-text="statystyka[0].icon"></v-icon>
+                </v-list-item-icon>
             </v-list-item>
             <v-list-item
                     link
                     :to="{name: 'failurePreMonth'}">
-                <v-list-item-icon>
-                    <v-icon v-text="statystyka[1].icon"></v-icon>
-                </v-list-item-icon>
                 <v-list-item-content>
                     <v-list-item-title v-text="statystyka[1].text"></v-list-item-title>
                 </v-list-item-content>
+                <v-list-item-icon>
+                    <v-icon v-text="statystyka[1].icon"></v-icon>
+                </v-list-item-icon>
             </v-list-item>
         </v-list-group>
 
-
-
+        <v-list-group v-if="adminMenu"
+                prepend-icon="mdi-account-multiple"
+                value="true"
+        >
+            <template v-slot:activator>
+                <v-list-item-title>Użytkownicy</v-list-item-title>
+            </template>
+            <v-list-item
+                    sub-group
+                    link
+                    :to="{name: 'register'}">
+                <v-list-item-content>
+                    <v-list-item-title v-text="user[0].text"></v-list-item-title>
+                </v-list-item-content>
+                <v-list-item-icon>
+                    <v-icon v-text="user[0].icon"></v-icon>
+                </v-list-item-icon>
+            </v-list-item>
+        </v-list-group>
 
         <!--&lt;!&ndash;Users&ndash;&gt;
         <v-list-group
@@ -99,23 +115,26 @@
 </template>
 
 <script>
+    import store from "../store/store";
+
     export default {
-        data: () => ({
+        data() {
+            return {
+                adminMenu: false,
             statystyka: [
                 { text: 'Suma Awarii', icon: 'mdi-chart-gantt' },
                 { text: 'Rok', icon: 'mdi-chart-line' }
             ],
-            admins: [
-                ['Management', 'people_outline'],
-                ['Settings', 'settings'],
-            ],
-            cruds: [
-                ['Create', 'add'],
-                ['Read', 'insert_drive_file'],
-                ['Update', 'update'],
-                ['Delete', 'delete'],
-            ],
-        }),
+            user: [
+                {text: 'Nowy', icon: 'mdi-account-plus'}
+                ],
+        }},
+
+        mounted() {
+            if (store.getters.profesja === 'Admin'){
+                this.adminMenu = true
+            }
+        }
     }
 </script>
 

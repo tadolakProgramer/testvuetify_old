@@ -98,12 +98,17 @@
                             transition="scale-transition"
                     >{{ServerMessage}}
                     </v-alert>
-                    <v-layout align-center justify-center>
+                    <v-card-actions >
                         <v-btn color="accent"
                                dark
                                @click="register">Dodaj
                         </v-btn>
-                    </v-layout>
+                        <v-btn color="orange"
+                               @click="pageBack"
+                        >Anuluj
+                            <v-icon right>mdi-cancel</v-icon>
+                        </v-btn>
+                    </v-card-actions>
                 </v-card>
             </v-form>
         </v-flex>
@@ -123,7 +128,7 @@
                 valid: false,
                 Hale: [],
                 items: [
-                    'Operator', 'Automatyk', 'Mechanik', 'Kierownik'
+                    'Operator', 'Automatyk', 'Mechanik', 'Kierownik','Admin','Gość'
                 ],
                 Profesje: '',
                 show1: false,
@@ -184,9 +189,13 @@
                     this.ServerMessage = ServerMessage.response.data.ServerMessage;
 
                 }
+            },
+            pageBack() {
+                this.$router.go(-1)
             }
         },
         async mounted() {
+            this.items.sort()
             this.Hale = (await AuthenticationService.getHale()).data;
             console.log('Hale: ', this.Hale)
         }

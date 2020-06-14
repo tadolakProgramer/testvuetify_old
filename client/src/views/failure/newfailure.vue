@@ -117,6 +117,7 @@
 
                 <v-card-actions>
                     <v-btn color="orange"
+                           ma="10"
                            @click="AddNewFailure">Zapisz
                         <v-icon right>mdi-content-save</v-icon>
                     </v-btn>

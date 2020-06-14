@@ -33,9 +33,11 @@
                                 class="mx-lg-4"
                         ></v-divider>
                         <v-layout align-center justify-space-between>
-                            <v-btn class="ma-2"
+                            <v-btn
+                                    class="ma-2"
                                    color="red" pa="2"
                                    dark
+                                   :disabled="menuGuest"
                                    @click="failure(maszyna.ID_Maszyna)"
                             >Nowa awaria
                                 <v-icon right>mdi-plus</v-icon>
@@ -59,6 +61,7 @@
     import FailureService from "../../services/FailureService";
     import SerchMachine from "../../components/serchMachine";
     import {mapMutations, mapGetters} from  "vuex";
+    import store from "../../store/store";
 
     export default {
         name: "failure",
@@ -76,7 +79,8 @@
                 listaMaszyn: [],
                 viewMachine: [],
                 filterHala: '',
-                filterTyp:''
+                filterTyp:'',
+                menuGuest: false
             }
         },
         methods: {
@@ -100,6 +104,11 @@
             this.viewMachine = (await FailureService.getListaMaszyn()).data;
         },
         async mounted() {
+            if (store.getters.profesja === 'Gość'){
+               this.menuGuest = true}
+                else{
+                    this.menuGuest = false
+                }
             this.listaMaszyn = (await FailureService.getListaMaszyn()).data;
 
             this.$root.$on('filter', (hala, typMaszyny) => {
