@@ -6,11 +6,16 @@
                 </v-card-title>
 
                 <v-card-text>
-                    <v-row justify="end" pa="20">
-                    <v-btn  >small</v-btn>
-                    </v-row>
+
                     <data-table-parts></data-table-parts>
                 </v-card-text>
+                <v-card-actions>
+                    <v-btn color="orange"
+                           @click="pageBack"
+                    >Powrót do awarii
+                        <v-icon right>mdi-reply-outline</v-icon>
+                    </v-btn>
+                </v-card-actions>
             </v-card>
         </v-flex>
     </v-layout>
@@ -25,6 +30,11 @@
         data() {
             return {
                 maszyna: {}
+            }
+        },
+        methods: {
+            pageBack() {
+                this.$router.go(-1)
             }
         }
     }

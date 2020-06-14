@@ -65,6 +65,7 @@
             addParts(){
                 this.$router.push({name:'allParts'})
             }
+
         }
     }
 </script>

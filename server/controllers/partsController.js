@@ -1,4 +1,5 @@
 const vParts = require('../models/v_parts')
+const parts = require('../models/parts')
 const partsType = require('../models/partsType')
 const partsProducer = require('../models/partsProducer')
 
@@ -17,7 +18,10 @@ module.exports = {
         }
     },
     async addPart(req, res){
-
+        console.log(req.body)
+        await parts.create(req.body)
+            .then(part => res.send(part))
+            .catch(error => console.log(error))
     },
 
     async getAllProducer(req, res){
