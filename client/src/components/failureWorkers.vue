@@ -74,6 +74,7 @@
             for (let k = 0; k<this.items.length; k++){
                 this.items[k].fullName = this.items[k].PR_imie +' '+ this.items[k].PR_Nazwisko;
             }
+            this.items.sort(function(a,b){ return (a.fullName> b.fullName)? 1: ((b.fullName > a.fullName) ? -1:0);})
             const pr = (await FailureService.getWorkersFromAwariaPracownik({ID_AWARIA:this.ID_AWARIA})).data
             for (let i=0; i < pr.length; i++ ){
                 this.workers.push(pr[i].AWPR_ID_PR)

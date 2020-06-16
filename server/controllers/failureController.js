@@ -75,11 +75,12 @@ module.exports = {
     },
 
     async putNewFailure(req, res) {
+        console.log(req.body)
         try {
             if (req.body.ID_AWARIA === 0){
                 //Nowa awaria
             await awaria.create(req.body)
-                .then(awaria => res.send(awaria))
+                .then(awaria => {res.send(awaria)})
                 .catch(e => console.log(e))
             }else{
                 //Edycja awarii

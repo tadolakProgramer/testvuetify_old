@@ -39,6 +39,7 @@
 <script>
     import FailureService from "../services/FailureService";
     import {mapMutations} from "vuex";
+    import * as moment from "moment";
 
     export default {
         name: "dataTableFailureAll",
@@ -100,6 +101,7 @@
             ...mapMutations(['setfailureEdit', 'setfailureCreate' ]),
 
            async  initialize (){
+                moment.locale('PL')
                this.failures = ((await FailureService.getAllFailure()).data);
             },
             async editItem(item) {

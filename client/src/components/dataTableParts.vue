@@ -52,7 +52,7 @@
                         </v-card-actions>
                     </v-card>
                 </v-dialog>
-                <v-dialog v-model="dialogNewPart" max-width="700px">
+                <v-dialog v-model="dialogNewPart" max-width="800px">
                     <template v-slot:activator="{ on, attrs }">
                         <v-btn
                                 color="primary"
@@ -224,7 +224,9 @@
                 this.AWCZ_AW_ID = this.getIdFailure();
                 this.parts = (await PartsService.getALLParts()).data;
                 this.typeParts = (await PartsService.getAllPartsType()).data;
+                this.typeParts.sort(function(a,b){ return (a.CZGR_NAZWA> b.CZGR_NAZWA)? 1: ((b.CZGR_NAZWA > a.CZGR_NAZWA) ? -1:0);})
                 this.producer = (await PartsService.getAllProducer()).data;
+                this.producer.sort(function(a,b){ return (a.CZPR_NAZWA> b.CZPR_NAZWA)? 1: ((b.CZPR_NAZWA > a.CZPR_NAZWA) ? -1:0);})
             },
 
             close() {
