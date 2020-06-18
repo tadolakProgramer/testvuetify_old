@@ -4,6 +4,8 @@
             :items="failures"
             sort-by="DataAW"
             sort-desc
+            dense
+            :items-per-page="25"
             class="elevation-1"
             :search="search"
     >

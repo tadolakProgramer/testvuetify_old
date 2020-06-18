@@ -1,6 +1,20 @@
 <template>
     <v-layout>
         <v-flex xs2 sm8 offset-sm2>
+            <template>
+                <v-row justify="center">
+                    <v-dialog v-model="dialog" persistent max-width="390">
+                        <v-card>
+                            <v-card-title class="headline primary">Info</v-card-title>
+                            <v-card-text>{{dialogText}}</v-card-text>
+                            <v-card-actions>
+                                <v-spacer></v-spacer>
+                                <v-btn color="green darken-1"  @click="closeNewNotifikation">OK</v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-dialog>
+                </v-row>
+            </template>
             <v-card class="pq-2"
                     max-width="auto"
                     color="secondary"
@@ -51,6 +65,8 @@
         },
         data() {
             return {
+                dialog: false,
+                dialogText:'',
                 maszynka: '',
                 dataGodzina: '',
                 user:'',
@@ -77,6 +93,7 @@
 
             }
         },
+
         methods: {
             async AddNewNotification() {
                 try {
@@ -84,14 +101,20 @@
                         Maszyna_ID: this.maszynka.ID_Maszyna,
                         AW_Zglaszajacy_ID: this.user.ID_USER,
                         AW_OpisAwarii: this.AW_OpisAwarii,
-                        AW_Zrealizowane: 'Zgłoszenie'
+                        AW_Zrealizowane: 'Zgłoszenie',
+                        AW_DataZgloszenia: this.AW_DataZgloszenia = moment().format("MM DD YYYY HH:mm:ss", true),
                     });
                     this.NowaAwaria = await response.data
-                    alert('Zgłoszenie ' +this.maszynka.NazwaMaszyny +' zostało poprawnie zapisane')
+                    this.dialogText = 'Awaria nr: ' + this.NowaAwaria.ID_AWARIA + ', maszyny ' + this.maszynka.NazwaMaszyny + ' została poprawnie zapisana!'
+                    this.dialog = true;
                 }
                 catch (e) {
                     console.log(e)
                 }
+            },
+            closeNewNotifikation() {
+                this.dialog = false
+                this.pageBack(this.maszynka.Hala_id)
             },
             pageBack(Hala_id) {
                 this.$router.push({name: 'notification', params:{IdHala:Hala_id}})

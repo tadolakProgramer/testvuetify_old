@@ -41,10 +41,11 @@ module.exports = {
     async putNewNotification(req, res) {
         try {
             await awaria.create(req.body)
-                .this(awaria => res.send(awaria))
+                .then(awaria => res.send(awaria))
+                .catch(e => console.log(e))
         }
     catch (e) {
-            await res.send.status(400).send({error: 'Wystąpił błąd zapisu do bazy danych'})
+            res.send.status(400).send({error: 'Wystąpił błąd zapisu do bazy danych'})
         }
     }
 };

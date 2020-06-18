@@ -27,9 +27,10 @@
                             <v-icon right>mdi-plus</v-icon>
                         </v-btn>
                         <v-btn class="ma-2"
-                               color="szary" pa="2"
+                               color="accent" pa="2"
                                dark
-                               @click="edit">Edycja
+                               @click="goToFailureHistory(maszyna.ID_Maszyna)"
+                        >Historia
                             <v-icon right>mdi-pencil</v-icon>
                         </v-btn>
                     </v-layout>
@@ -66,12 +67,15 @@
             },
             edit() {
 
-            }
+            },
+            goToFailureHistory(IDS) {
+                this.$router.push({name: 'failureHistory', params: {IDS: IDS}})
+            },
         },
         async mounted() {
             this.user = store.getters.user;
             this.IdHala = this.user.Hala_ID;
-            this.listaMaszyn = (await NotificationService.getListaMaszyn(this.$route.params)).data;
+            this.listaMaszyn = (await NotificationService.getListaMaszyn({IdHala: this.IdHala})).data;
             console.log('Lista: ', this.listaMaszyn, this.IdHala)
         }
     }
