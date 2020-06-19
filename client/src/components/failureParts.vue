@@ -1,7 +1,8 @@
 <template>
     <v-card class="md-2 my-1"
             width="auto"
-            color="secondary">
+            color="secondary"
+            :disabled="disable">
         <v-card-title class="primary font-weight-bold">Lista wymienionych części</v-card-title>
         <v-list-item two-line dense v-for="item in items" :key="item.AWCZ_AW_ID">
             <v-list-item-content >
@@ -44,6 +45,12 @@
         }),
         return:{
             x:''
+        },
+        props: {
+            disable:{
+                type: Boolean,
+                default: false
+            }
         },
         async created() {
             this.ID_AWARIA = this.getIdFailure();

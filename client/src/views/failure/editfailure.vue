@@ -162,10 +162,14 @@
             <v-row justify="center" class="mb-1"
             >
                 <v-col md="3">
-            <failure-workers></failure-workers>
+            <failure-workers
+                    :disable="disabledEdit">
+            </failure-workers>
                 </v-col>
                <v-col md="3">
-                    <failure-parts></failure-parts>
+                    <failure-parts
+                            :disable="disabledEdit">
+                    </failure-parts>
                 </v-col>
                 <!-- <v-col md="3">
                     <failure-workers></failure-workers>
