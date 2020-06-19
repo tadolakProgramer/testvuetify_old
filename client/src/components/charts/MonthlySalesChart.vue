@@ -37,7 +37,16 @@
                 }
             }]
         },
-
+        title: {
+            display: true,
+            fontSize: 18,
+            fontColor: '#4CAF50',
+            text: 'Podsumowanie awarii'
+        },
+        tooltips: {
+            borderColor: '#f60404',
+            borderWidth: 2
+        }
     };
     export default {
         name: 'monthly-sales-chart',

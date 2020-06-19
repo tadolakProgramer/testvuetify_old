@@ -39,7 +39,16 @@
                 }
             }]
         },
-
+        title: {
+            display: true,
+            fontSize: 18,
+            fontColor: '#4CAF50',
+            text: 'Zestawienie awarii z ostatnich 12 miesięcy'
+        },
+        tooltips: {
+            borderColor: '#f60404',
+            borderWidth: 2
+        }
     };
     export default {
         name: 'monthly-failure-chart',
@@ -57,13 +66,13 @@
                     2018: {
                         label: 'Mechaniczne',
                         borderColor: 'rgba(50, 115, 220, 0.5)',
-                        backgroundColor: 'rgba(23,43,222,0.6)',
+                        backgroundColor: 'rgba(23,43,222,0.79)',
                         data: []
                     },
                     2017: {
                         label: 'Elektroniczne',
                         borderColor: 'rgb(23,72,17)',
-                        backgroundColor: 'rgba(107,177,7,0.53)',
+                        backgroundColor: 'rgba(107,177,7,0.74)',
                         data: []
                     }
                 }

@@ -299,7 +299,7 @@
         watch: {
             AW_Zrealizowane: function () {
                 if (this.AW_Zrealizowane === 'Zakończone') {
-                    this.AW_DataZakonczenia = moment().format("MM DD YYYY HH:mm:ss", true);
+                    this.AW_DataZakonczenia = moment().utc("MM DD YYYY HH:mm:ss", true);
                     console.log("Zmiana", this.AW_DataZakonczenia)
                     this.AW_DataZakonczeniaView = moment().format('lll')
                     this.viewDataZakonczenia = true;
