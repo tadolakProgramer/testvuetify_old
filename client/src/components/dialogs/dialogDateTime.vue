@@ -36,9 +36,11 @@
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="green darken-1" text @click="SetNow">Teraz</v-btn>
-                    <v-btn color="green darken-1" text @click="dialog = false">Anuluj</v-btn>
-                    <v-btn color="green darken-1" text @click="saveDate">OK</v-btn>
+                    <v-btn color="orange"  @click="SetNow">Teraz</v-btn>
+                    <v-btn color="orange"  @click="dialog = false">Anuluj
+                        <v-icon right>mdi-cancel</v-icon></v-btn>
+                    <v-btn color="orange"  @click="saveDate">OK
+                        <v-icon right>mdi-check-bold</v-icon></v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
