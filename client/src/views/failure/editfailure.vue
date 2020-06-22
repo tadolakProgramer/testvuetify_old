@@ -314,7 +314,8 @@
                 if (this.AW_Zrealizowane === 'Zakończone') {
                     this.viewDataZakonczenia = true;
                     if (this.AW_DataZakonczenia != null) {
-                        this.AW_DataZakonczenia = await moment(this.maszynka.AW_DataZakonczenia).format('lll')
+                        this.AW_DataZakonczeniaView = await moment(this.maszynka.AW_DataZakonczenia).format('lll')
+                        this.AW_DataZakonczenia = moment().format("MM DD YYYY HH:mm:ss", true);
                     } else {
                         this.AW_DataZakonczenia = moment().format("MM DD YYYY HH:mm:ss", true);
                         this.AW_DataZakonczeniaView = moment().format('lll')
@@ -326,6 +327,7 @@
 
             async AddNewFailure() {
                 try {
+                    console.log(this.AW_DataZakonczenia)
                     const response = await FailureService.addNewFailure({
                         ID_AWARIA: this.ID_AWARIA,
                         Maszyna_ID: this.maszynka.ID_Maszyna,
@@ -337,7 +339,7 @@
                         AW_Typ: this.AW_Typ,
                         AW_Dzialania: this.AW_Dzialania,
                         AW_Zrealizowane: this.AW_Zrealizowane,
-                        AW_DataZakonczenia: (this.AW_DataZakonczenia)
+                        AW_DataZakonczenia: this.AW_DataZakonczenia
                     })
                     this.NowaAwaria = await response.data;
                     this.ID_AWARIA = this.NowaAwaria.ID_AWARIA
