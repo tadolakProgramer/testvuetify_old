@@ -1,7 +1,11 @@
 <template>
     <v-layout>
         <v-flex xs12 sm10 offset-sm1>
-            <v-form v-model="valid">
+            <v-form
+                    ref="form"
+                    v-model="valid"
+                    :lazy-validation="lazy"
+            >
                 <v-card class="pa-4" color="secondary">
                     <v-card-title color="green" class="headline">Nowy użytkownik</v-card-title>
                     <v-row>
@@ -101,6 +105,7 @@
                     <v-card-actions >
                         <v-btn color="accent"
                                dark
+                               :disabled="!valid"
                                @click="register">Dodaj
                         </v-btn>
                         <v-btn color="orange"
@@ -167,6 +172,11 @@
             }
         },
         methods: {
+
+            validate () {
+                this.$refs.form.validate()
+            },
+
             async register() {
                 try {
                     const response = await AuthenticationService.register({

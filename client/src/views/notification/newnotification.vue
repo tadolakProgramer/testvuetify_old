@@ -15,6 +15,11 @@
                     </v-dialog>
                 </v-row>
             </template>
+            <v-form
+                    ref="form"
+                    v-model="valid"
+                    :lazy-validation="lazy"
+            >
             <v-card class="pq-2"
                     max-width="auto"
                     color="secondary"
@@ -42,13 +47,16 @@
                     <span>Zgłaszający: {{user.US_Name}} {{user.US_SUER_NAME}} {{user.US_PROFESJA}}</span>
                 </v-card-text>
                 <v-card-actions>
-                    <v-btn  color="orange"
-                    @click="AddNewNotification">Zapisz</v-btn>
+                    <v-btn
+                            color="orange"
+                            :disabled="!valid"
+                            @click="AddNewNotification">Zapisz</v-btn>
                     <v-btn  color="orange"
                             @click="pageBack(maszynka.Hala_id)"
                     >Anuluj</v-btn>
                 </v-card-actions>
             </v-card>
+            </v-form>
         </v-flex>
     </v-layout>
 </template>
@@ -95,6 +103,10 @@
         },
 
         methods: {
+
+            validate () {
+                this.$refs.form.validate()
+            },
             async AddNewNotification() {
                 try {
                     const response = await NotificationService.addNewNotification({

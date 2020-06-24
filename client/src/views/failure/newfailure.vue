@@ -18,6 +18,11 @@
                     </v-dialog>
                 </v-row>
             </template>
+            <v-form
+                    ref="form"
+                    v-model="valid"
+                    :lazy-validation="lazy"
+            >
             <v-card class="pq-2"
                     max-width="auto"
                     color="secondary"
@@ -118,6 +123,7 @@
                 <v-card-actions>
                     <v-btn color="orange"
                            ma="10"
+                           :disabled="!valid"
                            @click="AddNewFailure">Zapisz
                         <v-icon right>mdi-content-save</v-icon>
                     </v-btn>
@@ -128,6 +134,7 @@
                     </v-btn>
                 </v-card-actions>
             </v-card>
+            </v-form>
         </v-flex>
     </v-layout>
 </template>
@@ -228,6 +235,10 @@
             ]),
             ...mapGetters([
                 'getDateTimeEnd', 'getDataTimeStart']),
+
+            validate () {
+                this.$refs.form.validate()
+            },
 
             async AddNewFailure() {
                 console.log("zapis", this.dataGodzina)

@@ -6,7 +6,6 @@
                 <v-card-title class="headline primary">{{titleDialog()}}</v-card-title>
                 <v-card-text>
                     <v-menu
-
                             :close-on-content-click="true"
                             :nudge-right="40"
                             transition="scale-transition"
