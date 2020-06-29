@@ -13,17 +13,7 @@
                     >
                         <v-card-title class="primary font-weight-bold">
                             {{maszyna.NazwaMaszyny}}
-                            <v-chip
-                                    v-if="maszyna.SumAwarii >0"
-                                    class="ml-12"
-                                    small
-                                    color="szary"
-                                    text-color="white"
-                                    align="end"
-                            >
-                                Ilość interwencji: {{maszyna.SumAwarii}}
-                                <v-icon right>mdi-hammer-screwdriver</v-icon>
-                            </v-chip>
+
                         </v-card-title>
                         <v-card-subtitle class="pt-10 font-weight-bold">
                             {{maszyna.NazwaTypu}}
@@ -42,6 +32,15 @@
                             >Nowa awaria
                                 <v-icon right>mdi-plus</v-icon>
                             </v-btn>
+                            <v-badge
+                                    bordered
+                                    overlap
+                                    color="error"
+                                    left
+                                    :value="maszyna.SumAwarii">
+                                <template v-slot:badge>
+                                    <div>{{maszyna.SumAwarii}}</div>
+                                </template>
                             <v-btn class="ma-2"
                                    color="accent" pa="2"
                                    dark
@@ -49,6 +48,8 @@
                             >Historia
                                 <v-icon right>mdi-table-large</v-icon>
                             </v-btn>
+                            </v-badge>
+
                         </v-layout>
                     </v-card>
             </v-col>
