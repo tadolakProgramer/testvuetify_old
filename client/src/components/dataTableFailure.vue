@@ -21,6 +21,7 @@
         </template>
         <template v-slot:item.actions="{ item }">
             <v-icon
+                    v-if="!operator"
                     small
                     class="mr-2"
                     @click="editItem(item)"
@@ -34,7 +35,7 @@
             <p class="headline
                       font-weight-bold
                       primary"
-                    > Ta maszyna niema zapisanych awarii :-)</p>
+                    > Ta maszyna nie ma zapisanych awarii :-)</p>
         </template>
 
         <template v-slot:item.AW_Zrealizowane=" { item }">
@@ -46,12 +47,14 @@
 <script>
     import FailureService from "../services/FailureService";
     import {mapMutations} from "vuex";
+    import store from "../store/store";
 
     export default {
         name: "dataTableFailure",
         data: () => ({
             search: '',
             dialog: false,
+            operator: false,
             headers: [
                 {
                     text: 'Lp',
@@ -111,6 +114,9 @@
 
             async initialize() {
                 this.failures = (await FailureService.getFailureMachina(this.$route.params)).data;
+                if (store.getters.profesja === 'Operator'){
+                 this.operator = true;
+                }
             },
             async editItem(item) {
                 const ID_AWARIA = item.ID_AWARIA

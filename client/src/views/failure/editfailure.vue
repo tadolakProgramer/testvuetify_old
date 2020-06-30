@@ -104,6 +104,7 @@
                     <v-textarea
                             v-model="AW_Dzialania"
                             background-color="white"
+                            :disabled="disabledEdit"
                             color="black"
                             label="Opisz jakie działania zostały podjete aby usunąć usterkę"
                             hint="Minimum 25 znaków"
