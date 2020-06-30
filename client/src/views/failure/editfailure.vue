@@ -45,7 +45,7 @@
                         <v-tooltip bottom>
                             <template v-slot:activator="{on}">
                         <v-btn x-small
-                               :disabled="disabledEdit"
+                               :disabled="disabledEditZgloszenie"
                                fab small
                                v-on="on"
                                @click=OpenDialogDateTime()>
@@ -91,7 +91,7 @@
                     </v-row>
                     <v-textarea
                             v-model="AW_OpisAwarii"
-                            :disabled="disabledEdit"
+                            :disabled="disabledEditZgloszenie"
                             background-color="white"
                             color="black"
                             label="Opisz awarię"
@@ -200,6 +200,7 @@
             return {
                 dialog: '',
                 dialogPytanie:false,
+                disabledEditZgloszenie: false,
                 disabledEdit: false,
                 dialogText: '',
                 dialogPytanieText:'',
@@ -226,6 +227,7 @@
                 AW_Dzialania: '',
                 AW_DataZakonczenia: '',
                 AW_DataZakonczeniaView: '',
+                AW_Realizujacy_ID: '',
                 dataGodzinaView: '',
                 NowaAwaria: {},
                 DataTimeEnd: '',
@@ -261,6 +263,7 @@
                 this.AW_Typ = this.maszynka.AW_Typ
                 this.AW_OpisAwarii = this.maszynka.AW_OpisAwarii
                 this.AW_Zrealizowane = this.maszynka.AW_Zrealizowane
+                this.AW_Realizujacy_ID = this.maszynka.AW_Realizujacy_ID
                 this.US_Name = this.maszynka.US_Name
                 this.US_SUER_NAME = this.maszynka.US_SUER_NAME
                 if (this.AW_Zrealizowane === 'Zakończone') {
@@ -282,7 +285,12 @@
 
                 //Get User login to system
                 this.user = store.getters.user;
-                if (this.user.ID_USER === this.maszynka.ID_USER) {
+                if (this.user.ID_USER === this.maszynka.ID_USER){
+                    this.disabledEditZgloszenie = false;
+                } else {
+                    this.disabledEditZgloszenie = true;
+                }
+                if ((this.user.ID_USER === this.maszynka.AW_Realizujacy_ID) || (this.maszynka.AW_Realizujacy_ID === null)){
                     this.disabledEdit = false;
                 } else {
                     this.disabledEdit = true;
@@ -334,7 +342,7 @@
                         AW_MO_ID: this.obszarMaszyny,
                         AW_MO_Symbol: this.AW_MO_Symbol,
                         AW_DataZgloszenia: this.dataGodzina,
-                        AW_Zglaszajacy_ID: this.user.ID_USER,
+                        AW_Realizujacy_ID: this.user.ID_USER,
                         AW_OpisAwarii: this.AW_OpisAwarii,
                         AW_Typ: this.AW_Typ,
                         AW_Dzialania: this.AW_Dzialania,

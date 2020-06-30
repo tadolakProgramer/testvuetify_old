@@ -95,7 +95,8 @@ module.exports = {
                     AW_Typ: req.body.AW_Typ,
                     AW_Dzialania: req.body.AW_Dzialania,
                     AW_Zrealizowane: req.body.AW_Zrealizowane,
-                    AW_DataZakonczenia: req.body.AW_DataZakonczenia},
+                    AW_DataZakonczenia: req.body.AW_DataZakonczenia,
+                    AW_Realizujacy_ID: req.body.AW_Realizujacy_ID},
                     {
                     where:{ ID_AWARIA: ID_Awaria
                     }})

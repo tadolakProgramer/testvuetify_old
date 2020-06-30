@@ -59,6 +59,10 @@ const Awarie = sequelize.define('AWARIE', {
     AW_ID_Zatwierdzajacy: {
         type: Sequelize.INTEGER,
         allowNull: true
+    },
+    AW_Realizujacy_ID: {
+        type: Sequelize.INTEGER,
+        allowNull: true
     }
 });
 
