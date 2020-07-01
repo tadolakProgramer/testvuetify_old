@@ -83,6 +83,10 @@
                 protein: 0,
             },
         }),
+        props: {
+
+        },
+
         computed: {
             formTitle() {
                 return this.editedIndex === -1 ? 'New Item' : 'Edit Item'

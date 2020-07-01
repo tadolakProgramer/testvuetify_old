@@ -32,4 +32,6 @@ module.exports = (app) => {
     app.post('/failure/addPartToFailutre', failureController.postAddPartToFailure);
 
     app.post('/failure/deleteOneFailure/', failureController.deleteOneFailure);
+
+    app.get('/failure/getFailureByStatus', failureController.getFailureByStatus);
 };

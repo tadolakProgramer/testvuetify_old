@@ -61,7 +61,8 @@
                 show1: false,
                 IdHala:'',
                 Hale:'',
-                TypyMaszyn:''
+                TypyMaszyn:'',
+                lazy: ''
             }
         },
         methods: {
@@ -88,11 +89,15 @@
                     if (store.getters.profesja ==='Operator'){
                         this.IdHala = this.user.Hala_ID;
                         console.log('NrHali:',this.IdHala);
-                        this.$router.push({name: 'notification', params:{IdHala:this.IdHala}});
+                        await this.$router.push({name: 'notification', params: {IdHala: this.IdHala}});
+                        this.$root.$emit('loginOK', true, false);
+                    }
+                    if (store.getters.profesja ==='Kierownik'){
+                        await this.$router.push({name: 'notification', params: {IdHala: this.IdHala}});
                         this.$root.$emit('loginOK', true, false);
                     }
                     if (store.getters.profesja === 'Automatyk' || store.getters.profesja === 'Admin' || store.getters.profesja === 'Gość'){
-                        this.$router.push({name: 'failure'})
+                        await this.$router.push({name: 'failure'})
                         this.$root.$emit('loginOK', true, true)
                         }
                 } catch (LoginError) {

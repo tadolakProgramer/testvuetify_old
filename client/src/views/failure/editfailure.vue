@@ -322,13 +322,8 @@
             async changeRadioGroup() {
                 if (this.AW_Zrealizowane === 'Zakończone') {
                     this.viewDataZakonczenia = true;
-                    if (this.AW_DataZakonczenia != null) {
-                        this.AW_DataZakonczeniaView = await moment(this.maszynka.AW_DataZakonczenia).format('lll')
-                        this.AW_DataZakonczenia = moment().format("MM DD YYYY HH:mm:ss", true);
-                    } else {
                         this.AW_DataZakonczenia = moment().format("MM DD YYYY HH:mm:ss", true);
                         this.AW_DataZakonczeniaView = moment().format('lll')
-                    }
                 } else {
                     this.viewDataZakonczenia = false;
                 }

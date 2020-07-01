@@ -74,6 +74,22 @@ module.exports = {
         }
     },
 
+    async getFailureByStatus(req, res) {
+        try{
+            const statusAwarii = req.query.AW_Zrealizowane;
+            console.log("ID", AW_Zrealizowane)
+            await listaAwarii.findAll({where:{
+                    AW_Zrealizowane: statusAwarii
+                }})
+                .then(awaria => res.send(awaria))
+        }catch (e) {
+            console.log('error', err);
+            res.status(400).send({
+                error: 'vMaszyny error'
+            })
+        }
+    },
+
     async putNewFailure(req, res) {
         try {
             if (req.body.ID_AWARIA === 0){

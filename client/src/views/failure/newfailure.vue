@@ -156,10 +156,11 @@
         data() {
             return {
                 dialog: '',
+                lazy: '',
                 dialogText:'',
                 maszynka: '',
                 obszar:[],
-                obszarMaszyny:'',
+                obszarMaszyny:'0',
                 obszarMaszynyHint:'',
                 ID_OM:'',
                 OM_Komentarz:'',
@@ -213,6 +214,8 @@
 
                 //Get User login to system
                 this.user = store.getters.user;
+
+                this.AW_DataZakonczenia = moment().format("MM DD YYYY HH:mm:ss", true);
 
                 //Get date from dialogDateTime
                 this.$root.$on('dataStart', (DataCzas) => {

@@ -131,6 +131,7 @@
                 alert: false,
                 alert2: false,
                 valid: false,
+                lazy: '',
                 Hale: [],
                 items: [
                     'Operator', 'Automatyk', 'Mechanik', 'Kierownik','Admin','Gość'

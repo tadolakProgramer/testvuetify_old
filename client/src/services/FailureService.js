@@ -26,6 +26,11 @@ export default {
             {params: ID_AWARIA})
     },
 
+    getFailureByStatus(AW_Zrealizowane){
+        return Api().get('/failure/getFailureByStatus',
+            {params: AW_Zrealizowane})
+    },
+
     getFailureMachina(IDS){
         return Api().get('/getFailureMachine/',
             {params: IDS})

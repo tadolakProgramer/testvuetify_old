@@ -43,6 +43,7 @@
 <script>
     import NotificationService from "../../services/NotificationService";
     import store from "../../store/store";
+    import FailureService from "../../services/FailureService";
 
     export default {
         name: "notification",
@@ -74,8 +75,16 @@
         },
         async mounted() {
             this.user = store.getters.user;
-            this.IdHala = this.user.Hala_ID;
-            this.listaMaszyn = (await NotificationService.getListaMaszyn({IdHala: this.IdHala})).data;
+            if (store.getters.profesja === 'Operator')
+            {
+                this.IdHala = this.user.Hala_ID;
+                this.listaMaszyn = (await NotificationService.getListaMaszyn({IdHala: this.IdHala})).data;
+            }
+            if (store.getters.profesja === 'Kierownik')
+            {
+                this.IdHala = this.user.Hala_ID;
+                this.listaMaszyn = (await FailureService.getListaMaszyn()).data;
+            }
             console.log('Lista: ', this.listaMaszyn, this.IdHala)
         }
     }
