@@ -152,7 +152,7 @@
                     </v-btn>
                     <v-spacer></v-spacer>
                     <v-btn color="red"
-                           :disabled="disabledEdit"
+                           :disabled="disabledEditZgloszenie"
                            justify="end"
                            @click="deleteFailure"
                     >Usuń wpis

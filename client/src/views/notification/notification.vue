@@ -26,13 +26,23 @@
                                >Zgłoszenie
                             <v-icon right>mdi-plus</v-icon>
                         </v-btn>
-                        <v-btn class="ma-2"
-                               color="accent" pa="2"
-                               dark
-                               @click="goToFailureHistory(maszyna.ID_Maszyna)"
-                        >Historia
-                            <v-icon right>mdi-pencil</v-icon>
-                        </v-btn>
+                        <v-badge
+                                bordered
+                                overlap
+                                color="error"
+                                left
+                                :value="maszyna.SumAwarii">
+                            <template v-slot:badge>
+                                <div>{{maszyna.SumAwarii}}</div>
+                            </template>
+                            <v-btn class="ma-2"
+                                   color="accent" pa="2"
+                                   dark
+                                   @click="goToFailureHistory(maszyna.ID_Maszyna)"
+                            >Historia
+                                <v-icon right>mdi-table-large</v-icon>
+                            </v-btn>
+                        </v-badge>
                     </v-layout>
                 </v-card>
             </v-col>
