@@ -1,5 +1,7 @@
 const vMaszyny = require('../models/v_maszyny');
 const awaria = require('../models/awarie');
+const listaAwarii = require('../models/listaAwarii')
+const transporter = require('../config/mail')
 
 module.exports = {
     async getListaMaszyn(req, res) {
@@ -41,7 +43,30 @@ module.exports = {
     async putNewNotification(req, res) {
         try {
             await awaria.create(req.body)
-                .then(awaria => res.send(awaria))
+                .then(async awaria => {
+                    res.send(awaria)
+                    const ID_AWARIA = awaria.ID_AWARIA;
+                    await listaAwarii.findByPk(ID_AWARIA)
+                        .then(awaria => {
+                            mailOptions = {
+                                from: '',
+                                to: '',
+                                subject: awaria.NazwaMaszyny,
+                                text: awaria.AW_OpisAwarii,
+                                html: 'Witam,</br>\n\n' +
+                                    'Zgłaszam awarię maszyny: '+ awaria.NazwaMaszyny + '</br>\n\n' +
+                                    'Opis awarii: ' + awaria.AW_OpisAwarii + '</br>\n\n' +
+                                    '</br> Zgłaszający: ' + awaria.US_Name +' '+ awaria.US_SUER_NAME + '\n\n' + '</br>'
+                            }
+                            transporter.sendMail(mailOptions, function (error, info) {
+                                if (error) {
+                                    console.log(error);
+                                } else {
+                                    console.log('Email sent: ' + info.response);
+                                }
+                            })
+                        })
+                })
                 .catch(e => console.log(e))
         }
     catch (e) {
