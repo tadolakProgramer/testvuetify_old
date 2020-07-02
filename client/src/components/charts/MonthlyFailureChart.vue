@@ -91,7 +91,7 @@
         async mounted() {
             this.dane = (await StatisticService.getFailurePerMonth()).data
             for (let k = 0; k<this.dane.length; k++){
-                let data = (this.dane[k].Year_ID).toString() +" "+(moment().month(this.dane[k].Month).format("MMMM")).toString()
+                let data = (this.dane[k].Year_ID).toString() +" "+(moment().month(this.dane[k].Month-1).format("MMMM")).toString()
                     this.labels.push(data);
                     this.datasets["2017"].data.push(this.dane[k].SumaAwariiA)
                     this.datasets["2018"].data.push(this.dane[k].SumaAwariiM)
