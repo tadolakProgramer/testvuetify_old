@@ -2,7 +2,7 @@
     <div class="Header">
         <v-navigation-drawer
                 v-model="drawer"
-                v-if=automatyk
+                v-if=leftMenu
                 app
         >
             <tree-view></tree-view>
@@ -88,8 +88,9 @@
 </template>
 
 <script>
-    import AuthenticationService from '../services/AuthenticationService'
+
     import TreeView from "./treeView";
+    import store from "../store/store";
 
     export default {
         name: "Header",
@@ -102,6 +103,7 @@
                 drawer: null,
                 avatar:'',
                 automatyk: false,
+                leftMenu: false,
                 login: false //control buttons login/logout
             }
         },
@@ -114,6 +116,7 @@
                 this.$store.dispatch('setListaHal', null)
                 this.login = false;
                 this.automatyk = false;
+                this.leftMenu = false;
                 this.$router.push({
                     name: 'Home'
                 })
@@ -123,15 +126,31 @@
             }
         },
         async mounted() {
+
             this.$root.$on('loginOK',(login, automatyk) => {
                 this.login = login
                 this.automatyk = automatyk
+                    const profesja = store.getters.profesja
             //crate avatar
-            this.avatar = this.$store.getters.user.US_Name.charAt(0) + this.$store.getters.user.US_SUER_NAME.charAt(0)
+                    switch(profesja) {
+                        case "Automatyk":
+                            this.leftMenu = true;
+                            break;
+                        case "Kierownik":
+                            this.leftMenu = true;
+                            break;
+                        case "Gość":
+                            this.leftMenu = true;
+                            break;
+                        case "Admin":
+                            this.leftMenu = true;
+                            break;
+                        default:
+                            this.leftMenu = false;
+                    }
+                    this.avatar = this.$store.getters.user.US_Name.charAt(0) + this.$store.getters.user.US_SUER_NAME.charAt(0)
             }
             )
-                this.Hale = (await AuthenticationService.getHale()).data;
-            console.log('Hale: ', this.Hale)
         }
     }
 

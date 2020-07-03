@@ -77,7 +77,7 @@ module.exports = {
     async getFailureByStatus(req, res) {
         try{
             const statusAwarii = req.query.AW_Zrealizowane;
-            console.log("ID", AW_Zrealizowane)
+            console.log("Status", statusAwarii)
             await listaAwarii.findAll({where:{
                     AW_Zrealizowane: statusAwarii
                 }})
