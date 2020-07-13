@@ -92,7 +92,12 @@
             ]),
             failure(IDS) {
                 this.setfailureCreate();
-                this.$router.push({name: 'newfailure', params: {IDS: IDS}})
+                if (store.getters.profesja === 'Kierownik') {
+                    this.$router.push({name: 'newnotification', params: {IDS: IDS}})
+                }
+                else {
+                    this.$router.push({name: 'newfailure', params: {IDS: IDS}})
+                }
             },
             goToFailureHistory(IDS) {
                 this.$router.push({name: 'failureHistory', params: {IDS: IDS}})
