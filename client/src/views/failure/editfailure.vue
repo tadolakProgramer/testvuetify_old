@@ -72,11 +72,13 @@
                                     item-value="ID_OM"
                                     @change="changeHint"
                                     label="Obszar"
+                                    inputmax="3"
                                     :hint="obszarMaszynyHint"
                             ></v-select>
                         </v-col>
                         <v-col cols="8" sm="4" md="2">
                             <v-text-field
+                                    maxlength="3"
                                     v-model="AW_MO_Symbol"
                                     :disabled="disabledEdit"
                                     label="Symbol obszaru"

@@ -58,11 +58,13 @@
                                     label="Obszar"
                                     @change="changeHint"
                                     persistent-hint
+                                    inputmax="3"
                                     :hint="obszarMaszynyHint"
                             ></v-select>
                         </v-col>
                         <v-col cols="8" sm="4" md="2">
                             <v-text-field
+                                    maxlength="3"
                                     v-model="AW_MO_Symbol"
                                     label="Symbol obszaru"
                             ></v-text-field>
@@ -186,7 +188,7 @@
                 DataTimeEnd: '',
                 rules: {
                     required: value => !!value || 'To pole nie może być puste.',
-                    min: v => v.length > 25 || 'Min 25 znaków'
+                    min: v => v.length > 25 || 'Min 25 znaków',
                 }
             }
         },
