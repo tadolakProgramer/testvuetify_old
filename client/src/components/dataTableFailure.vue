@@ -1,4 +1,5 @@
 <template>
+
     <v-data-table
             :headers="headers"
             :items="failures"
@@ -10,15 +11,23 @@
     >
         <template v-slot:top>
             <v-toolbar color="secondary">
-
                 <v-text-field
                         v-model="search"
                         append-icon="mdi-magnify"
                         label="Szukaj"
                 ></v-text-field>
-
+              <v-btn
+                  class="ma-2"
+                  color="red" pa="2"
+                  dark
+                  :disabled="menuGuest"
+                  @click="failure(maszynaID)"
+              >Nowa awaria
+                <v-icon right>mdi-plus</v-icon>
+              </v-btn>
             </v-toolbar>
         </template>
+
         <template v-slot:item.actions="{ item }">
             <v-icon
                     v-if="!operator"
@@ -51,6 +60,11 @@
 
     export default {
         name: "dataTableFailure",
+      props: {
+        maszynaID: {
+          type: Number
+        }
+      },
         data: () => ({
             search: '',
             dialog: false,
@@ -112,6 +126,15 @@
         methods: {
             ...mapMutations(['setfailureEdit', 'setfailureCreate' ]),
 
+          failure(IDS) {
+            this.setfailureCreate();
+            if ((store.getters.profesja === 'Kierownik') || (store.getters.profesja === 'Operator')){
+              this.$router.push({name: 'newnotification', params: {IDS: IDS}})
+            }
+            else {
+              this.$router.push({name: 'newfailure', params: {IDS: IDS}})
+            }
+          },
             async initialize() {
                 this.failures = (await FailureService.getFailureMachina(this.$route.params)).data;
                 if (store.getters.profesja === 'Operator'){
