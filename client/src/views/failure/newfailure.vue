@@ -169,6 +169,7 @@
                 newFailure: '',
                 dataGodzina: '',
                 user: '',
+                zrealizowal:null,
                 dialogType: '',
                 viewDataZakonczenia: false,
                 ID_AWARIA: 0,
@@ -262,6 +263,7 @@
                         AW_OpisAwarii: this.AW_OpisAwarii,
                         AW_Dzialania: this.AW_Dzialania,
                         AW_Zrealizowane: this.AW_Zrealizowane,
+                        AW_Realizujacy_ID: this.zrealizowal,
                         AW_DataZakonczenia:(this.AW_DataZakonczenia)
                     })
                     this.NowaAwaria = await response.data;
@@ -319,8 +321,10 @@
                     console.log("Zmiana", this.AW_DataZakonczenia)
                     this.AW_DataZakonczeniaView = moment().format('lll')
                     this.viewDataZakonczenia = true;
+                    this.zrealizowal = this.user.ID_USER;
                 } else {
                     this.viewDataZakonczenia = false;
+                    this.zrealizowal = null;
                 }
             },
             DataTimeEnd() {
