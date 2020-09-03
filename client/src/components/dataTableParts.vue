@@ -73,20 +73,20 @@
                                     <v-col cols="12" sm="6" md="4">
                                         <v-text-field
                                                 v-model="CZ_Nazwa"
-                                                inputmax="50"
+                                                maxlength="50"
                                                 label="Nazwa części">
                                         </v-text-field>
                                     </v-col>
                                     <v-col cols="12" sm="6" md="4">
                                         <v-text-field
                                                 v-model="CZ_Symbol"
-                                                inputmax="50"
+                                                maxlength="50"
                                                 label="Symbol"></v-text-field>
                                     </v-col>
                                     <v-col cols="12" sm="6" md="4">
                                         <v-text-field
                                                 v-model="CZ_NrKatalogowy"
-                                                inputmax="50"
+                                                maxlength="50"
                                                 label="Nr katalogowy"></v-text-field>
                                     </v-col>
                                     <v-col cols="12" sm="6" md="3">
