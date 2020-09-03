@@ -1,8 +1,8 @@
-const partsController = require('../controllers/partsController');
+const componentController = require('../controllers/componentController');
 const isAuth = require('../policies/isAuthenticated')
 
 module.exports = (app) => {
 
-    app.get('/components/gettree', componentController.getTree);
+    app.get('/components/gettree', componentController.getTree());
 
 }
