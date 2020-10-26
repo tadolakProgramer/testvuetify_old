@@ -63,6 +63,7 @@
     import SerchMachine from "../../components/serchMachine";
     import {mapMutations, mapGetters} from  "vuex";
     import store from "../../store/store";
+    import tree from "../../helpers/TreeTest";
 
     export default {
         name: "failure",
@@ -104,7 +105,32 @@
             },
             edit() {
 
+            },
+          convert(tree){
+            var map = {}
+            for(var i = 0; i < tree.length; i++){
+              var obj = tree[i]
+              if(!(obj.ID_Podzespol in map)){
+                map[obj.ID_Podzespol] = obj
+                map[obj.ID_Podzespol].pdz_rodzic = []
+              }
+
+              if(typeof map[obj.ID_Podzespol].pdz_Nazwa === 'undefined'){
+                map[obj.ID_Podzespol].ID_Podzespol = obj.ID_Podzespol
+                map[obj.ID_Podzespol].pdz_Nazwa = obj.pdz_Nazwa
+                map[obj.ID_Podzespol].pdz_rodzic= obj.pdz_rodzic
+              }
+
+              var parent = obj.pdz_rodzic || '-';
+              if(!(parent in map)){
+                map[parent] = {}
+                map[parent].children = []
+              }
+
+              map[parent].children.push(map[obj.ID_Podzespol])
             }
+            return map['-']
+          }
         },
         async created() {
             this.viewMachine = (await FailureService.getListaMaszyn()).data;
@@ -145,6 +171,18 @@
                     }}
             })
             this.filterHala = SerchMachine.data().listaHal;
+           var treeView3 = this.convert(tree)
+          console.log("tree:", treeView3)
+          let poziom2 = tree.filter(tree2 => tree2.pdz_rodzic === 3)
+          console.log("drzewo p2:", poziom2)
+          for (let p2=0; p2< poziom2.length; p2++){
+            for (let allTree=0; allTree<tree.length; allTree++){
+              if (poziom2[p2].ID_Podzespol === tree[allTree].pdz_rodzic){
+                let poziom3 = tree.filter(tree3 => tree3.pdz_rodzic === tree[allTree].ID_Podzespol)
+                console.log(poziom3)
+              }
+            }
+          }
         }
     }
 </script>

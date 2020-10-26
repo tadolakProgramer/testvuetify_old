@@ -79,7 +79,7 @@
             };
         },
         created() {
-            moment.locale('pl');
+             moment.locale('pl');
             // this.dataGodzina = moment().format('lll');
 
         },

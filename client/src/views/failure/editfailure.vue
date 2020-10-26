@@ -35,6 +35,12 @@
                     </v-dialog>
                 </v-row>
             </template>
+
+          <v-form
+              ref="form"
+              v-model="valid"
+              :lazy-validation="lazy"
+          >
             <v-card class="pq-2"
                     max-width="auto"
                     color="secondary"
@@ -79,6 +85,7 @@
                         <v-col cols="8" sm="4" md="2">
                             <v-text-field
                                     maxlength="3"
+                                    inputmax="3"
                                     v-model="AW_MO_Symbol"
                                     :disabled="disabledEdit"
                                     label="Symbol obszaru"
@@ -118,6 +125,7 @@
                     <span>Zgłaszający: {{US_Name}} {{US_SUER_NAME}}</span>
                 </v-card-text>
                 <hr>
+
                 <v-radio-group v-model="AW_Zrealizowane" @change="changeRadioGroup" row
                                :disabled="disabledEdit"
                 >Status awarii
@@ -141,9 +149,18 @@
                     </div>
                 </v-radio-group>
 
+              <v-alert
+                  :value="alert"
+                  type="error"
+                  color="red"
+                  elevation="2"
+                  transition="scale-transition"
+              >Pole obszar maszyny nie może być puste
+              </v-alert>
+
                 <v-card-actions>
                     <v-btn color="orange"
-                           :disabled="disabledEdit"
+                           :disabled="disabledZapisz"
                            @click="AddNewFailure">Zapisz
                         <v-icon right>mdi-content-save</v-icon>
                     </v-btn>
@@ -174,10 +191,11 @@
                             :disable="disabledEdit">
                     </failure-parts>
                 </v-col>
-                <!-- <v-col md="3">
-                    <failure-workers></failure-workers>
-                </v-col>-->
+                <v-col md="3">
+                    <failure-image></failure-image>
+                </v-col>
             </v-row>
+          </v-form>
         </v-flex>
 
     </v-layout>
@@ -192,19 +210,23 @@
     import {mapMutations, mapGetters} from "vuex";
     import FailureWorkers from "../../components/failureWorkers";
     import FailureParts from "../../components/failureParts";
+    import FailureImage from "../../components/failureImage";
 
 
     export default {
-        components: {FailureParts, FailureWorkers, DialogDateTime},
+        components: {FailureParts, FailureWorkers, FailureImage ,DialogDateTime},
         props: {
             source: String,
         },
         data() {
             return {
                 dialog: '',
+                lazy: '',
+              alert: false,
                 dialogPytanie:false,
                 disabledEditZgloszenie: false,
                 disabledEdit: false,
+              disabledZapisz: false,
                 dialogText: '',
                 dialogPytanieText:'',
                 maszynka: '',
@@ -293,11 +315,17 @@
                 } else {
                     this.disabledEditZgloszenie = true;
                 }
-                if ((this.user.ID_USER === this.maszynka.AW_Realizujacy_ID) || (this.maszynka.AW_Realizujacy_ID === null)){
+                if (((this.user.ID_USER === this.maszynka.AW_Realizujacy_ID) || (this.maszynka.AW_Realizujacy_ID === null)) ) {
                     this.disabledEdit = false;
                 } else {
                     this.disabledEdit = true;
                 }
+
+              if (!this.disabledEdit && !this.validate()) {
+                this.disabledZapisz = false;
+              } else {
+                this.disabledZapisz = true;
+              }
 
                 //Get date from dialogDateTime
                 this.$root.$on('dataStart', (DataCzas) => {
@@ -321,6 +349,11 @@
             ...mapGetters([
                 'getDateTimeEnd', 'getDateTimeStart']),
 
+          validate () {
+            this.$refs.form.validate()
+            this.lazy = this.$refs.form.validate()
+          },
+
             async changeRadioGroup() {
                 if (this.AW_Zrealizowane === 'Zakończone') {
                     this.viewDataZakonczenia = true;
@@ -332,28 +365,33 @@
             },
 
             async AddNewFailure() {
+              if (this.AW_MO_Symbol == null) {
+                this.alert = true;
+              }
+              else {
                 try {
-                    console.log(this.AW_DataZakonczenia)
-                    const response = await FailureService.addNewFailure({
-                        ID_AWARIA: this.ID_AWARIA,
-                        Maszyna_ID: this.maszynka.ID_Maszyna,
-                        AW_MO_ID: this.obszarMaszyny,
-                        AW_MO_Symbol: this.AW_MO_Symbol,
-                        AW_DataZgloszenia: this.dataGodzina,
-                        AW_Realizujacy_ID: this.user.ID_USER,
-                        AW_OpisAwarii: this.AW_OpisAwarii,
-                        AW_Typ: this.AW_Typ,
-                        AW_Dzialania: this.AW_Dzialania,
-                        AW_Zrealizowane: this.AW_Zrealizowane,
-                        AW_DataZakonczenia: this.AW_DataZakonczenia
-                    })
-                    this.NowaAwaria = await response.data;
-                    this.ID_AWARIA = this.NowaAwaria.ID_AWARIA
-                    this.dialogText = 'Awaria nr: ' + this.NowaAwaria.ID_AWARIA + ', maszyny ' + this.maszynka.NazwaMaszyny + ' została poprawnie zapisana!'
-                    this.dialog = true;
+                  console.log(this.AW_DataZakonczenia)
+                  const response = await FailureService.addNewFailure({
+                    ID_AWARIA: this.ID_AWARIA,
+                    Maszyna_ID: this.maszynka.ID_Maszyna,
+                    AW_MO_ID: this.obszarMaszyny,
+                    AW_MO_Symbol: this.AW_MO_Symbol,
+                    AW_DataZgloszenia: this.dataGodzina,
+                    AW_Realizujacy_ID: this.user.ID_USER,
+                    AW_OpisAwarii: this.AW_OpisAwarii,
+                    AW_Typ: this.AW_Typ,
+                    AW_Dzialania: this.AW_Dzialania,
+                    AW_Zrealizowane: this.AW_Zrealizowane,
+                    AW_DataZakonczenia: this.AW_DataZakonczenia
+                  })
+                  this.NowaAwaria = await response.data;
+                  this.ID_AWARIA = this.NowaAwaria.ID_AWARIA
+                  this.dialogText = 'Awaria nr: ' + this.NowaAwaria.ID_AWARIA + ', maszyny ' + this.maszynka.NazwaMaszyny + ' została poprawnie zapisana!'
+                  this.dialog = true;
                 } catch (e) {
-                    console.log(e)
+                  console.log(e)
                 }
+              }
             },
             async OpenDialogDateTime() {
                 await this.setTitleDialog('Wystąpienie usterki')
@@ -401,7 +439,12 @@
             watch: {
                 DataTimeEnd() {
                     console.log("Zmiana")
+                },
+              obszarMaszyny: function () {
+                if (this.alert) {
+                  this.alert = false
                 }
+              }
             }
         }
     }

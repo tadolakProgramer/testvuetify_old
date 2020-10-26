@@ -8,6 +8,8 @@
         <v-select
                 v-model="workers"
                 :items="items"
+                filled
+
                 item-value="PR_ID"
                 item-text="fullName"
                 label="Dodaj osoby"

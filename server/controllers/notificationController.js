@@ -49,8 +49,8 @@ module.exports = {
                     await listaAwarii.findByPk(ID_AWARIA)
                         .then(awaria => {
                             mailOptions = {
-                                from: '',
-                                to: '',
+                                from: 'zgloszenie.awari@folplast.com.pl',
+                                to: 'tadeusz.maziarz@folplast.com.pl',
                                 subject: awaria.NazwaMaszyny,
                                 text: awaria.AW_OpisAwarii,
                                 html: 'Witam,</br>\n\n' +
