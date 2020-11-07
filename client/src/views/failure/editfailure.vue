@@ -191,9 +191,9 @@
                             :disable="disabledEdit">
                     </failure-parts>
                 </v-col>
-                <v-col md="3">
+                <!--<v-col md="3">
                     <failure-image></failure-image>
-                </v-col>
+                </v-col>-->
             </v-row>
           </v-form>
         </v-flex>
@@ -210,11 +210,11 @@
     import {mapMutations, mapGetters} from "vuex";
     import FailureWorkers from "../../components/failureWorkers";
     import FailureParts from "../../components/failureParts";
-    import FailureImage from "../../components/failureImage";
+   // import FailureImage from "../../components/failureImage";
 
 
     export default {
-        components: {FailureParts, FailureWorkers, FailureImage ,DialogDateTime},
+        components: {FailureParts, FailureWorkers, /*FailureImage ,*/DialogDateTime},
         props: {
             source: String,
         },

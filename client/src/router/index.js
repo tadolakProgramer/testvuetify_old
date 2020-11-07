@@ -17,7 +17,10 @@ import allParts from "../views/parts/allParts";
 import monthlySalesCharts from "../components/charts/MonthlySalesChart"
 import failurePreMonth from "../components/charts/MonthlyFailureChart"
 
+import treePartsByMachine from "@/views/parts/treePartsByMachine";
+
 import IsLogin from './isLogin'
+
 
 
 Vue.use(VueRouter)
@@ -102,6 +105,12 @@ const routes = [
         path: '/charts/failurePermonth',
         name: 'failurePreMonth',
         component: failurePreMonth,
+        //beforeEnter: IsLogin
+    },
+    {
+        path: '/parts/treeParts:IDS',
+        name: 'treePartsByMachine',
+        component: treePartsByMachine,
         //beforeEnter: IsLogin
     },
 ]

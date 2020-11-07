@@ -267,7 +267,7 @@
                     const response = await PartsService.postPart({
                         CZ_Nazwa: this.CZ_Nazwa,
                         CZ_NrKatalogowy: this.CZ_NrKatalogowy,
-                        CZ_Smbol: this.CZ_Smbol,
+                        CZ_Symbol: this.CZ_Symbol,
                         CZ_Uwagi: this.CZ_Uwagi,
                         CZ_CZGR_ID: this.CZ_CZGR_ID,
                         CZ_PROD_ID: this.CZ_PROD_ID

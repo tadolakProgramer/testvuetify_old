@@ -50,7 +50,7 @@ module.exports = {
                         .then(awaria => {
                             mailOptions = {
                                 from: 'zgloszenie.awari@folplast.com.pl',
-                                to: 'tadeusz.maziarz@folplast.com.pl',
+                                to: 'automatycy@folplast.com.pl',
                                 subject: awaria.NazwaMaszyny,
                                 text: awaria.AW_OpisAwarii,
                                 html: 'Witam,</br>\n\n' +

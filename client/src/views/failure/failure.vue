@@ -32,6 +32,14 @@
                             >Nowa awaria
                                 <v-icon right>mdi-plus</v-icon>
                             </v-btn>
+                          <v-btn
+                              class="ma-2"
+                              color="blue" pa="2"
+                              dark
+                              :disabled="menuGuest"
+                              @click="drzewo(maszyna.ID_Maszyna)"
+                          >Elementy
+                          </v-btn>
                             <v-badge
                                     bordered
                                     overlap
@@ -63,7 +71,6 @@
     import SerchMachine from "../../components/serchMachine";
     import {mapMutations, mapGetters} from  "vuex";
     import store from "../../store/store";
-    import tree from "../../helpers/TreeTest";
 
     export default {
         name: "failure",
@@ -106,6 +113,9 @@
             edit() {
 
             },
+          drzewo(IDS){
+            this.$router.push({name: 'treePartsByMachine' , params: {IDS: IDS}})
+          },
           convert(tree){
             var map = {}
             for(var i = 0; i < tree.length; i++){
@@ -171,19 +181,7 @@
                     }}
             })
             this.filterHala = SerchMachine.data().listaHal;
-           var treeView3 = this.convert(tree)
-          console.log("tree:", treeView3)
-          let poziom2 = tree.filter(tree2 => tree2.pdz_rodzic === 3)
-          console.log("drzewo p2:", poziom2)
-          for (let p2=0; p2< poziom2.length; p2++){
-            for (let allTree=0; allTree<tree.length; allTree++){
-              if (poziom2[p2].ID_Podzespol === tree[allTree].pdz_rodzic){
-                let poziom3 = tree.filter(tree3 => tree3.pdz_rodzic === tree[allTree].ID_Podzespol)
-                console.log(poziom3)
-              }
-            }
           }
-        }
     }
 </script>
 

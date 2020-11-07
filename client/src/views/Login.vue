@@ -97,7 +97,8 @@
                         this.$root.$emit('loginOK', true, false);
                     }
                     if (store.getters.profesja === 'Automatyk' || store.getters.profesja === 'Admin' || store.getters.profesja === 'Gość' || store.getters.profesja === 'Kierownik'){
-                        await this.$router.push({name: 'failure'})
+
+                      await this.$router.push({name: 'failure'})
                         this.$root.$emit('loginOK', true, true)
                         }
                 } catch (LoginError) {
